@@ -4,107 +4,203 @@ import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { getDRRSColor } from "@/lib/scoring";
-import type { CountyRecord, DigitalRightsIndicators } from "@/lib/types";
-import { computeDRRS } from "@/lib/scoring";
 
 interface MapViewProps {
-  counties: CountyRecord[];
-  indicators: DigitalRightsIndicators[];
+  boundaries: GeoJSON.FeatureCollection;
+  countyScores: Record<string, number>;
+  countyNames: Record<string, string>;
   onCountyClick: (code: string) => void;
   selectedCountyCode: string | null;
 }
 
+function buildMatchExpression(scores: Record<string, number>): any {
+  const entries = Object.entries(scores).flatMap(([k, v]) => [Number(k), getDRRSColor(v)]);
+  return ["match", ["get", "county_code"], ...entries, "#E7E5E4"];
+}
+
+interface HoverInfo {
+  countyCode: string;
+  countyName: string;
+  drrs: number | undefined;
+  x: number;
+  y: number;
+}
+
 export default function MapView({
-  counties,
-  indicators,
+  boundaries,
+  countyScores,
+  countyNames,
   onCountyClick,
   selectedCountyCode,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [ready, setReady] = useState(false);
-
-  const countyScores: Record<string, number> = {};
-  for (const c of counties) {
-    const ind = indicators.find((i) => i.county_code === c.id);
-    if (ind) {
-      countyScores[c.id] = computeDRRS(c.id, ind).drrs;
-    }
-  }
-
-  function buildMatchExpression(scores: Record<string, number>): (string | number | string[])[] {
-    const entries: (string | number)[] = Object.entries(scores).flatMap(([k, v]) => [Number(k), getDRRSColor(v) as string]);
-    return ["match", ["get", "county_code"], ...entries, "#E7E5E4"];
-  }
+  const [hasError, setError] = useState(false);
+  const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    const map = new maplibregl.Map({
-      container: containerRef.current,
-      style: {
-        version: 8,
-        sources: {
-          "carto-positron": {
-            type: "raster",
-            tiles: ["https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"],
-            tileSize: 256,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
+    let map: maplibregl.Map | null = null;
+    try {
+      map = new maplibregl.Map({
+        container: containerRef.current,
+        style: {
+          version: 8,
+          sources: {
+            "carto-positron": {
+              type: "raster",
+              tiles: ["https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"],
+              tileSize: 256,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
+            },
           },
+          layers: [
+            { id: "base-map", type: "raster", source: "carto-positron", minzoom: 0, maxzoom: 19 },
+          ],
         },
-        layers: [
-          { id: "base-map", type: "raster", source: "carto-positron", minzoom: 0, maxzoom: 19 },
-        ],
-      },
-      center: [37.9, 0.5],
-      zoom: 5.2,
-      maxBounds: [[31.0, -5.5], [43.0, 6.0]],
-      cooperativeGestures: true,
-    });
+        center: [37.9, 0.5],
+        zoom: 5.2,
+        maxBounds: [[31.0, -5.5], [43.0, 6.0]],
+        cooperativeGestures: true,
+      });
+    } catch {
+      setError(true);
+      return;
+    }
 
     map.on("load", () => {
       mapRef.current = map;
 
-      fetch("/data/boundaries.geojson")
-        .then((r) => r.json())
-        .then((geo) => {
-          map.addSource("counties", { type: "geojson", data: geo });
-          const fillExpr = buildMatchExpression(countyScores);
-          map.addLayer({
-            id: "counties-fill",
-            type: "fill",
-            source: "counties",
-            paint: {
-              "fill-color": fillExpr as any,
-              "fill-opacity": 0.85,
-              "fill-outline-color": "#FFFFFF",
-            },
-          });
-          map.addLayer({
-            id: "counties-outline",
-            type: "line",
-            source: "counties",
-            paint: { "line-color": "#FFFFFF", "line-width": 1 },
-          });
+      try {
+        map.addSource("counties", { type: "geojson", data: boundaries as any });
+      } catch {
+        setError(true);
+        setReady(true);
+        return;
+      }
 
-          map.on("click", "counties-fill", (e) => {
-            if (e.features?.[0]?.properties) {
-              onCountyClick(String(e.features[0].properties.county_code));
-            }
-          });
-          map.on("click", (e) => {
-            const features = map.queryRenderedFeatures(e.point, { layers: ["counties-fill"] });
-            if (!features.length) onCountyClick("");
-          });
+      const fillExpr = buildMatchExpression(countyScores);
 
-          map.fitBounds([[33.5, -5], [42.5, 5]], { padding: 40, duration: 0 });
-          setReady(true);
-        })
-        .catch(() => setReady(true));
+      map.addLayer({
+        id: "counties-fill",
+        type: "fill",
+        source: "counties",
+        paint: {
+          "fill-color": fillExpr as any,
+          "fill-opacity": 0.85,
+          "fill-outline-color": "#FFFFFF",
+        },
+      });
+
+      map.addLayer({
+        id: "counties-hover",
+        type: "fill",
+        source: "counties",
+        paint: {
+          "fill-color": fillExpr as any,
+          "fill-opacity": 0.95,
+          "fill-outline-color": "#292524",
+        },
+        filter: ["==", "county_code", ""],
+      });
+
+      map.addLayer({
+        id: "counties-selected",
+        type: "line",
+        source: "counties",
+        paint: {
+          "line-color": "#292524",
+          "line-width": [
+            "case",
+            ["==", ["get", "county_code"], selectedCountyCode ?? ""],
+            3,
+            0,
+          ],
+        },
+      });
+
+      map.addLayer({
+        id: "counties-outline",
+        type: "line",
+        source: "counties",
+        paint: { "line-color": "#FFFFFF", "line-width": 1 },
+      });
+
+      map.on("click", "counties-fill", (e) => {
+        if (e.features?.[0]?.properties) {
+          onCountyClick(String(e.features[0].properties.county_code));
+        }
+      });
+
+      map.on("mousemove", "counties-fill", (e) => {
+        if (e.features?.[0]?.properties) {
+          const props = e.features[0].properties;
+          const code = String(props.county_code);
+          if (map.getCanvas().style.cursor !== "pointer") {
+            map.getCanvas().style.cursor = "pointer";
+          }
+          map.setFilter("counties-hover", ["==", "county_code", Number(code)]);
+          const name = countyNames[code] ?? props.COUNTY ?? "Unknown";
+          setHoverInfo({
+            countyCode: code,
+            countyName: name,
+            drrs: countyScores[code],
+            x: e.point.x,
+            y: e.point.y,
+          });
+        }
+      });
+
+      map.on("mouseleave", "counties-fill", () => {
+        map.getCanvas().style.cursor = "";
+        map.setFilter("counties-hover", ["==", "county_code", ""]);
+        setHoverInfo(null);
+      });
+
+      map.on("click", (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ["counties-fill"] });
+        if (!features.length) onCountyClick("");
+      });
+
+      map.fitBounds([[33.5, -5], [42.5, 5]], { padding: 40, duration: 0 });
+      setReady(true);
+    });
+
+    map.on("error", () => {
+      setError(true);
+      setReady(true);
     });
 
     return () => { map.remove(); mapRef.current = null; };
-  }, []);
+  }, [boundaries]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+    const source = map.getSource("counties") as maplibregl.GeoJSONSource | undefined;
+    if (source) source.setData(boundaries as any);
+  }, [countyScores, selectedCountyCode, boundaries]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+    map.setPaintProperty("counties-selected", "line-width", [
+      "case",
+      ["==", ["get", "county_code"], selectedCountyCode ?? ""],
+      3,
+      0,
+    ]);
+  }, [selectedCountyCode]);
+
+  if (hasError) {
+    return (
+      <div className="flex h-[400px] items-center justify-center rounded-xl border border-[#E0DBD0] bg-[#F8F5F0] text-sm text-[#6B6355]">
+        Geographic data temporarily unavailable.
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-[400px] w-full overflow-hidden rounded-xl border border-[#E0DBD0] shadow-sm">
@@ -112,6 +208,17 @@ export default function MapView({
       {!ready && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#FDFBF7] text-sm text-[#6B6355]">
           Loading geographic interface...
+        </div>
+      )}
+      {hoverInfo && (
+        <div
+          className="pointer-events-none absolute z-10 rounded-lg bg-[#292524] px-3 py-2 text-xs text-[#FDFBF7] shadow-lg"
+          style={{ left: hoverInfo.x + 12, top: hoverInfo.y - 12 }}
+        >
+          <div className="font-semibold">{hoverInfo.countyName}</div>
+          {hoverInfo.drrs !== undefined && (
+            <div className="mt-0.5 opacity-80">DRRS: {hoverInfo.drrs}</div>
+          )}
         </div>
       )}
     </div>

@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS } from "@/lib/scoring";
+import { fetchJSON } from "@/lib/data-fetch";
 import InsightsDashboard from "@/components/InsightsDashboard";
 import CountyDetails from "@/components/CountyDetails";
 import CountyRankings from "@/components/CountyRankings";
@@ -15,11 +16,28 @@ const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
 export default function HomePage() {
   const [selectedCountyCode, setSelectedCountyCode] = useState<string | null>(null);
+  const [boundaries, setBoundaries] = useState<GeoJSON.FeatureCollection | null>(null);
+
+  useEffect(() => {
+    fetchJSON<GeoJSON.FeatureCollection>("/data/boundaries.geojson")
+      .then((data) => setBoundaries(data))
+      .catch(() => {});
+  }, []);
 
   const selectedCounty = useMemo(() => {
     if (!selectedCountyCode) return null;
     return counties.find((c) => c.id === selectedCountyCode) ?? null;
   }, [selectedCountyCode]);
+
+  const countyScores: Record<string, number> = {};
+  const countyNames: Record<string, string> = {};
+  for (const c of counties) {
+    countyNames[c.id] = c.name;
+    const ind = indicators.find((i) => i.county_code === c.id);
+    if (ind) {
+      countyScores[c.id] = computeDRRS(c.id, ind).drrs;
+    }
+  }
 
   const totalAISystems = indicators.reduce((sum, i) => sum + i.ai_systems_count, 0);
   const totalShutdownHours = indicators.reduce((sum, i) => sum + i.internet_shutdown_hours, 0);
@@ -47,12 +65,19 @@ export default function HomePage() {
       <div className="relative grid gap-4 sm:gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <MapErrorBoundary>
-            <MapView
-              counties={counties}
-              indicators={indicators}
-              onCountyClick={setSelectedCountyCode}
-              selectedCountyCode={selectedCountyCode}
-            />
+            {boundaries ? (
+              <MapView
+                boundaries={boundaries}
+                countyScores={countyScores}
+                countyNames={countyNames}
+                onCountyClick={setSelectedCountyCode}
+                selectedCountyCode={selectedCountyCode}
+              />
+            ) : (
+              <div className="flex h-[400px] items-center justify-center rounded-xl border border-[#E0DBD0] bg-[#F8F5F0] text-sm text-[#6B6355]">
+                Loading geographic interface...
+              </div>
+            )}
           </MapErrorBoundary>
           <div className="mt-2">
             <ScoreLegend />
