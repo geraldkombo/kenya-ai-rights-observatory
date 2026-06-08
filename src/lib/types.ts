@@ -8,6 +8,9 @@ export interface DigitalRightsIndicators {
   county_code: string;
   county_name: string;
   population: number;
+  internet_usage_pct: number;
+  mobile_ownership_pct: number;
+  birth_registration_pct: number;
   surveillance_score: number;
   internet_health_score: number;
   data_privacy_score: number;

@@ -69,11 +69,14 @@ export default function MethodPage() {
         <section className="rounded-[8px] border border-[#E0DBD0] bg-white p-8">
           <h2 className="text-[14px] font-bold uppercase tracking-widest text-[#78350F]">Data Sources</h2>
           <ul className="mt-4 space-y-3 text-[14px] leading-7 text-[#6B6355]">
-            <li><strong>Surveillance data:</strong> Compiled from media reports, civil society monitoring (CIPESA, Article 19), and open-source intelligence on CCTV and AI system deployments.</li>
-            <li><strong>Internet health:</strong> Internet shutdown records from the Kenya ICT Action Network (KICTANet), OONI network measurement data, and Access Now #KeepItOn reports.</li>
-            <li><strong>Data privacy:</strong> Office of the Data Protection Commissioner (ODPC) annual reports and enforcement actions.</li>
-            <li><strong>Biometric enrollment:</strong> Huduma Nama registration statistics from the National Registration Bureau, mobile money KYC data from Communications Authority of Kenya sector reports.</li>
-            <li><strong>Platform impact:</strong> Content moderation transparency reports from Meta, Google, TikTok, and X (Twitter), combined with Kenyan civil society monitoring.</li>
+            <li><strong>Population:</strong> Kenya National Bureau of Statistics, 2019 Kenya Population and Housing Census.</li>
+            <li><strong>Internet usage &amp; mobile ownership:</strong> Communications Authority of Kenya / KNBS, 2023/24 Kenya Housing Survey (published August 2025). Internet usage ranges from 64.7% (Nairobi) to 9.1% (West Pokot).</li>
+            <li><strong>Birth registration:</strong> KNBS Vital Statistics Report 2023. Used as proxy for biometric/civil registration completeness per county. Ranges from 131.6% (Nairobi) to 12.2% (Wajir).</li>
+            <li><strong>Surveillance:</strong> Compiled from media reports, civil society monitoring (CIPESA, KICTANet, Amnesty Kenya, KHRC), and open-source intelligence on CCTV and AI system deployments. County-level data are estimates derived from multiple proxy indicators.</li>
+            <li><strong>Internet health:</strong> Internet shutdown records from the Kenya ICT Action Network (KICTANet), OONI network measurement data, and Access Now #KeepItOn reports. County-level estimates incorporate documented events (June 2024 national shutdown, November 2024 Telegram block, localized disruptions).</li>
+            <li><strong>Data privacy:</strong> Office of the Data Protection Commissioner (ODPC) — 9,061 total complaints as of March 2026. County distribution estimated from regional office presence (Nairobi, Mombasa, Kisumu, Nakuru, Eldoret, Machakos, Garissa, Nyeri) and population.</li>
+            <li><strong>Biometric enrollment:</strong> Huduma Namba/Maisha Namba enrollment statistics from the National Registration Bureau, cross-referenced with birth registration completeness from KNBS Vital Statistics 2023.</li>
+            <li><strong>Platform impact:</strong> Content moderation transparency reports from Meta, Google, TikTok, and X (Twitter), combined with Kenyan civil society monitoring and CA internet usage data.</li>
           </ul>
         </section>
 
