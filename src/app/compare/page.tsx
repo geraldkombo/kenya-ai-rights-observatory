@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
+import RadarChart from "@/components/RadarChart";
 
 function useStats(countyId: string) {
   return useMemo(() => {
@@ -13,6 +14,14 @@ function useStats(countyId: string) {
   }, [countyId]);
 }
 
+const DIMENSIONS = [
+  { key: "surveillance" as const, label: "Surveillance" },
+  { key: "internetHealth" as const, label: "Internet Health Deficit" },
+  { key: "dataPrivacy" as const, label: "Data Privacy" },
+  { key: "biometric" as const, label: "Biometric Enrollment" },
+  { key: "platformImpact" as const, label: "Platform Impact" },
+];
+
 export default function ComparePage() {
   const [countyA, setCountyA] = useState("");
   const [countyB, setCountyB] = useState("");
@@ -21,8 +30,6 @@ export default function ComparePage() {
   const selB = useMemo(() => counties.find((c) => c.id === countyB) ?? null, [countyB]);
   const statsA = useStats(countyA);
   const statsB = useStats(countyB);
-
-  const handlePrint = () => window.print();
 
   return (
     <div className="mx-auto max-w-5xl px-8 py-8">
@@ -64,6 +71,23 @@ export default function ComparePage() {
 
       {selA && selB && statsA && statsB && (
         <div className="mt-8 space-y-8">
+          <section className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-sm font-bold text-[#78350F]">{selA.name}</span>
+              <RadarChart
+                scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsA.score[d.key] }))}
+                size={220}
+              />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-sm font-bold text-[#EA580C]">{selB.name}</span>
+              <RadarChart
+                scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsB.score[d.key] }))}
+                size={220}
+              />
+            </div>
+          </section>
+
           <section className="grid gap-8 md:grid-cols-2">
             {([{ county: selA, stats: statsA }, { county: selB, stats: statsB }] as const).map(({ county, stats }, idx) => (
               <div key={county.id} className="rounded-[8px] border border-[#E0DBD0] bg-white shadow-sm" style={{ borderTop: `4px solid ${idx === 0 ? "#78350F" : "#EA580C"}` }}>
@@ -77,6 +101,12 @@ export default function ComparePage() {
                 <div className="p-4">
                   <table className="w-full text-[14px]">
                     <tbody>
+                      {DIMENSIONS.map((d) => (
+                        <tr key={d.key} className="border-b border-[#E0DBD0] last:border-0">
+                          <td className="py-2 text-[#6B6355]">{d.label}</td>
+                          <td className="py-2 text-right font-semibold text-[#292524]">{stats.score[d.key]}%</td>
+                        </tr>
+                      ))}
                       <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">Population</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.population.toLocaleString()}</td></tr>
                       <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">AI Systems</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.ai_systems_count}</td></tr>
                       <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">CCTV Density</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.cctv_density} per 10K</td></tr>
@@ -106,7 +136,7 @@ export default function ComparePage() {
         </div>
       )}
 
-      <div className="mt-8 text-center text-[12px] text-[#A8A08F] print:hidden">
+      <div className="mt-16 text-center text-[12px] text-[#A8A08F] print:hidden">
         <Link href="/" className="text-[#EA580C] underline underline-offset-2">&larr; Return to map</Link>
       </div>
     </div>

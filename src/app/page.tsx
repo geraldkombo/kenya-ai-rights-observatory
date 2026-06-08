@@ -11,6 +11,7 @@ import CountyDetails from "@/components/CountyDetails";
 import CountyRankings from "@/components/CountyRankings";
 import ScoreLegend from "@/components/ScoreLegend";
 import MapErrorBoundary from "@/components/MapErrorBoundary";
+import Search from "@/components/Search";
 
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
@@ -56,10 +57,11 @@ export default function HomePage() {
         totalShutdownHours={totalShutdownHours}
       />
 
-      <div className="mb-3 sm:mb-6">
-        <p className="mt-0.5 text-xs font-medium text-[#6B6355] sm:text-sm">
+      <div className="mb-4 sm:mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs font-medium text-[#6B6355] sm:text-sm">
           Identify counties with the most critical digital rights risks, surveillance density, and AI system deployment across Kenya.
         </p>
+        <Search counties={counties} onSelect={setSelectedCountyCode} />
       </div>
 
       <div className="relative grid gap-4 sm:gap-6 lg:grid-cols-3">
