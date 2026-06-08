@@ -18,6 +18,10 @@ function buildMatchExpression(scores: Record<string, number>): any {
   return ["match", ["get", "county_code"], ...entries, "#E7E5E4"];
 }
 
+function selectedCode(code: string | null): number {
+  return code ? Number(code) : -1;
+}
+
 interface HoverInfo {
   countyCode: string;
   countyName: string;
@@ -103,21 +107,17 @@ export default function MapView({
           "fill-opacity": 0.95,
           "fill-outline-color": "#292524",
         },
-        filter: ["==", "county_code", ""],
+        filter: ["==", "county_code", -1],
       });
 
+      const selCode = selectedCode(selectedCountyCode);
       map.addLayer({
         id: "counties-selected",
         type: "line",
         source: "counties",
         paint: {
           "line-color": "#292524",
-          "line-width": [
-            "case",
-            ["==", ["get", "county_code"], selectedCountyCode ?? ""],
-            3,
-            0,
-          ],
+          "line-width": ["case", ["==", ["get", "county_code"], selCode], 3, 0],
         },
       });
 
@@ -155,7 +155,7 @@ export default function MapView({
 
       map.on("mouseleave", "counties-fill", () => {
         map.getCanvas().style.cursor = "";
-        map.setFilter("counties-hover", ["==", "county_code", ""]);
+        map.setFilter("counties-hover", ["==", "county_code", -1]);
         setHoverInfo(null);
       });
 
@@ -188,7 +188,7 @@ export default function MapView({
     if (!map || !map.isStyleLoaded()) return;
     map.setPaintProperty("counties-selected", "line-width", [
       "case",
-      ["==", ["get", "county_code"], selectedCountyCode ?? ""],
+      ["==", ["get", "county_code"], selectedCode(selectedCountyCode)],
       3,
       0,
     ]);
