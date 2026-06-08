@@ -685,3 +685,282 @@ Fix any errors found. Do NOT commit broken code.
 Pass these prompts individually to Gemini (e.g. via Google AI Studio or API).
 Start with Prompt 1 (scaffold), then proceed sequentially. Each prompt builds
 on the outputs of the prior prompts. Verify the build after each prompt.
+
+---
+
+## Prompt 21 (FINAL): Full System Verification & Handover
+
+```
+You are performing the FINAL verification and handover of the Kenya AI & Digital 
+Rights Observatory. This prompt validates every subsystem and documents the 
+complete project state for handover.
+
+Run each step and confirm success (✅) or failure (❌) with details.
+
+---
+
+### PHASE 1: BUILD VERIFICATION
+
+1. Run `npm run build` (which runs `node scripts/generate-icons.mjs` then `next build`)
+   Expected: "Compiled successfully", "TypeScript … Finished", 
+   "Generating static pages … 8/8", "Route (app)" listing all 6 static routes
+
+2. Verify the output directory `out/` has:
+   - Files at root: index.html, 404.html, favicon.ico, icon.svg, manifest.json,
+     og-image.svg, sw.js, robots.txt, sitemap.xml, _redirects
+   - Data: data/boundaries.geojson
+   - Icons: icons/icon-192.png, icons/icon-512.png
+   - Sub-routes: brief/index.html, compare/index.html, dua/index.html, method/index.html
+   - Build assets: _next/static/chunks/ (hashed chunks)
+
+---
+
+### PHASE 2: HTML VALIDATION
+
+Check every generated HTML page (index.html, brief/index.html, compare/index.html,
+dua/index.html, method/index.html, 404.html):
+
+1. DOCTYPE is <!DOCTYPE html>
+2. <html lang="en">
+3. Has viewport <meta name="viewport">
+4. Has theme-color <meta name="theme-color" content="#FDFBF7">
+5. Has apple-mobile-web-app-capable meta
+6. Contains <link rel="manifest" href="/kenya-ai-rights-observatory/manifest.json">
+7. Contains Inter font stylesheet link
+8. OG meta tags present (og:title, og:description, og:image, og:url)
+9. Twitter card meta tags present
+10. All internal links use the basePath prefix (/kenya-ai-rights-observatory/...)
+
+---
+
+### PHASE 3: JAVASCRIPT & INTERACTIVITY
+
+Verify client-side functionality without errors:
+
+1. Open index.html in a browser with browser DevTools console open
+2. Confirm NO runtime errors (red console messages)
+3. Confirm MapLibre GL loads and renders the CARTO basemap tiles
+4. Confirm boundaries.geojson fetches (check Network tab for 200 response)
+5. Confirm county polygons render with DRRS colour fills
+6. Hover over a county — confirm:
+   - Cursor changes to pointer
+   - County name + DRRS score tooltip appears
+   - County polygon highlights (darker fill, dark outline)
+7. Click a county — confirm:
+   - CountyDetails panel appears on desktop (right side, lg:block)
+   - Mobile bottom sheet appears on narrow viewport (lg:hidden)
+   - Selected county border (3px dark line) renders
+   - URL does NOT change (SPA behavior via React state)
+8. Click empty map space — confirm county deselects
+9. Test Search component — type a county name, confirm dropdown appears,
+   click a result, confirm it selects the county on the map
+10. Test HowToUse accordion — click to expand, click to collapse
+
+---
+
+### PHASE 4: PAGE INTEGRITY
+
+Visit each route and verify content:
+
+1. **Home (index.html):**
+   - 4 stat cards visible: Counties(47), AI Systems(148), Shutdown Hours(2,864), High Risk(6)
+   - Map container renders
+   - ScoreLegend shows 4 colour swatches (Low, Medium, High, Critical)
+   - Search input present
+   - Rankings panel shows top 5 and bottom 5 counties with DRRS badges
+   - Footer links to /method and /compare
+
+2. **/method:**
+   - "Methodology Framework" heading
+   - DRRS explanation with 4-tier scale
+   - 5 component cards (Surveillance 25%, Internet Health 25%, etc.)
+   - Formula displayed
+   - Data sources section with 8 sources
+   - Limitations section (dark background)
+   - Link back to map
+
+3. **/compare:**
+   - Two selects for County A and County B
+   - After selecting, two radar charts appear (SVG pentagons)
+   - Metrics tables for both counties
+   - Key findings section with driver highlights
+   - Link back to map
+
+4. **/dua:**
+   - "Data Use Agreement" heading
+   - Source Register table with 6 datasets
+   - Suggested Citation block
+   - Privacy section (no cookies, no tracking)
+   - Link back to map
+
+5. **/brief?id=47:**
+   - Shows "Nairobi County — Digital Rights & Surveillance Brief"
+   - DRRS badge with colour
+   - Key Indicators and Action Recommendations columns
+   - DRRS Component Scores progress bars
+   - Print button
+   - Test with ?id=32 (Nakuru), ?id=23 (Turkan a)
+
+6. **404 page:**
+   - Navigate to a non-existent route like /nonexistent
+   - Shows "Resource not found" with 404
+   - "Return to map" link works
+
+---
+
+### PHASE 5: RESPONSIVE BREAKPOINTS
+
+Test at these viewport widths:
+
+1. **Mobile (375px):**
+   - Header collapses to single row
+   - Stat cards 2x2 grid
+   - Map takes full width, rankings/details hidden below (lg:hidden)
+   - Clicking county opens bottom sheet (fixed, rounded top)
+   - Search input full width
+   - Compare page stacks vertically
+
+2. **Tablet (768px):**
+   - Header nav visible
+   - Stat cards 4-column
+   - Map full width, side panel still hidden
+
+3. **Desktop (1280px):**
+   - 3-column grid: map (2 cols) + side panel (1 col)
+   - Rankings visible when no county selected
+   - Details visible when county selected
+   - Compare page shows radar charts side by side
+
+---
+
+### PHASE 6: PWA VERIFICATION
+
+1. Open Chrome DevTools → Application → Manifest
+   - Name: "Kenya AI & Digital Rights Observatory"
+   - Short name: "Digital Rights KE"
+   - Start URL: "/kenya-ai-rights-observatory/"
+   - Display: "standalone"
+   - Theme color: #78350F, Background: #FDFBF7
+   - Icons: 192x192 and 512x512 (maskable)
+
+2. Application → Service Workers
+   - SW registered for scope /kenya-ai-rights-observatory/
+   - Status: "activated and is running"
+
+3. Lighthouse audit (optional but recommended):
+   - Run Lighthouse for desktop and mobile
+   - Target: 90+ Performance, 90+ Accessibility, 90+ Best Practices, 90+ SEO, PWA badge
+
+---
+
+### PHASE 7: DATA INTEGRITY
+
+Verify the 47-county dataset:
+
+1. `src/lib/data.ts` contains exactly 47 counties (array length)
+2. County IDs are strings "1" through "47" (no gaps, no duplicates)
+3. `indicators[]` also has exactly 47 entries
+4. Every county has a matching indicator (county_code matches id)
+5. `computeDRRS()` returns valid scores (0-100) for all counties
+6. DRRS scores differentiate: Nairobi highest (~62), Turkan a / Samburu / Tana River lowest (~32)
+7. Boundaries GeoJSON has 47 features with county_code matching IDs
+8. All `county_code` values in GeoJSON are numbers (not strings)
+
+---
+
+### PHASE 8: SOURCE CODE REVIEW
+
+Verify these critical patterns are correct:
+
+1. **String vs number** — ALL Maplibre match expressions comparing `county_code`
+   use NUMBER values. `selectedCode()` helper converts with `Number()`.
+   Sentinel value is -1 (never "" or null).
+
+2. **Base path prefix** — ALL data fetches use `dataUrl()` or `fetchJSON()` from
+   `src/lib/data-fetch.ts` which prepends `/kenya-ai-rights-observatory`.
+   The manifest link in layout.tsx uses the hardcoded BASE constant.
+
+3. **Client components** — All interactive components have "use client" directive.
+   MapView is dynamically imported with { ssr: false }.
+
+4. **Static export** — NO server-side functions (getServerSideProps, etc.).
+   NO API routes. NO ISR/revalidation. All data is static.
+
+5. **Colour tokens** — ALL brand colours use the exact hex values:
+   #78350F, #EA580C, #FDFBF7, #292524, #6B6355, #E0DBD0, #F8F5F0
+
+---
+
+### PHASE 9: DEPLOYMENT VERIFICATION
+
+If deployed:
+
+1. Visit https://geraldkombo.github.io/kenya-ai-rights-observatory/
+2. Confirm all routes return 200:
+   - / → 200
+   - /method/ → 200
+   - /compare/ → 200
+   - /brief/ → 200
+   - /dua/ → 200
+   - /nonexistent/ → custom 404 page
+3. Confirm all static assets load (check Network tab):
+   - /kenya-ai-rights-observatory/_next/static/... (JS chunks)
+   - /kenya-ai-rights-observatory/manifest.json → 200
+   - /kenya-ai-rights-observatory/sw.js → 200
+   - /kenya-ai-rights-observatory/data/boundaries.geojson → 200
+   - /kenya-ai-rights-observatory/icon.svg → 200
+   - /kenya-ai-rights-observatory/sitemap.xml → 200
+   - /kenya-ai-rights-observatory/robots.txt → 200
+4. Confirm map tiles load from CARTO CDN
+5. Confirm service worker registers successfully
+
+---
+
+### PHASE 10: HANDOVER CHECKLIST
+
+Final checklist — mark complete:
+
+- [ ] npm run build → 0 errors
+- [ ] 6 static routes generated (/, /brief, /compare, /dua, /method, /_not-found)
+- [ ] All HTML pages valid (DOCTYPE, meta, viewport, lang)
+- [ ] Map renders with county polygons and colour fills
+- [ ] Hover tooltip works on all counties
+- [ ] Click selects county, shows details
+- [ ] Selected county border renders (3px #292524)
+- [ ] Search finds counties, click selects on map
+- [ ] Mobile bottom sheet opens on county click
+- [ ] Compare page: radar charts render as SVGs
+- [ ] Methodology page: all 5 dimensions documented
+- [ ] DUA page: source register, citation, privacy
+- [ ] Brief page: printable, works with ?id= parameter
+- [ ] 404 page shows custom content
+- [ ] Manifest valid, SW registered
+- [ ] robots.txt, sitemap.xml served correctly
+- [ ] All colour tokens match spec
+- [ ] BasePath correct on all assets and links
+- [ ] No console errors on any page
+- [ ] Responsive at 375px, 768px, 1280px
+- [ ] All data loads (47 counties, boundaries.geojson)
+
+---
+
+### FINAL DECLARATION
+
+Once all checks pass, output:
+
+```
+STATUS: ✅ ALL SYSTEMS VERIFIED
+BUILD: 0 errors, 8 static routes
+DATA: 47 counties, 47 indicator records, 47 GeoJSON features
+MAP: Interactive choropleth with hover, click, selection
+PWA: Manifest valid, service worker active
+SEO: sitemap.xml, robots.txt, OG tags, Twitter cards
+ACCESSIBILITY: ARIA combobox, focus-visible, semantic HTML
+DEPLOYMENT: GitHub Actions auto-deploy on push to master
+REPOSITORY: https://github.com/geraldkombo/kenya-ai-rights-observatory
+LIVE: https://geraldkombo.github.io/kenya-ai-rights-observatory/
+```
+
+If any check fails, fix it and re-run from PHASE 1.
+```
+
