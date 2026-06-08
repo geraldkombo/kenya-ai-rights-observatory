@@ -9,6 +9,7 @@ import InsightsDashboard from "@/components/InsightsDashboard";
 import CountyDetails from "@/components/CountyDetails";
 import CountyRankings from "@/components/CountyRankings";
 import ScoreLegend from "@/components/ScoreLegend";
+import MapErrorBoundary from "@/components/MapErrorBoundary";
 
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
@@ -45,12 +46,14 @@ export default function HomePage() {
 
       <div className="relative grid gap-4 sm:gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <MapView
-            counties={counties}
-            indicators={indicators}
-            onCountyClick={setSelectedCountyCode}
-            selectedCountyCode={selectedCountyCode}
-          />
+          <MapErrorBoundary>
+            <MapView
+              counties={counties}
+              indicators={indicators}
+              onCountyClick={setSelectedCountyCode}
+              selectedCountyCode={selectedCountyCode}
+            />
+          </MapErrorBoundary>
           <div className="mt-2">
             <ScoreLegend />
           </div>

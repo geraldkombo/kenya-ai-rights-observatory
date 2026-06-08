@@ -38,12 +38,25 @@ export const metadata: Metadata = {
     images: ["/og-image.svg"],
   },
   icons: {
-    icon: { url: "/icon.svg", type: "image/svg+xml" },
-    apple: { url: "/icon-192.svg", type: "image/svg+xml" },
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icons/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
   },
-  manifest: "/manifest.json",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Digital Rights KE",
+    "mobile-web-app-capable": "yes",
+  },
   robots: { index: true, follow: true },
 };
+
+const BASE = "/kenya-ai-rights-observatory";
 
 export default function RootLayout({
   children,
@@ -52,9 +65,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
+      <head>
+        <link rel="manifest" href={`${BASE}/manifest.json`} />
+      </head>
       <body className="min-h-[100svh] bg-[#FDFBF7] text-[#292524]">
         <Header />
         <main>{children}</main>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if("serviceWorker"in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("${BASE}/sw.js").catch(()=>{})})}`,
+          }}
+        />
       </body>
     </html>
   );
