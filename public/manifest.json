@@ -1,0 +1,23 @@
+{
+  "name": "Kenya AI & Digital Rights Observatory",
+  "short_name": "Digital Rights KE",
+  "description": "Mapping surveillance and digital rights risks across Kenya's 47 counties.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#78350F",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
