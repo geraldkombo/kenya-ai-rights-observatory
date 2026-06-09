@@ -17,6 +17,9 @@ export default function Header() {
           <Link href="/brief?id=47" className="min-h-[44px] transition-colors hover:text-brand-dark">
             Brief
           </Link>
+          <Link href="/advocacy" className="min-h-[44px] transition-colors hover:text-brand-dark">
+            Act
+          </Link>
           <Link href="/dua" className="min-h-[44px] transition-colors hover:text-brand-dark">
             Data
           </Link>

@@ -148,6 +148,9 @@ export default function HomePage() {
           <Link href="/compare" className="min-h-[44px] rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-stone transition-colors hover:bg-brand-bg">
             Compare county risks
           </Link>
+          <Link href="/advocacy" className="min-h-[44px] rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-stone transition-colors hover:bg-brand-bg">
+            Advocacy tools
+          </Link>
         </div>
       </div>
     </div>
