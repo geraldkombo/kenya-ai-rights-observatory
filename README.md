@@ -1,6 +1,6 @@
-# Kenya AI & Digital Rights Observatory
+# Kenya Digital Rights Risk Atlas
 
-Mapping surveillance infrastructure, AI deployments, and digital rights risks across Kenya's 47 counties. A civic technology tool for civil society, researchers, and advocates.
+Mapping surveillance infrastructure, data privacy risks, and digital rights across Kenya's 47 counties. A civic technology tool for civil society, researchers, and advocates.
 
 **Live:** https://geraldkombo.github.io/kenya-ai-rights-observatory/
 

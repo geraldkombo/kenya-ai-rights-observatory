@@ -10,7 +10,7 @@ export default function DUAPage() {
         <section className="break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
           <h2 className="text-base font-semibold text-brand-dark">Open Data Principles</h2>
           <p className="mt-3 text-sm leading-6 text-brand-stone">
-            The Kenya AI &amp; Digital Rights Observatory is built entirely on open civic data and publicly available reports. Every indicator displayed on this platform can be traced to a published source. Transparency in methodology builds trust with the communities, civil society organisations, and policymakers who use this tool for advocacy and planning.
+            The Kenya Digital Rights Risk Atlas is built entirely on open civic data and publicly available reports. Every indicator displayed on this platform can be traced to a published source. Transparency in methodology builds trust with the communities, civil society organisations, and policymakers who use this tool for advocacy and planning.
           </p>
           <p className="mt-3 text-sm leading-6 text-brand-stone">
             Use of this platform constitutes agreement to attribute the original data creators in any derivative work, publication, or research that incorporates data presented here.
@@ -43,7 +43,7 @@ export default function DUAPage() {
         <section className="break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
           <h2 className="text-base font-semibold text-brand-dark">Suggested Citation</h2>
           <div className="mt-4 rounded-lg bg-amber-200 p-5 text-sm leading-6 text-brand-dark">
-            <p className="font-mono">Kenya AI &amp; Digital Rights Observatory. <em>Mapping algorithmic systems, surveillance, and digital rights risks across Kenya&apos;s 47 counties.</em> Nairobi, Kenya. Retrieved from https://geraldkombo.github.io/kenya-ai-rights-observatory/</p>
+            <p className="font-mono">Kenya Digital Rights Risk Atlas. <em>Mapping surveillance infrastructure, data privacy, and digital rights across Kenya&apos;s 47 counties.</em> Nairobi, Kenya. Retrieved from https://geraldkombo.github.io/kenya-ai-rights-observatory/</p>
           </div>
         </section>
 

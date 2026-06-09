@@ -9,7 +9,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const siteName = "Kenya AI & Digital Rights Observatory";
+const siteName = "Kenya Digital Rights Risk Atlas";
 const siteUrl = "https://geraldkombo.github.io/kenya-ai-rights-observatory/";
 
 export const metadata: Metadata = {
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description:
-    "Mapping algorithmic systems, surveillance infrastructure, and digital rights risks across Kenya's 47 counties using open data.",
+    "Mapping surveillance infrastructure, data privacy risks, and digital rights across Kenya's 47 counties using open data.",
   openGraph: {
     title: siteName,
     description:
-      "Mapping algorithmic systems, surveillance infrastructure, and digital rights risks across Kenya's 47 counties.",
+      "Mapping surveillance infrastructure, data privacy risks, and digital rights across Kenya's 47 counties.",
     url: siteUrl,
     locale: "en_KE",
     siteName,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description:
-      "Mapping algorithmic systems, surveillance infrastructure, and digital rights risks across Kenya's 47 counties.",
+      "Mapping surveillance infrastructure, data privacy risks, and digital rights across Kenya's 47 counties.",
     images: ["/og-image.svg"],
   },
   icons: {
