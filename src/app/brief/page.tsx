@@ -1,7 +1,9 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { counties, indicators } from '@/lib/data';
 import { computeDRRS, getDRRSBadgeClass } from '@/lib/scoring';
+import { NEIGHBORS } from '@/lib/neighbors';
 import { Suspense } from 'react';
 
 const BAR_COLORS = ['#FFF7BC', '#FEC44F', '#D95F0E', '#8C2D04'];
@@ -51,6 +53,10 @@ function BriefContent() {
             <li><strong>CCTV Density (per 10k):</strong> {indicator.cctv_density}</li>
             <li><strong>ODPC Complaints:</strong> {indicator.odpc_complaints}</li>
             <li><strong>Internet Shutdown Hrs:</strong> {indicator.internet_shutdown_hours}</li>
+            <li><strong>Internet Usage:</strong> {indicator.internet_usage_pct}%</li>
+            <li><strong>Mobile Ownership:</strong> {indicator.mobile_ownership_pct}%</li>
+            <li><strong>Birth Registration:</strong> {indicator.birth_registration_pct}%</li>
+            <li><strong>Population:</strong> {indicator.population.toLocaleString()}</li>
           </ul>
         </div>
         <div className="break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
@@ -60,6 +66,25 @@ function BriefContent() {
             <li>Engage local civil society on biometric inclusion campaigns.</li>
             <li>Monitor network throttling during localized protests.</li>
           </ul>
+        </div>
+      </div>
+
+      <div className="mb-8 break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
+        <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Neighbouring Counties</h3>
+        <div className="flex flex-wrap gap-2">
+          {(NEIGHBORS[county.id] ?? []).map((nid) => {
+            const nc = counties.find((c) => c.id === nid);
+            if (!nc) return null;
+            return (
+              <Link
+                key={nid}
+                href={`/brief?id=${nid}`}
+                className="inline-flex items-center min-h-[44px] rounded-md border border-brand-border bg-white px-3 py-1.5 text-sm text-brand-stone transition-colors hover:border-brand-orange hover:text-brand-orange"
+              >
+                {nc.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
 

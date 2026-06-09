@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
+import { NEIGHBORS } from "@/lib/neighbors";
 import RadarChart from "@/components/RadarChart";
 
 function useStats(countyId: string) {
@@ -37,6 +38,15 @@ export default function ComparePage() {
   const selB = useMemo(() => counties.find((c) => c.id === countyB) ?? null, [countyB]);
   const statsA = useStats(countyA);
   const statsB = useStats(countyB);
+
+  const neighborsOfA = useMemo(
+    () => (countyA ? (NEIGHBORS[countyA] ?? []).map((id) => counties.find((c) => c.id === id)).filter(Boolean) : []),
+    [countyA]
+  );
+  const otherCounties = useMemo(
+    () => counties.filter((c) => c.id !== countyA && !neighborsOfA.some((n) => n?.id === c.id)),
+    [countyA, neighborsOfA]
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8">
@@ -72,7 +82,14 @@ export default function ComparePage() {
             <select id="county-b" value={countyB} onChange={(e) => setCountyB(e.target.value)} disabled={!countyA}
               className="w-full min-h-[44px] rounded border border-brand-border bg-white px-4 py-2 text-sm text-brand-dark shadow-sm transition-colors disabled:opacity-50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
               <option value="">-- Choose a County --</option>
-              {counties.filter((c) => c.id !== countyA).map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+              {countyA && neighborsOfA.length > 0 && (
+                <optgroup label={`Neighbors of ${selA?.name ?? ""}`}>
+                  {neighborsOfA.map((c) => c && <option key={c.id} value={c.id}>{c.name}</option>)}
+                </optgroup>
+              )}
+              <optgroup label={countyA ? "All Other Counties" : "All Counties"}>
+                {otherCounties.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </optgroup>
             </select>
           </div>
         </div>
@@ -144,6 +161,37 @@ export default function ComparePage() {
               </tbody>
             </table>
           </section>
+
+          {(() => {
+            const neighA = (NEIGHBORS[selA.id] ?? []).map((id) => counties.find((c) => c.id === id)?.name).filter(Boolean);
+            const neighB = (NEIGHBORS[selB.id] ?? []).map((id) => counties.find((c) => c.id === id)?.name).filter(Boolean);
+            const shareNeighbor = neighA.some((n) => neighB.includes(n));
+            return (
+              <section className="rounded-lg border border-brand-border bg-white p-6 shadow-sm">
+                <h3 className="mb-3 text-sm font-bold text-brand-dark">Geographic Context</h3>
+                <div className="grid gap-4 text-sm leading-7 text-brand-stone md:grid-cols-2">
+                  <div>
+                    <span className="font-semibold text-brand-brown">{selA.name}</span>
+                    {neighA.length > 0 ? <> borders: {neighA.join(", ")}.</> : <> has no bordering counties (island county).</>}
+                  </div>
+                  <div>
+                    <span className="font-semibold text-brand-orange">{selB.name}</span>
+                    {neighB.length > 0 ? <> borders: {neighB.join(", ")}.</> : <> has no bordering counties (island county).</>}
+                  </div>
+                </div>
+                {shareNeighbor && (
+                  <p className="mt-2 text-xs text-brand-muted">
+                    These two counties share a common border via at least one neighbor.
+                  </p>
+                )}
+                {selA.id === selB.id && (
+                  <p className="mt-2 text-xs text-amber-600">
+                    You are comparing the same county. Select a different County B to compare distinct regions.
+                  </p>
+                )}
+              </section>
+            );
+          })()}
 
           <section className="grid gap-8 md:grid-cols-2">
             {([{ county: selA, stats: statsA }, { county: selB, stats: statsB }] as const).map(({ county, stats }, idx) => (
