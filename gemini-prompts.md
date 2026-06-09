@@ -964,3 +964,407 @@ LIVE: https://geraldkombo.github.io/kenya-ai-rights-observatory/
 If any check fails, fix it and re-run from PHASE 1.
 ```
 
+---
+
+## Prompt 22 (PERFECT): Full UI polish to Nairobi Health Equity Map quality
+
+```
+You are refining the Kenya AI & Digital Rights Observatory to match the production
+quality of the Nairobi Health Equity Map (KHEM). Apply EVERY polish pattern below
+to EVERY component. The goal is zero rough edges — every interaction should feel
+intentional, every state should be handled, every screen size should look designed.
+
+The codebase is at the repo root. All source files are in src/.
+Output is static export to out/. Build with: npm run build.
+
+---
+
+### 1. TRANSITIONS & ANIMATIONS
+
+Every interactive element MUST have one of these transition classes:
+
+- Button/link hover: `transition-colors` (no duration needed, default 150ms)
+- Card hover (shadow change): `transition-all duration-200 ease-in-out hover:shadow-md`
+- Progress bar fill: `transition-all duration-300` on the inner coloured div
+- Chevron/spin: `transition-transform duration-200`
+
+Specific fixes needed:
+
+1. All `<button>` and `<a>` elements: add `transition-colors`
+2. All stat cards (InsightsDashboard): add `transition-all duration-200 ease-in-out hover:shadow-md`
+3. CountyRankings rows: add `transition-colors hover:border-stone-400`
+4. Progress bars (CountyDetails): add `transition-all duration-300` on the inner coloured div
+5. All score badges: add `transition-colors`
+6. Search dropdown items: add `transition-colors hover:bg-stone-100`
+7. Footer links: add `transition-colors`
+
+---
+
+### 2. LOADING STATES
+
+Replace all inline loading checks with a single `loaded` atomic boolean pattern.
+
+Current pattern (DO NOT USE):
+```tsx
+const [boundaries, setBoundaries] = useState(null);
+useEffect(() => { fetch(...).then(setBoundaries) }, []);
+// ... in render: {boundaries ? <MapView ... /> : <Loading />}
+```
+
+NEW pattern (USE THIS):
+```tsx
+const [loaded, setLoaded] = useState(false);
+const [error, setError] = useState("");
+const [boundaries, setBoundaries] = useState(null);
+
+useEffect(() => {
+  async function load() {
+    try {
+      const data = await fetchJSON("/data/boundaries.geojson");
+      if (!data || !data.features) throw new Error("Boundaries data missing features");
+      setBoundaries(data);
+      setLoaded(true);
+    } catch (e: any) {
+      setError(`Data load error: ${e?.message ?? "Unknown"}`);
+    }
+  }
+  load();
+}, []);
+```
+
+Then in render:
+```tsx
+{error && <div className="mb-6 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700" role="alert">{error}</div>}
+{!loaded ? <LoadingPlaceholder /> : <MapView ... />}
+```
+
+Every loading placeholder MUST visually mirror the final component shape:
+- Map placeholder: `flex h-[400px] items-center justify-center rounded-xl border border-stone-200 bg-stone-50 text-sm text-stone-500`
+- Rankings placeholder: Same dimensions as the rankings panel
+- Details placeholder: Same dimensions as the details panel
+
+Apply this pattern across ALL pages and components.
+
+---
+
+### 3. MAP POLISH (MapView.tsx)
+
+Add these to the existing map implementation:
+
+1. **Navigation control**: After `fitBounds`, add:
+   ```tsx
+   map.addControl(new maplibregl.NavigationControl(), "bottom-right");
+   ```
+
+2. **Tooltip clamp**: Prevent tooltip from overflowing viewport:
+   ```tsx
+   style={{
+     left: Math.min(hoverInfo.x + 16, window.innerWidth - 220),
+     top: hoverInfo.y + 16,
+   }}
+   ```
+
+3. **Tooltip styling**: Use white background with border, not dark:
+   ```tsx
+   className="pointer-events-none absolute z-50 rounded-lg border border-stone-200 bg-white p-3 shadow-lg"
+   role="tooltip"
+   aria-live="polite"
+   ```
+
+4. **Selected county highlight**: Make it obvious — change the fill-opacity or
+   add a bright border. Currently it's just a 3px dark line. Use a fill-color
+   case expression instead that brightens/highlights the selected county.
+
+5. **Map resize on panel open**: When mobile bottom sheet opens, resize the map:
+   ```tsx
+   useEffect(() => {
+     const map = mapRef.current;
+     if (!map) return;
+     const timer = setTimeout(() => {
+       try { map.resize(); } catch (e) { console.error('Map resize error:', e); }
+     }, 500);
+     return () => clearTimeout(timer);
+   }, [selectedCountyCode]);
+   ```
+
+6. **Map container ARIA**: Add `role="application"` and `tabIndex={0}` to the map
+   container div.
+
+---
+
+### 4. RESPONSIVE DESIGN
+
+Current responsive breakpoints are set. Add these refinements:
+
+1. **Stat cards**: Ensure 2-column on mobile, 4-column on `sm:` and above.
+   Current: `grid-cols-2 sm:grid-cols-4` ✓ Already correct.
+
+2. **Mobile bottom sheet**: Use `max-h-[70svh]` (svh, not vh) for proper mobile
+   browser toolbar behavior. Current: `max-h-[70svh]` ✓ Already correct.
+
+3. **Search**: On mobile, full width. On desktop (`md:`), show a
+   `Cmd+K` keyboard shortcut hint next to the input.
+
+4. **Header**: Ensure `backdrop-blur-sm` with `bg-white/95` for frosted glass
+   effect on all viewports.
+
+5. **Typography**: On mobile, use `text-xs` for body. On desktop (`sm:`), bump
+   to `text-sm`. This pattern should be consistent everywhere:
+   ```tsx
+   className="text-xs sm:text-sm"
+   ```
+
+---
+
+### 5. TYPOGRAPHY & SPACING
+
+Standardise these patterns across ALL components:
+
+1. **Labels**: Always `text-xs uppercase tracking-wider font-semibold text-stone-600`
+2. **Stat values**: Always `text-2xl font-bold text-stone-900`
+3. **Section headings**: Always `text-sm font-semibold text-stone-900`
+4. **Card padding**: Always `p-5` (not `p-4`, not `p-6`)
+5. **Border colour**: Always `border-stone-200` (current brand is `border-[#E0DBD0]` = same)
+6. **Background**: Cards use `bg-white`, body background is `bg-cream`/`bg-[#FDFBF7]`
+
+Replace all hex colour inline classes with the brand variables where possible:
+- `#292524` → `text-stone-900` / `text-[#292524]`
+  (Tailwind v4 @theme defines these, but the @theme names are custom:
+   `text-brand-dark` = `#292524`, etc.)
+
+Actually, use the @theme custom names consistently:
+- `text-brand-brown` for #78350F
+- `text-brand-orange` for #EA580C
+- `text-brand-dark` for #292524
+- `text-brand-stone` for #6B6355
+- `text-brand-muted` for #A8A08F
+- `border-brand-border` for #E0DBD0
+- `bg-brand-bg` for #F8F5F0
+- `bg-brand-cream` for #FDFBF7
+
+Replace ALL hardcoded hex colour utility classes with these @theme token names.
+
+---
+
+### 6. MICRO-INTERACTIONS
+
+Add these interaction states to EVERY interactive element:
+
+1. **Buttons**: `hover:` state changes background/text colour.
+   `active:` state adds a darker background. `focus-visible:` adds an outline ring.
+   ```tsx
+   className="... hover:bg-stone-50 active:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EA580C]"
+   ```
+
+2. **Cards**: `hover:shadow-md` with `transition-all duration-200 ease-in-out`
+
+3. **Rankings rows**: `hover:border-stone-400` (border colour change on hover)
+
+4. **Chevrons/collapse indicators**: Rotate 180 degrees on open:
+   ```tsx
+   className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+   ```
+
+5. **Score badges**: No special hover states, but ensure colours shift smoothly
+   with `transition-colors`
+
+---
+
+### 7. PRINT STYLES
+
+Add this comprehensive print stylesheet to globals.css (before the body rule,
+after the @theme block):
+
+```css
+@media print {
+  @page { size: A4; margin: 10mm; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  body {
+    background: white !important;
+    color: #1C1917 !important;
+    font-size: 8pt;
+    line-height: 1.3;
+  }
+
+  .no-print,
+  .print\:hidden { display: none !important; }
+  .print-only { display: block !important; }
+
+  a[href]::after { content: none; }
+  a { text-decoration: underline; color: #292524 !important; }
+
+  img, svg { break-inside: avoid; max-width: 100% !important; }
+  h1, h2, h3, h4 { break-after: avoid; }
+
+  table, figure, .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .rounded-lg, .rounded-xl {
+    border: 1px solid #292524 !important;
+    box-shadow: none !important;
+  }
+
+  .bg-stone-50, .bg-stone-100, .bg-cream, .bg-brand-bg {
+    background: transparent !important;
+  }
+}
+```
+
+Then add `print:hidden` to:
+- Header navigation
+- Search bar
+- Bottom sheet close button
+- Footer action links
+- Reset button on Compare page
+
+Add `break-inside-avoid` to:
+- CountyDetails cards
+- Comparison result cards
+- Stat cards
+
+---
+
+### 8. ERROR STATES
+
+Ensure every data-fetching component has these 3 states:
+
+1. **Loading state**: Shows placeholder matching component shape
+2. **Error state**: Shows inline error div with `role="alert"`
+3. **Ready state**: Shows the actual content
+
+The error div pattern:
+```tsx
+<div className="mb-6 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700" role="alert">
+  {errorMessage}
+</div>
+```
+
+Currently the page.tsx has error handling partially. Add a proper `error` state
+string, and render it above the map when set. Make sure the error message is
+informative and actionable.
+
+---
+
+### 9. DATA LOADING
+
+Refactor page.tsx to use the KHEM `async function load()` pattern:
+
+```tsx
+useEffect(() => {
+  async function load() {
+    try {
+      // Validate data shape after fetch
+      const [boundariesData] = await Promise.all([
+        fetchJSON("/data/boundaries.geojson"),
+      ]);
+      if (!boundariesData || !boundariesData.features) {
+        throw new Error("Boundaries data missing features");
+      }
+      setBoundaries(boundariesData);
+      setLoaded(true);
+    } catch (e: any) {
+      setError(`Data load error: ${e?.message ?? "Unknown"}`);
+    }
+  }
+  load();
+}, []);
+```
+
+Benefits:
+- Single `loaded` boolean prevents flash of partial UI
+- Single `error` string prevents uncaught promise rejections
+- Response validation catches malformed data early
+- All data loads atomically (appears all at once)
+
+---
+
+### 10. ACCESSIBILITY
+
+Add these accessibility patterns to EVERY component:
+
+1. **Focus-visible ring**: Global style in globals.css:
+   ```css
+   *:focus-visible {
+     outline: 2px solid #EA580C;
+     outline-offset: 2px;
+   }
+   ```
+   Apply `focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EA580C]`
+   to ALL buttons and interactive elements that aren't native `<a>` or `<button>`.
+
+2. **ARIA attributes**:
+   - Map container: `role="application"`, `tabIndex={0}`, `aria-label="Map of Kenya counties with digital rights risk data"`
+   - Tooltip: `role="tooltip"`, `aria-live="polite"`
+   - Error banners: `role="alert"`
+   - Search: `role="combobox"`, `aria-expanded`, `aria-controls`, `aria-activedescendant`
+   - Search results: `role="listbox"`, `role="option"`, `aria-selected`
+   - HowToUse: `aria-expanded`, `aria-controls`
+   - Bottom sheet close button: `aria-label="Close county details"`
+
+3. **Touch targets**: All clickable elements MUST have minimum 44px height:
+   ```tsx
+   className="min-h-[44px] ..."
+   ```
+   Apply to: header nav links, buttons, search input, rankings rows,
+   bottom sheet close button, footer links.
+
+4. **Semantic HTML**: Use `<header>`, `<main>`, `<section>`, `<nav aria-label="...">`,
+   `<table>`, `<th>`, etc. appropriately throughout.
+
+5. **Screen reader live regions**: Dynamic content updates need `aria-live="polite"`:
+   - County details panel content
+   - Comparison results
+   - Search results count
+
+6. **Keyboard navigation**: Search should handle ArrowDown/ArrowUp/Enter/Escape.
+   Bottom sheet should trap focus when open on mobile.
+
+---
+
+### IMPLEMENTATION ORDER
+
+Apply these changes in this order:
+
+1. First, make ALL changes to globals.css (print styles, focus-visible, theme tokens)
+2. Update src/app/page.tsx with the single `loaded` + `error` pattern
+3. Rewrite MapView.tsx with all map polish (navigation control, tooltip clamp, resize, ARIA)
+4. Update all components with transition classes and hover states
+5. Replace all hex colour inline classes with @theme token names
+6. Add ARIA attributes and touch targets throughout
+7. Add print:hidden and print-specific classes
+8. Run npm run build and fix any TypeScript errors
+9. Test all interactions in browser
+10. Commit and push
+
+---
+
+### VERIFICATION
+
+After all changes, verify:
+- `npm run build` produces 0 errors
+- Every button has hover/focus/active states
+- Every card has hover shadow transition
+- Loading states are atomic (single `loaded` boolean)
+- Error states use the red bordered div pattern
+- Map has NavigationControl and resize handler
+- Tooltip is white with border, clamped to viewport
+- Print stylesheet is complete
+- All colour tokens use @theme names, not hex values
+- All interactive elements have 44px min-height
+- Search has full keyboard + ARIA support
+- `focus-visible` outline works on all interactive elements
+- Mobile bottom sheet has `max-h-[70svh]`
+
+Do NOT half-implement any section. Every component must be polished or it will
+stand out as unfinished. The goal is KHEM parity — indistinguishable production quality.
+```
+
+
