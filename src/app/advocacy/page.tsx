@@ -6,12 +6,41 @@ export default function AdvocacyPage() {
       <h1 className="mb-6 text-3xl font-bold text-brand-brown">Advocacy & Action Guide</h1>
 
       <p className="mb-8 text-sm leading-relaxed text-brand-stone">
-        Data without action is purely academic. The DRRS is designed to arm civil society, policy researchers, and advocates with the empirical evidence needed to challenge digital rights violations. Below are templates for initiating Access to Information (FOIA) requests under Article 35 of the Constitution of Kenya.
+        Data without action is purely academic. The DRRS is designed to arm civil society, policy researchers, and advocates with the empirical evidence needed to challenge digital rights violations. Below are templates for initiating Access to Information (FOIA) requests under Article 35 of the Constitution of Kenya, and Data Protection Act complaints to the ODPC.
       </p>
 
+      <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand-dark">Escalation Pathway</h2>
+        <div className="grid gap-3 text-sm leading-relaxed text-brand-stone md:grid-cols-4">
+          <div className="rounded-lg border border-brand-border bg-brand-bg p-3 text-center">
+            <div className="text-lg font-bold text-brand-brown">1</div>
+            <div className="font-semibold text-brand-dark">FOIA Request</div>
+            <div className="mt-1 text-xs">Article 35 / AIA 2016<br/>21-day response</div>
+          </div>
+          <div className="flex items-center justify-center text-lg text-brand-muted hidden md:block text-center pt-6">&rarr;</div>
+          <div className="rounded-lg border border-brand-border bg-brand-bg p-3 text-center">
+            <div className="text-lg font-bold text-brand-brown">2</div>
+            <div className="font-semibold text-brand-dark">CAJ Appeal</div>
+            <div className="mt-1 text-xs">Commission on Administrative Justice<br/>Review of refusal/ignorance</div>
+          </div>
+          <div className="flex items-center justify-center text-lg text-brand-muted hidden md:block text-center pt-6">&rarr;</div>
+          <div className="rounded-lg border border-brand-border bg-brand-bg p-3 text-center">
+            <div className="text-lg font-bold text-brand-brown">3</div>
+            <div className="font-semibold text-brand-dark">ODPC Complaint</div>
+            <div className="mt-1 text-xs">Section 34 DPA<br/>Enforcement notice / fine</div>
+          </div>
+          <div className="flex items-center justify-center text-lg text-brand-muted hidden md:block text-center pt-6">&rarr;</div>
+          <div className="rounded-lg border border-brand-border bg-brand-bg p-3 text-center">
+            <div className="text-lg font-bold text-brand-brown">4</div>
+            <div className="font-semibold text-brand-dark">High Court</div>
+            <div className="mt-1 text-xs">Constitutional petition<br/>Judicial review</div>
+          </div>
+        </div>
+      </section>
+
       <section className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
-        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 1: Biometric Data in Public Facilities</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016)</p>
+        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 1: Biometric Data & Health System Integration</h2>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016) &mdash; Target: County CECM ICT</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Secretary / Data Protection Officer
 [County Government Name]
@@ -46,7 +75,7 @@ Yours faithfully,
 
       <section className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 2: Internet Shutdown & Network Throttling</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &mdash; Target: County Commissioner / Communications Authority</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Commissioner / Communications Authority of Kenya
 
@@ -74,7 +103,7 @@ Yours faithfully,
 
       <section className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 3: AI Procurement & Algorithmic Systems Audit</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act &mdash; Target: County CECM ICT</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Executive Committee Member for ICT
 [County Government Name]
@@ -98,6 +127,51 @@ of the following information:
 Yours faithfully,
 [Your Name / Organisation]
 [Contact]`}</pre>
+        </div>
+      </section>
+
+      <section className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
+        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 4: Data Controller Non-Complaint (ODPC)</h2>
+        <p className="mb-4 text-xs text-brand-muted">Complaint under Section 34, Data Protection Act 2019</p>
+        <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
+          <pre className="whitespace-pre-wrap">{`To: Office of the Data Protection Commissioner (ODPC)
+P.O. Box 1041-00606, Nairobi
+complaints@odpc.go.ke
+
+RE: COMPLAINT UNDER SECTION 34 OF THE DATA PROTECTION ACT 2019
+    AGAINST [COUNTY GOVERNMENT NAME]
+
+I, [Your Full Name / Organisation], lodge the following complaint:
+
+1. The County Government of [Name] is a data controller as defined
+   under Section 3 of the DPA, processing personal data of county
+   residents through [describe systems: CCTV, biometric enrollment,
+   health databases, e-government platform].
+
+2. To the best of my knowledge, the County Government has NOT
+   registered as a data controller with the ODPC, in violation of
+   Section 18 of the DPA and the Data Protection (General) Regulations
+   2021.
+
+3. I have reasonable grounds to believe that the County Government
+   deployed [AI system / surveillance system / biometric system]
+   without conducting a mandatory Data Protection Impact Assessment
+   (DPIA) as required under Section 31 of the DPA.
+
+4. On [date], I submitted a formal FOIA request under Article 35
+   regarding these systems. [Attach response or evidence of non-response].
+
+RELIEF SOUGHT:
+- An investigation into the County Government's data processing activities
+- An enforcement notice compelling registration and compliance
+- A suspension order for any processing found to be unlawful
+
+Supporting documents attached: [FOIA request, response (if any), evidence]
+
+Yours faithfully,
+[Your Name / Organisation]
+[Contact / P.O. Box]
+[Date]`}</pre>
         </div>
       </section>
 

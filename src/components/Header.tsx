@@ -8,6 +8,9 @@ export default function Header() {
           Kenya AI &amp; Digital Rights Observatory
         </Link>
         <nav className="flex items-center gap-5 text-sm font-medium text-brand-stone" aria-label="Main navigation">
+          <Link href="/explore" className="min-h-[44px] transition-colors hover:text-brand-dark">
+            Explore
+          </Link>
           <Link href="/method" className="min-h-[44px] transition-colors hover:text-brand-dark">
             Methodology
           </Link>

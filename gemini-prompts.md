@@ -3,7 +3,289 @@
 
 ---
 
-## Prompt 23 (AUDIT & OPPORTUNITY): Full Project Audit + Funding/Growth Strategy for Gemini Pro
+## Prompt 24 (HOW KENYA WORKS): Political, Legal & Governance Context for Digital Rights Analysis
+
+```
+You are a Kenya governance and digital rights expert providing context for a data
+journalism / civic tech project. Read this document to understand how Kenya's
+systems actually work — so that every analysis, recommendation, and data model
+is grounded in Kenyan reality rather than generic assumptions.
+
+---
+
+## 1. DEVOLUTION — WHY 47 COUNTIES MATTER
+
+The 2010 Constitution created 47 county governments, each with:
+- An elected Governor (executive) and County Assembly (legislature)
+- Own budget (at least 15% of national revenue via the Division of Revenue Act)
+- Direct responsibility for: county health, agriculture, transport, planning,
+  trade development, and — critically — county ICT / e-government programs
+- County Integrated Development Plans (CIDPs) that guide 5-year spending
+
+This devolution is the single most important structural fact for this project.
+It means digital rights surveillance happens at BOTH levels: national (mass
+surveillance, data protection law, ISP regulation) AND county (CCTV tenders,
+biometric enrollment, county-issued digital IDs, e-government platforms).
+
+County governments are major procurers of technology:
+- Nairobi leads with massive CCTV contracts (thousands of cameras, Huawei hardware)
+- Mombasa, Kisumu, Nakuru have their own urban surveillance programs
+- Counties issue biometric registration (birth certificates, county ID cards)
+- County health systems use digital patient databases (some linked to Maisha Namba)
+
+Each county has a CECM (County Executive Committee Member) for ICT — the
+equivalent of a county-level CIO. FOIA requests (Article 35) should target them.
+
+---
+
+## 2. KEY LAWS — THE LEGAL FRAMEWORK
+
+### Constitution of Kenya 2010
+- **Article 31** — Right to privacy (extends to personal data)
+- **Article 33** — Freedom of expression (includes online speech)
+- **Article 35** — Right to access information (Kenya's FOIA). ANY citizen can
+  request any information held by any state organ, which MUST respond within
+  21 days (extendable by 14). This is the legal basis for all FOIA templates
+  in the advocacy page.
+- **Article 34** — Freedom of the media
+- **Article 46** — Consumer rights (includes digital services)
+
+### Data Protection Act 2019 (DPA)
+- Established the Office of the Data Protection Commissioner (ODPC)
+- Requires data controllers to register, obtain consent, conduct DPIAs
+- ODPC has handled 9,061+ complaints (as of Mar 2026)
+- Key pattern: complaints are rising fast but enforcement is slow; ODPC is
+  underfunded and understaffed (approx 50 staff for 55M people)
+- Penalties: up to KES 5M fine or 2% of annual turnover, but few levied so far
+- Relevancy: every county government is a data controller — they MUST register
+  and comply. Most have NOT. This creates an advocacy angle.
+
+### Computer Misuse & Cybercrimes Act 2018 (CMCA)
+- Broadly worded, criticised for enabling state censorship
+- Criminalises "unauthorised access", "false data", "cyber harassment"
+- Used to prosecute journalists and activists (e.g. Robert Alai, Okiyah Omtatah)
+- Section 29: warrants for expedited preservation of data
+
+### Kenya Information & Communications Act (KICA)
+- Gives Communications Authority (CA) regulatory power over telecoms
+- CA can order internet shutdown — usually under "national security" pretext
+- CA Network Disruption Regulation 2025 (draft) proposes fines for shutdowns but
+  also creates a "lawful interception" framework
+
+### Access to Information Act 2016
+- Implements Article 35 — procedural mechanism for FOIA
+- Commission on Administrative Justice (CAJ) handles appeals
+- Response time: 21 days, extendable by 14
+- Grounds for refusal very narrow (national security, privacy of third party,
+  commercial confidentiality, ongoing investigations)
+- Pattern: state organs routinely ignore requests, CAJ backlog is severe,
+  enforcement requires High Court petition
+
+### Data Protection (General) Regulations 2021
+- Registration thresholds, DPIIA requirements, transfer rules
+- County governments should register as data controllers — most have not
+
+---
+
+## 3. KEY INSTITUTIONS — WHO HOLDS POWER
+
+### Executive
+- **Ministry of Interior & National Administration** — National Police Service,
+  Immigration, registration of persons (Huduma Namba / Maisha Namba)
+- **Ministry of ICT & the Digital Economy** — Konza Technopolis, ICT policy,
+  digital transformation agenda
+- **Presidential Digital Transformation Programme** — county-level digital
+  service delivery push (e-Citizen, digitised land registries)
+
+### Regulatory
+- **ODPC (Office of the Data Protection Commissioner)** — Data protection
+  enforcement. Modest powers, limited budget. Located in Nairobi, no county
+  offices. Currently building its enforcement muscle.
+- **CA (Communications Authority of Kenya)** — Telecom licensing, spectrum,
+  internet shutdown authority. Has county-level coverage data (used in this
+  project's indicators).
+- **CAJ (Commission on Administrative Justice)** — FOIA appeals body.
+  Constitutional commission but underfunded.
+
+### Oversight & Civil Society
+- **KICTANet** — Multi-stakeholder platform (government + private sector + civil
+  society). Runs the annual Kenya School of Internet Governance. Publishes
+  research on digital rights. Key partner for this project.
+- **ICJ Kenya** — Governance, rule of law, litigates digital rights cases
+- **KHRC (Kenya Human Rights Commission)** — Digital rights, surveillance,
+  protest monitoring
+- **Article 19 East Africa** — Free expression, FOIA, digital rights
+- **CIPESA** — Pan-African digital rights, based in Kampala, funds research
+- **Mozilla / OTF** — Fund internet freedom tools globally
+- **Access Now** — Global digital rights org, active in Kenya (shutdown tracking)
+
+---
+
+## 4. INTERNET LANDSCAPE — HOW KENYA IS ONLINE
+
+### Connectivity
+- Internet penetration: ~40% nationally (CA 2024), heavily Nairobi/Mombasa skewed
+- Mobile penetration: ~60% nationally but feature phones dominate in rural areas
+- M-Pesa / mobile money: 30M+ active users — Kenya's de facto banking system
+- Undersea cables: TEAMS, SEACOM, EASSy, DARE, 2Africa — good bandwidth but
+  last-mile is still expensive
+- Starlink launched in Kenya 2024 — disrupting ISP market, but $45/month is
+  unaffordable for most
+
+### Shutdowns
+- June 2024: nationwide shutdown during #RejectFinanceBill2024 protests
+  (3+ hours total across several days)
+- Nov 2024: Telegram blocked (ongoing at ISP level)
+- Localised: throttling during political rallies, by-election violence,
+  anti-government protests in Kisumu, Migori, Homa Bay (opposition strongholds)
+- This project's `internet_shutdown_hours` reflects these events per county
+
+### Digital Public Infrastructure
+- **Maisha Namba** — National digital ID rollout (replacing Huduma Namba)
+  Biometric registration linked to birth registration. Mandatory for:
+  passports, driving licenses, NHIF, KRA PIN, mobile SIM registration,
+  bank accounts. Critics say it creates a surveillance infrastructure.
+  County-level birth registration rates (used in this project) reflect
+  the completeness of this biometric enrollment pipeline.
+- **e-Citizen** — Government service portal, now required for over 5,000
+  government services. Single point of data aggregation. Security concerns
+  have been raised (2024 breach exposed citizen data).
+- **County digital platforms** — Each county has its own e-government portal,
+  revenue collection system, health information system. Quality varies wildly.
+
+---
+
+## 5. POLITICAL ECONOMY — WHY THIS MAP MATTERS NOW
+
+### Key Dynamics
+- **Government digital push is accelerating** — Hustler Fund (digital lending),
+  Maisha Namba, e-Citizen, county digital transformation. More data = more
+  surveillance surface area.
+- **Finance Bill 2024 protests** — Largely Gen Z organised online, exposed
+  state surveillance capacity (tanks linked to Safaricom/Huawei systems).
+  Sparked demands for algorithmic transparency, data protection, digital rights.
+- **Election cycle** — Next general election is Aug 2027. Expect increased
+  surveillance, social media monitoring, biometric voter registration
+  (IEBC systems), and shutdown risk during political violence.
+- **Counterterrorism** — Operation Amani, Operation Linda Boni: surveillance
+  in coast and northeastern counties (Garissa, Mandera, Wajir, Lamu, Tana River).
+  Explained by these counties' high surveillance scores.
+- **AI deployment** — Growing fast: fintech credit scoring, recruit AI,
+  predictive policing pilots (Nairobi), healthcare AI, agri-tech.
+  No regulation specific to AI exists yet (Data Protection Act is the closest).
+- **China/Huawei presence** — Huawei built Nairobi's CCTV system, is building
+  Kenya's fibre backbone, involved in ICT infrastructure. Raises questions
+  about data sovereignty and surveillance tech transfer.
+
+### County Politics
+- 47 governors wield significant power over local ICT spending
+- County assembly members approve budgets — they can be lobbied to demand
+  transparency in tech procurement
+- Opposition-governed counties (e.g. Kisumu, Migori, Homa Bay, Siaya) tend
+  to face more internet disruptions during protests — reflected in their
+  high internet_shutdown_hours
+- Ruling party counties (e.g. Nakuru, Kiambu, Meru, Uasin Gishu) generally
+  have more investment and less disruption
+
+---
+
+## 6. DATA GAPS & PROXY METHODOLOGY
+
+This project uses estimated data because many official statistics either don't
+exist at county level or are not publicly available. Here is the reality:
+
+- **CCTV density**: No national registry of cameras. Estimates based on
+  news reports, KHRC surveys, county budgets, urbanisation rates.
+  Nairobi's estimate (8/10K) is based on the ~4,500 cameras in the
+  command centre system. Other county estimates scale relative to this.
+- **AI systems**: No register of AI systems in Kenya. Estimates based on
+  economic complexity, fintech presence, county ICT budgets, news reports.
+  "AI system" broadly defined (ML model in production, not ChatGPT usage).
+- **ODPC complaints**: National total (9,061) is known. County distribution
+  is estimated from population, urbanisation, and known regional disparities
+  in rights awareness.
+- **Internet shutdown hours**: Based on cross-referencing Access Now, NetBlocks,
+  and KICTANet event reports. Localised events are hard to verify independently.
+- **Social media reports**: Proxy for platform content moderation / takedowns.
+  Inferred from internet usage rates and documented platform restrictions.
+
+All estimates are clearly labelled as such in the data. The project prioritises
+transparency over false precision.
+
+---
+
+## 7. ADVOCACY STRATEGY — HOW TO USE THIS PROJECT FOR REAL CHANGE
+
+### FOIA Requests (Article 35)
+Most effective lever. Template requests target county CECM ICT officers:
+1. **AI Procurement** — which AI/automated systems does the county use, vendor,
+   cost, DPIA status, algorithmic impact assessment
+2. **Biometric Data** — what biometric data is collected, storage, third-party
+   sharing, legal basis, consent mechanism
+3. **Surveillance Systems** — CCTV count, locations, operator, maintenance
+   costs, live facial recognition capability
+
+### Data Protection Complaints
+If counties do not respond to FOIA or refuse registration:
+1. File complaint with ODPC under Section 34 DPA (data controller obligations)
+2. ODPC can issue enforcement notices, fines, suspension of processing
+3. Pattern: ODPC is more likely to act on official complaints than on letters
+
+### Strategic Litigation
+- ICJ Kenya and KHRC file digital rights cases
+- Successful precedent: Mwaniki vs AG (2023) — right to data protection
+  recognised under Article 31
+- PSA (Public Service Accountability) cases can force county transparency
+
+### County Budget Advocacy
+- County budget estimates are public documents under the PFM Act
+- Track ICT spending through the budget cycle (June = approval, July = start)
+- Flag suspicious CCTV / AI procurement line items
+- Submit memoranda to County Assembly Budget Committees
+
+---
+
+## 8. SENSITIVITIES & ETHICAL NOTES
+
+- Surveillance data can be misinterpreted to incite fear or panic
+- Do NOT identify individual surveillance targets (e.g. named activists)
+- The "risk" labels (High/Elevated/Moderate/Lower) are relative, not absolute
+- High surveillance in northeastern counties reflects counterterrorism, not
+  state repression of ordinary citizens
+- Some counties have low scores due to poverty and lack of infrastructure,
+  not because they are safer — "low risk" can mean "too poor to surveil"
+- Avoid implying that higher surveillance = more rights violations; context
+  matters (a camera in a mall is different from a camera in a police station)
+- Data gaps disproportionately affect marginalised counties — this is itself
+  a digital rights observation worth making
+
+---
+
+## 9. NUMBERED LIST OF KEY TAKEAWAYS
+
+1. Devolution means digital rights are both a national AND county issue —
+   this project's 47-county model reflects Kenyan constitutional reality
+2. Article 35 (FOIA) is the strongest legal tool — county ICT departments
+   must respond to information requests within 21 days
+3. The Data Protection Act 2019 applies to ALL county governments as data
+   controllers — most are not in compliance
+4. Internet shutdowns follow political lines: opposition strongholds bear
+   the brunt of connectivity disruptions
+5. Maisha Namba / digital ID creates a universal biometric surveillance
+   infrastructure — county birth registration is the entry point
+6. AI regulation is nonexistent in Kenya — county-level AI procurement
+   happens without any algorithmic transparency or impact assessment
+7. Kenya's internet is bifurcated: urban fibre vs rural mobile-only,
+   creating a digital rights disparity between counties
+8. Civil society organisations (KICTANet, ICJ Kenya, KHRC, Article 19)
+   are the enforcement arm of Kenya's data protection framework
+9. The next election cycle (Aug 2027) will intensify all digital rights
+   dynamics — this map should be published well before campaigning begins
+10. Every county score is an estimate with uncertainty — the project's
+    value is in comparison and pattern-finding, not absolute precision
+```
+
+---
 
 ```
 You are Gemini Pro 2.5 — a frontier AI model with significantly more advanced reasoning,
