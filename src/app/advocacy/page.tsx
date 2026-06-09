@@ -43,7 +43,7 @@ export default function AdvocacyPage() {
 
       <section id="template-1" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 1: Biometric Data & Health System Integration</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016) &mdash; Target: County CECM ICT</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016) - Target: County CECM ICT</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Secretary / Data Protection Officer
 [County Government Name]
@@ -78,7 +78,7 @@ Yours faithfully,
 
       <section id="template-2" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 2: Internet Shutdown & Network Throttling</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &mdash; Target: County Commissioner / Communications Authority</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya - Target: County Commissioner / Communications Authority</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Commissioner / Communications Authority of Kenya
 
@@ -106,7 +106,7 @@ Yours faithfully,
 
       <section id="template-3" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 3: AI Procurement & Algorithmic Systems Audit</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act &mdash; Target: County CECM ICT</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act - Target: County CECM ICT</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Executive Committee Member for ICT
 [County Government Name]

@@ -33,7 +33,7 @@ export default function Sparkline({ data, width = 56, height = 24, color, fallba
   }, [data, width, height]);
 
   if (data.length < 2) {
-    return <span className="text-[10px] text-brand-muted">{fallbackText ?? "—"}</span>;
+    return <span className="text-[10px] text-brand-muted">{fallbackText ?? "-"}</span>;
   }
 
   return (

@@ -71,7 +71,7 @@ export default function FoiaTracker() {
 
       <div className="grid gap-3">
         {foiaRequests.map((req) => {
-          const drrs = countyDrrs[req.county] ?? "—";
+          const drrs = countyDrrs[req.county] ?? "-";
           const templateNum = TYPE_TEMPLATES[req.requestType] ?? 1;
           return (
             <div

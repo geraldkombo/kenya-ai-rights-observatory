@@ -41,7 +41,7 @@ function BriefContent() {
 
       <div className="mb-8">
         <div className={`inline-block rounded-full px-4 py-1 text-lg font-bold ${getDRRSBadgeClass(score.drrs)}`}>
-          DRRS: {score.drrs}/100 &mdash; {score.drrs >= 70 ? 'High Risk' : score.drrs >= 50 ? 'Elevated Risk' : score.drrs >= 30 ? 'Moderate Risk' : 'Lower Risk'}
+          DRRS: {score.drrs}/100 - {score.drrs >= 70 ? 'High Risk' : score.drrs >= 50 ? 'Elevated Risk' : score.drrs >= 30 ? 'Moderate Risk' : 'Lower Risk'}
         </div>
       </div>
 
