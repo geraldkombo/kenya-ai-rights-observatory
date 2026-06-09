@@ -42,6 +42,18 @@ export interface YearRecord {
   population: number;
 }
 
+export type FoiaStatus = "Submitted" | "Acknowledged" | "Denied" | "Escalated" | "Resolved";
+
+export interface FoiaRequest {
+  id: string;
+  county: string;
+  requestType: "CCTV" | "HealthData" | "Biometric" | "AIProcurement";
+  dateSubmitted: string;
+  status: FoiaStatus;
+  daysPending: number;
+  notes?: string;
+}
+
 export interface DRSScore {
   drrs: number;
   surveillance: number;
