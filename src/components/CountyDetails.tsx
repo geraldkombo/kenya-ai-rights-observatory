@@ -4,6 +4,8 @@ import { useMemo } from "react";
 import Link from "next/link";
 import type { CountyRecord, DigitalRightsIndicators } from "@/lib/types";
 import { computeDRRS, getDRRSBadgeClass, getDRRSColor } from "@/lib/scoring";
+import { estimateHistory, drrsPercentTrend } from "@/lib/historical";
+import Sparkline from "./Sparkline";
 import ShareCard from "./ShareCard";
 
 interface Props {
@@ -55,6 +57,19 @@ export default function CountyDetails({ county, indicators }: Props) {
     URL.revokeObjectURL(url);
   };
 
+  const history = useMemo(() => ind ? estimateHistory(ind) : null, [ind]);
+
+  const dimTrends = useMemo(() => {
+    if (!history) return null;
+    return {
+      surveillance: drrsPercentTrend(history, "surveillance"),
+      internetHealth: drrsPercentTrend(history, "internetHealth"),
+      dataPrivacy: drrsPercentTrend(history, "dataPrivacy"),
+      biometric: drrsPercentTrend(history, "biometric"),
+      platformImpact: drrsPercentTrend(history, "platformImpact"),
+    };
+  }, [history]);
+
   if (!ind || !score) {
     return (
       <div className="rounded-xl border border-brand-border bg-white p-5">
@@ -78,11 +93,27 @@ export default function CountyDetails({ county, indicators }: Props) {
 
       <div className="mt-5 space-y-3 border-t border-brand-border pt-4">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-stone">Risk dimensions</h4>
-        <ProgressBar label="Surveillance density" value={score.surveillance} />
-        <ProgressBar label="Internet health deficit" value={score.internetHealth} />
-        <ProgressBar label="Data privacy risk" value={score.dataPrivacy} />
-        <ProgressBar label="Biometric enrollment" value={score.biometric} />
-        <ProgressBar label="Platform impact" value={score.platformImpact} />
+        {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((dim) => {
+          const trends = dimTrends?.[dim];
+          const trendColor = trends && trends[2] > trends[0] ? "#DC2626" : "#059669";
+          const labels: Record<string, string> = {
+            surveillance: "Surveillance density",
+            internetHealth: "Internet health deficit",
+            dataPrivacy: "Data privacy risk",
+            biometric: "Biometric enrollment",
+            platformImpact: "Platform impact",
+          };
+          return (
+            <div key={dim} className="flex items-center gap-3">
+              <div className="flex-1">
+                <ProgressBar label={labels[dim]} value={score[dim]} />
+              </div>
+              {trends && (
+                <Sparkline data={trends} width={48} height={20} color={trendColor} />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {score.drivers.length > 0 && (

@@ -4,7 +4,9 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
-import type { DRSScore } from "@/lib/types";
+import { estimateHistory, calcDRRSTrend } from "@/lib/historical";
+import type { DRSScore, YearRecord } from "@/lib/types";
+import Sparkline from "@/components/Sparkline";
 
 type SortKey = "name" | "drrs" | "surveillance" | "internetHealth" | "dataPrivacy" | "biometric" | "platformImpact";
 
@@ -12,6 +14,7 @@ interface TableRow {
   id: string;
   name: string;
   scores: DRSScore;
+  history: YearRecord[];
 }
 
 const DIM_LABELS: Record<string, string> = {
@@ -38,7 +41,7 @@ export default function ExplorePage() {
         .map((county) => {
           const ind = indicators.find((i) => i.county_code === county.id);
           if (!ind) return null;
-          return { id: county.id, name: county.name, scores: computeDRRS(county.id, ind) };
+          return { id: county.id, name: county.name, scores: computeDRRS(county.id, ind), history: estimateHistory(ind) };
         })
         .filter((row): row is TableRow => row !== null),
     [],
@@ -151,9 +154,18 @@ export default function ExplorePage() {
                         {row.scores.drrs}
                       </span>
                     </td>
-                    {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((key) => (
-                      <td key={key} className="px-4 py-3 font-mono text-brand-stone">{row.scores[key]}</td>
-                    ))}
+                    {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((key) => {
+                      const dimTrend = calcDRRSTrend(row.history, key);
+                      const trendColor = dimTrend.length >= 2 && dimTrend[dimTrend.length - 1] >= dimTrend[0] ? "#DC2626" : "#059669";
+                      return (
+                        <td key={key} className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-brand-stone">{row.scores[key]}</span>
+                            <Sparkline data={dimTrend} width={40} height={16} color={trendColor} />
+                          </div>
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))
               ) : (
