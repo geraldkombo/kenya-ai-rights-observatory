@@ -5,7 +5,7 @@ import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
 import { NEIGHBORS } from "@/lib/neighbors";
-import RadarChart from "@/components/RadarChart";
+import BarCompare from "@/components/BarCompare";
 
 function useStats(countyId: string) {
   return useMemo(() => {
@@ -109,20 +109,17 @@ export default function ComparePage() {
 
       {selA && selB && statsA && statsB && (
         <div className="mt-8 space-y-8">
-          <section className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center" aria-label="Radar chart comparison">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-bold text-brand-brown">{selA.name}</span>
-              <RadarChart
-                scores={DIMENSIONS.map((d) => ({ label: d.shortLabel, value: statsA.score[d.key] }))}
-                size={220}
-              />
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-bold text-brand-orange">{selB.name}</span>
-              <RadarChart
-                scores={DIMENSIONS.map((d) => ({ label: d.shortLabel, value: statsB.score[d.key] }))}
-                size={220}
-              />
+          <section className="rounded-lg border border-brand-border bg-white p-4 shadow-sm sm:p-6" aria-label="Score comparison">
+            <h3 className="mb-4 text-sm font-bold text-brand-dark">Score Comparison</h3>
+            <BarCompare
+              countyA={selA.name}
+              countyB={selB.name}
+              scoresA={statsA.score}
+              scoresB={statsB.score}
+            />
+            <div className="mt-4 flex items-center gap-4 text-xs text-brand-muted">
+              <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded bg-brand-brown" /> {selA.name}</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded bg-brand-orange" /> {selB.name}</span>
             </div>
           </section>
 
