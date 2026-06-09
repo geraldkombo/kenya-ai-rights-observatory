@@ -20,13 +20,8 @@ export default function Search({ counties, onSelect, placeholder = "Search count
     ? counties.filter((c) => c.name.toLowerCase().includes(query.toLowerCase())).slice(0, 8)
     : [];
 
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [query]);
-
-  useEffect(() => {
-    if (!isOpen) setQuery("");
-  }, [isOpen]);
+  useEffect(() => { setActiveIndex(-1); }, [query]);
+  useEffect(() => { if (!isOpen) setQuery(""); }, [isOpen]);
 
   const handleSelect = (code: string) => {
     onSelect(code);
@@ -64,7 +59,7 @@ export default function Search({ counties, onSelect, placeholder = "Search count
         aria-controls="search-results"
         aria-activedescendant={activeIndex >= 0 ? `search-option-${activeIndex}` : undefined}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-[#E0DBD0] bg-[#FDFBF7] px-4 py-2.5 text-sm text-[#292524] placeholder-[#A8A08F] transition-colors focus:border-[#EA580C] focus:outline-none focus:ring-2 focus:ring-[#EA580C]/20"
+        className="w-full min-h-[44px] rounded-lg border border-brand-border bg-brand-cream px-4 py-2.5 text-sm text-brand-dark placeholder-brand-muted transition-colors focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
         value={query}
         onChange={(e) => { setQuery(e.target.value); setIsOpen(true); }}
         onFocus={() => query.length > 0 && setIsOpen(true)}
@@ -76,7 +71,7 @@ export default function Search({ counties, onSelect, placeholder = "Search count
           ref={listRef}
           id="search-results"
           role="listbox"
-          className="absolute z-50 mt-1 w-full rounded-lg border border-[#E0DBD0] bg-white shadow-lg"
+          className="absolute z-50 mt-1 w-full rounded-lg border border-brand-border bg-white shadow-lg"
         >
           {filtered.map((c, i) => (
             <li
@@ -84,8 +79,8 @@ export default function Search({ counties, onSelect, placeholder = "Search count
               id={`search-option-${i}`}
               role="option"
               aria-selected={i === activeIndex}
-              className={`cursor-pointer border-b border-[#E0DBD0] px-4 py-2.5 text-sm text-[#292524] transition-colors last:border-0 ${
-                i === activeIndex ? "bg-[#F8F5F0] font-medium" : "hover:bg-[#F8F5F0]"
+              className={`min-h-[44px] cursor-pointer border-b border-brand-border px-4 py-2.5 text-sm text-brand-dark transition-colors last:border-0 ${
+                i === activeIndex ? "bg-brand-bg font-medium" : "hover:bg-brand-bg"
               }`}
               onMouseDown={() => handleSelect(c.id)}
             >

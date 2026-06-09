@@ -2,24 +2,25 @@
 
 import { useMemo } from "react";
 import type { CountyRecord, DigitalRightsIndicators } from "@/lib/types";
-import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
+import { computeDRRS, getDRRSBadgeClass, getDRRSColor } from "@/lib/scoring";
 
 interface Props {
   county: CountyRecord;
   indicators: DigitalRightsIndicators[];
 }
 
-function ProgressBar({ label, value, max, invert }: { label: string; value: number; max: number; invert?: boolean }) {
-  const pct = Math.min(100, Math.round((value / max) * 100));
-  const displayPct = invert ? 100 - pct : pct;
+function ProgressBar({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex items-center justify-between text-xs">
-        <span className="text-[#6B6355]">{label}</span>
-        <span className="font-medium text-[#292524]">{invert ? 100 - pct : pct}%</span>
+        <span className="text-brand-stone">{label}</span>
+        <span className="font-medium text-brand-dark">{value}%</span>
       </div>
-      <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[#F8F5F0]">
-        <div className="h-full rounded-full bg-[#78350F] transition-all duration-300" style={{ width: `${displayPct}%` }} />
+      <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-brand-bg">
+        <div
+          className="h-full rounded-full transition-all duration-300"
+          style={{ width: `${value}%`, backgroundColor: getDRRSColor(value) }}
+        />
       </div>
     </div>
   );
@@ -34,63 +35,61 @@ export default function CountyDetails({ county, indicators }: Props) {
 
   if (!ind || !score) {
     return (
-      <div className="rounded-xl border border-[#E0DBD0] bg-white p-5">
-        <p className="text-sm text-[#A8A08F]">Data unavailable for this county.</p>
+      <div className="rounded-xl border border-brand-border bg-white p-5">
+        <p className="text-sm text-brand-muted">Data unavailable for this county.</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-[#E0DBD0] bg-white p-5 transition-all duration-200 ease-in-out hover:shadow-md">
+    <div className="break-inside-avoid rounded-xl border border-brand-border bg-white p-5 transition-all duration-200 ease-in-out hover:shadow-md">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold text-[#292524]">{county.name}</h2>
-          <p className="text-sm text-[#A8A08F]">County, Kenya</p>
+          <h2 className="text-lg font-bold text-brand-dark">{county.name}</h2>
+          <p className="text-sm text-brand-muted">County, Kenya</p>
         </div>
-        {score && (
-          <div className={`rounded-lg px-3 py-1.5 text-right ${getDRRSBadgeClass(score.drrs)}`}>
-            <div className="text-xl font-bold tracking-tight">{score.drrs}</div>
-            <div className="text-[10px] font-medium opacity-80">DRRS</div>
-          </div>
-        )}
+        <div className={`rounded-lg px-3 py-1.5 text-right transition-colors ${getDRRSBadgeClass(score.drrs)}`}>
+          <div className="text-xl font-bold tracking-tight">{score.drrs}</div>
+          <div className="text-[10px] font-medium opacity-80">DRRS</div>
+        </div>
       </div>
 
-      <div className="mt-5 space-y-3 border-t border-[#E0DBD0] pt-4">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6B6355]">Risk dimensions</h4>
-        <ProgressBar label="Surveillance density" value={score.surveillance} max={100} />
-        <ProgressBar label="Internet health deficit" value={score.internetHealth} max={100} />
-        <ProgressBar label="Data privacy risk" value={score.dataPrivacy} max={100} />
-        <ProgressBar label="Biometric enrollment" value={score.biometric} max={100} />
-        <ProgressBar label="Platform impact" value={score.platformImpact} max={100} />
+      <div className="mt-5 space-y-3 border-t border-brand-border pt-4">
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-stone">Risk dimensions</h4>
+        <ProgressBar label="Surveillance density" value={score.surveillance} />
+        <ProgressBar label="Internet health deficit" value={score.internetHealth} />
+        <ProgressBar label="Data privacy risk" value={score.dataPrivacy} />
+        <ProgressBar label="Biometric enrollment" value={score.biometric} />
+        <ProgressBar label="Platform impact" value={score.platformImpact} />
       </div>
 
       {score.drivers.length > 0 && (
-        <div className="mt-5 space-y-3 border-t border-[#E0DBD0] pt-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6B6355]">Key drivers</h4>
-          <ul className="space-y-1">
+        <div className="mt-5 rounded-lg border border-red-100 bg-red-50 p-4">
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-red-800">Key drivers</h4>
+          <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-red-700">
             {score.drivers.map((d, i) => (
-              <li key={i} className="text-xs leading-5 text-[#6B6355] list-disc ml-4">{d}</li>
+              <li key={i}>{d}</li>
             ))}
           </ul>
         </div>
       )}
 
-      <div className="mt-4 grid grid-cols-2 gap-4 border-t border-[#E0DBD0] pt-4">
+      <div className="mt-4 grid grid-cols-2 gap-4 border-t border-brand-border pt-4">
         <div>
-          <div className="text-[11px] font-semibold text-[#6B6355]">AI Systems</div>
-          <div className="mt-0.5 text-sm font-medium text-[#292524]">{ind.ai_systems_count}</div>
+          <div className="text-[11px] font-semibold text-brand-stone">AI Systems</div>
+          <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.ai_systems_count}</div>
         </div>
         <div>
-          <div className="text-[11px] font-semibold text-[#6B6355]">CCTV Density</div>
-          <div className="mt-0.5 text-sm font-medium text-[#292524]">{ind.cctv_density} per 10K</div>
+          <div className="text-[11px] font-semibold text-brand-stone">CCTV Density</div>
+          <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.cctv_density} per 10K</div>
         </div>
         <div>
-          <div className="text-[11px] font-semibold text-[#6B6355]">Shutdown Hours</div>
-          <div className="mt-0.5 text-sm font-medium text-[#292524]">{ind.internet_shutdown_hours}h</div>
+          <div className="text-[11px] font-semibold text-brand-stone">Shutdown Hours</div>
+          <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.internet_shutdown_hours}h</div>
         </div>
         <div>
-          <div className="text-[11px] font-semibold text-[#6B6355]">ODPC Complaints</div>
-          <div className="mt-0.5 text-sm font-medium text-[#292524]">{ind.odpc_complaints}</div>
+          <div className="text-[11px] font-semibold text-brand-stone">ODPC Complaints</div>
+          <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.odpc_complaints}</div>
         </div>
       </div>
     </div>

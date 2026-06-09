@@ -30,8 +30,8 @@ export default class MapErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         this.props.fallback || (
-          <div className="flex h-[400px] items-center justify-center rounded-xl border border-[#E0DBD0] bg-[#F8F5F0] text-sm text-[#6B6355]">
-            Map loading failed. Check console for details.
+          <div className="flex h-[400px] items-center justify-center rounded-xl border border-red-200 bg-red-50 text-sm text-red-700" role="alert">
+            Map loading failed. Please refresh the page.
           </div>
         )
       );

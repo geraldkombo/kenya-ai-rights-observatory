@@ -32,36 +32,38 @@ export default function ComparePage() {
   const statsB = useStats(countyB);
 
   return (
-    <div className="mx-auto max-w-5xl px-8 py-8">
-      <div className="mb-8 pb-4 border-b border-[#E0DBD0] print:hidden flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8">
+      <div className="mb-8 flex flex-col gap-4 border-b border-brand-border pb-4 print:hidden md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-[24px] font-bold text-[#78350F] md:text-3xl">Compare Counties</h1>
-          <p className="text-[#6B6355] mt-4 text-[14px] leading-7">
+          <h1 className="text-2xl font-bold text-brand-brown md:text-3xl">Compare Counties</h1>
+          <p className="mt-4 text-sm leading-7 text-brand-stone">
             Select two counties to compare their digital rights risk profiles side-by-side.
           </p>
         </div>
         {(countyA || countyB) && (
-          <button onClick={() => { setCountyA(""); setCountyB(""); }}
-            className="min-h-[44px] inline-flex items-center justify-center rounded-[6px] bg-[#F8F5F0] border border-[#E0DBD0] hover:bg-[#F0EDE6] text-[#292524] font-bold px-4 py-2 text-[12px] uppercase tracking-widest transition-colors">
+          <button
+            onClick={() => { setCountyA(""); setCountyB(""); }}
+            className="min-h-[44px] inline-flex items-center justify-center rounded-md border border-brand-border bg-brand-bg px-4 py-2 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-[#F0EDE6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange"
+          >
             Reset Selection
           </button>
         )}
       </div>
 
-      <div className="mt-8 rounded-[8px] border border-[#E0DBD0] bg-[#F8F5F0] p-8 shadow-sm print:hidden">
-        <div className="grid gap-8 sm:grid-cols-2">
+      <div className="mt-8 rounded-lg border border-brand-border bg-brand-bg p-6 shadow-sm print:hidden sm:p-8">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label className="mb-2 block text-[12px] font-semibold uppercase text-[#292524]">Select County A</label>
-            <select value={countyA} onChange={(e) => { setCountyA(e.target.value); setCountyB(""); }}
-              className="w-full min-h-[44px] rounded-[4px] border border-[#E0DBD0] bg-white px-4 py-2 text-[14px] text-[#292524] shadow-sm">
+            <label className="mb-2 block text-xs font-semibold uppercase text-brand-dark" htmlFor="county-a">Select County A</label>
+            <select id="county-a" value={countyA} onChange={(e) => { setCountyA(e.target.value); setCountyB(""); }}
+              className="w-full min-h-[44px] rounded border border-brand-border bg-white px-4 py-2 text-sm text-brand-dark shadow-sm transition-colors focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
               <option value="">-- Choose a County --</option>
               {counties.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </div>
           <div>
-            <label className="mb-2 block text-[12px] font-semibold uppercase text-[#292524]">Select County B</label>
-            <select value={countyB} onChange={(e) => setCountyB(e.target.value)} disabled={!countyA}
-              className="w-full min-h-[44px] rounded-[4px] border border-[#E0DBD0] bg-white px-4 py-2 text-[14px] text-[#292524] shadow-sm disabled:opacity-50">
+            <label className="mb-2 block text-xs font-semibold uppercase text-brand-dark" htmlFor="county-b">Select County B</label>
+            <select id="county-b" value={countyB} onChange={(e) => setCountyB(e.target.value)} disabled={!countyA}
+              className="w-full min-h-[44px] rounded border border-brand-border bg-white px-4 py-2 text-sm text-brand-dark shadow-sm transition-colors disabled:opacity-50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
               <option value="">-- Choose a County --</option>
               {counties.filter((c) => c.id !== countyA).map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
@@ -71,16 +73,16 @@ export default function ComparePage() {
 
       {selA && selB && statsA && statsB && (
         <div className="mt-8 space-y-8">
-          <section className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center">
+          <section className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center" aria-label="Radar chart comparison">
             <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-bold text-[#78350F]">{selA.name}</span>
+              <span className="text-sm font-bold text-brand-brown">{selA.name}</span>
               <RadarChart
                 scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsA.score[d.key] }))}
                 size={220}
               />
             </div>
             <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-bold text-[#EA580C]">{selB.name}</span>
+              <span className="text-sm font-bold text-brand-orange">{selB.name}</span>
               <RadarChart
                 scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsB.score[d.key] }))}
                 size={220}
@@ -88,31 +90,31 @@ export default function ComparePage() {
             </div>
           </section>
 
-          <section className="grid gap-8 md:grid-cols-2">
+          <section className="grid gap-8 md:grid-cols-2" aria-live="polite">
             {([{ county: selA, stats: statsA }, { county: selB, stats: statsB }] as const).map(({ county, stats }, idx) => (
-              <div key={county.id} className="rounded-[8px] border border-[#E0DBD0] bg-white shadow-sm" style={{ borderTop: `4px solid ${idx === 0 ? "#78350F" : "#EA580C"}` }}>
-                <div className="flex items-start justify-between border-b border-[#E0DBD0] bg-[#F8F5F0] p-4">
-                  <h3 className="text-[14px] font-bold text-[#292524]">{county.name}</h3>
-                  <div className={`rounded-[6px] px-4 py-1 text-center font-bold shadow-sm ${getDRRSBadgeClass(stats.score.drrs)}`}>
-                    <span className="text-[20px]">{stats.score.drrs}</span>
-                    <span className="ml-1 text-[12px] font-normal opacity-80">DRRS</span>
+              <div key={county.id} className="break-inside-avoid rounded-lg border border-brand-border bg-white shadow-sm transition-all duration-200 hover:shadow-md" style={{ borderTop: `4px solid ${idx === 0 ? "#78350F" : "#EA580C"}` }}>
+                <div className="flex items-start justify-between border-b border-brand-border bg-brand-bg p-4">
+                  <h3 className="text-sm font-bold text-brand-dark">{county.name}</h3>
+                  <div className={`rounded-md px-4 py-1 text-center font-bold shadow-sm print-color-adjust-exact ${getDRRSBadgeClass(stats.score.drrs)}`}>
+                    <span className="text-xl">{stats.score.drrs}</span>
+                    <span className="ml-1 text-xs font-normal opacity-80">DRRS</span>
                   </div>
                 </div>
                 <div className="p-4">
-                  <table className="w-full text-[14px]">
+                  <table className="w-full text-sm">
                     <tbody>
                       {DIMENSIONS.map((d) => (
-                        <tr key={d.key} className="border-b border-[#E0DBD0] last:border-0">
-                          <td className="py-2 text-[#6B6355]">{d.label}</td>
-                          <td className="py-2 text-right font-semibold text-[#292524]">{stats.score[d.key]}%</td>
+                        <tr key={d.key} className="border-b border-brand-border last:border-0">
+                          <td className="py-2 text-brand-stone">{d.label}</td>
+                          <td className="py-2 text-right font-semibold text-brand-dark">{stats.score[d.key]}%</td>
                         </tr>
                       ))}
-                      <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">Population</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.population.toLocaleString()}</td></tr>
-                      <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">AI Systems</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.ai_systems_count}</td></tr>
-                      <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">CCTV Density</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.cctv_density} per 10K</td></tr>
-                      <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">Shutdown Hours</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.internet_shutdown_hours}h</td></tr>
-                      <tr className="border-b border-[#E0DBD0]"><td className="py-2 text-[#6B6355]">ODPC Complaints</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.odpc_complaints}</td></tr>
-                      <tr><td className="py-2 text-[#6B6355]">Biometric Enrollment</td><td className="py-2 text-right font-semibold text-[#292524]">{stats.ind.biometric_enrollment_rate}%</td></tr>
+                      <tr className="border-b border-brand-border"><td className="py-2 text-brand-stone">Population</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.population.toLocaleString()}</td></tr>
+                      <tr className="border-b border-brand-border"><td className="py-2 text-brand-stone">AI Systems</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.ai_systems_count}</td></tr>
+                      <tr className="border-b border-brand-border"><td className="py-2 text-brand-stone">CCTV Density</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.cctv_density} per 10K</td></tr>
+                      <tr className="border-b border-brand-border"><td className="py-2 text-brand-stone">Shutdown Hours</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.internet_shutdown_hours}h</td></tr>
+                      <tr className="border-b border-brand-border"><td className="py-2 text-brand-stone">ODPC Complaints</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.odpc_complaints}</td></tr>
+                      <tr><td className="py-2 text-brand-stone">Biometric Enrollment</td><td className="py-2 text-right font-semibold text-brand-dark">{stats.ind.biometric_enrollment_rate}%</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -121,9 +123,9 @@ export default function ComparePage() {
           </section>
 
           {statsA.score.drivers.length > 0 && statsB.score.drivers.length > 0 && (
-            <section className="rounded-[8px] border-l-4 bg-[#FFFBEB] p-8 shadow-sm" style={{ borderLeftColor: "#EA580C" }} role="note">
-              <h3 className="text-[14px] font-bold text-[#78350F]">Key findings</h3>
-              <ul className="mt-2 space-y-1 text-[14px] leading-7 text-[#292524]">
+            <section className="rounded-lg border-l-4 border-brand-orange bg-amber-50 p-6 shadow-sm" role="note">
+              <h3 className="text-sm font-bold text-brand-brown">Key findings</h3>
+              <ul className="mt-2 space-y-1 text-sm leading-7 text-brand-dark">
                 {statsA.score.drivers.slice(0, 2).map((d, i) => (
                   <li key={`a-${i}`}><strong>{selA.name}:</strong> {d}</li>
                 ))}
@@ -136,8 +138,8 @@ export default function ComparePage() {
         </div>
       )}
 
-      <div className="mt-16 text-center text-[12px] text-[#A8A08F] print:hidden">
-        <Link href="/" className="text-[#EA580C] underline underline-offset-2">&larr; Return to map</Link>
+      <div className="mt-16 text-center text-xs text-brand-muted print:hidden">
+        <Link href="/" className="text-brand-orange underline underline-offset-2 transition-colors hover:text-brand-accent">&larr; Return to map</Link>
       </div>
     </div>
   );

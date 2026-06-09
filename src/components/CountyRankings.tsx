@@ -18,11 +18,11 @@ function RankedCounty({
   return (
     <button
       onClick={onClick}
-      className="flex w-full items-center gap-2 rounded-md border border-[#E0DBD0] bg-white px-2.5 py-2 text-left text-xs shadow-sm transition-colors hover:border-[#A8A08F] hover:bg-[#F8F5F0]"
+      className="flex w-full min-h-[44px] items-center gap-2 rounded-md border border-brand-border bg-white px-2.5 py-2 text-left text-xs shadow-sm transition-colors hover:border-brand-muted hover:bg-brand-bg active:bg-[#F0EDE6]"
     >
-      <span className="w-5 text-center font-mono text-[10px] font-semibold text-[#A8A08F]">{rank}</span>
-      <span className="flex-1 truncate font-medium text-[#292524]">{name}</span>
-      <span className="rounded px-1.5 py-0.5 text-[10px] font-bold tabular-nums" style={{ backgroundColor: color, color: score >= 50 ? "#fff" : "#292524" }}>
+      <span className="w-5 text-center font-mono text-[10px] font-semibold text-brand-muted">{rank}</span>
+      <span className="flex-1 truncate font-medium text-brand-dark">{name}</span>
+      <span className="rounded px-1.5 py-0.5 text-[10px] font-bold tabular-nums transition-colors" style={{ backgroundColor: color, color: score >= 50 ? "#fff" : "#292524" }}>
         {score}
       </span>
     </button>
@@ -45,19 +45,19 @@ export default function CountyRankings({ counties, indicators, onCountyClick }: 
 
   if (rankings.length === 0) {
     return (
-      <div className="rounded-xl border border-[#E0DBD0] bg-white p-5">
-        <p className="text-sm text-[#A8A08F]">Loading rankings...</p>
+      <div className="rounded-xl border border-brand-border bg-white p-5">
+        <p className="text-sm text-brand-muted">Loading rankings...</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-[#E0DBD0] bg-white p-5">
-      <h3 className="text-sm font-semibold text-[#292524]">Highest digital rights risk</h3>
-      <p className="mt-1 text-[10px] text-[#A8A08F]">Counties with the most critical surveillance and privacy concerns</p>
+    <div className="rounded-xl border border-brand-border bg-white p-5">
+      <h3 className="text-sm font-semibold text-brand-dark">Highest digital rights risk</h3>
+      <p className="mt-1 text-[10px] text-brand-muted">Counties with the most critical surveillance and privacy concerns</p>
 
       <div className="mt-3">
-        <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#6B6355]">Maximum risk</h4>
+        <h4 className="text-[10px] font-semibold uppercase tracking-wider text-brand-stone">Maximum risk</h4>
         <div className="mt-1 space-y-0.5">
           {top5.map((c, i) => (
             <RankedCounty key={c.id} rank={i + 1} name={c.name} score={c.score} color={getDRRSColor(c.score)} onClick={() => onCountyClick(c.id)} />
@@ -66,7 +66,7 @@ export default function CountyRankings({ counties, indicators, onCountyClick }: 
       </div>
 
       <div className="mt-4">
-        <h4 className="text-[10px] font-semibold uppercase tracking-wider text-[#6B6355]">Minimum risk</h4>
+        <h4 className="text-[10px] font-semibold uppercase tracking-wider text-brand-stone">Minimum risk</h4>
         <div className="mt-1 space-y-0.5">
           {bottom5.map((c, i) => (
             <RankedCounty key={c.id} rank={rankings.length - 4 + i} name={c.name} score={c.score} color={getDRRSColor(c.score)} onClick={() => onCountyClick(c.id)} />

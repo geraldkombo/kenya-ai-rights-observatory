@@ -85,6 +85,8 @@ export default function MapView({
         return;
       }
 
+      map.addControl(new maplibregl.NavigationControl(), "bottom-right");
+
       const fillExpr = buildMatchExpression(countyScores);
 
       map.addLayer({
@@ -194,30 +196,50 @@ export default function MapView({
     ]);
   }, [selectedCountyCode]);
 
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const timer = setTimeout(() => {
+      try { map.resize(); } catch { /* ignore */ }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [selectedCountyCode]);
+
   if (hasError) {
     return (
-      <div className="flex h-[400px] items-center justify-center rounded-xl border border-[#E0DBD0] bg-[#F8F5F0] text-sm text-[#6B6355]">
+      <div className="flex h-[400px] items-center justify-center rounded-xl border border-brand-border bg-brand-bg text-sm text-brand-stone">
         Geographic data temporarily unavailable.
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-[400px] w-full overflow-hidden rounded-xl border border-[#E0DBD0] shadow-sm">
-      <div ref={containerRef} className="h-[70svh] w-full min-h-[400px] max-h-[800px]" aria-label="Map of Kenya counties with digital rights risk data" />
+    <div className="relative min-h-[400px] w-full overflow-hidden rounded-xl border border-brand-border shadow-sm">
+      <div
+        ref={containerRef}
+        className="h-[70svh] w-full min-h-[400px] max-h-[800px]"
+        role="application"
+        tabIndex={0}
+        aria-label="Map of Kenya counties with digital rights risk data"
+      />
       {!ready && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#FDFBF7] text-sm text-[#6B6355]">
+        <div className="absolute inset-0 flex items-center justify-center bg-brand-cream text-sm text-brand-stone">
           Loading geographic interface...
         </div>
       )}
       {hoverInfo && (
         <div
-          className="pointer-events-none absolute z-10 rounded-lg bg-[#292524] px-3 py-2 text-xs text-[#FDFBF7] shadow-lg"
-          style={{ left: hoverInfo.x + 12, top: hoverInfo.y - 12 }}
+          className="pointer-events-none absolute z-50 rounded-lg border border-brand-border bg-white p-3 shadow-lg"
+          style={{
+            left: Math.min(hoverInfo.x + 16, window.innerWidth - 220),
+            top: hoverInfo.y + 16,
+          }}
+          role="tooltip"
+          aria-live="polite"
         >
-          <div className="font-semibold">{hoverInfo.countyName}</div>
+          <div className="font-semibold text-brand-dark">{hoverInfo.countyName}</div>
           {hoverInfo.drrs !== undefined && (
-            <div className="mt-0.5 opacity-80">DRRS: {hoverInfo.drrs}</div>
+            <div className="mt-0.5 text-xs text-brand-stone">DRRS: {hoverInfo.drrs}</div>
           )}
         </div>
       )}
