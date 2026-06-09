@@ -94,7 +94,7 @@ export default function HomePage() {
         <div className="lg:col-span-2">
           <MapErrorBoundary>
             {!loaded ? (
-              <div className="flex h-[400px] items-center justify-center rounded-xl border border-brand-border bg-brand-bg text-sm text-brand-stone">
+              <div className="flex h-[400px] items-center justify-center rounded-xl border border-brand-border bg-brand-bg text-sm text-brand-stone" aria-live="polite">
                 Initializing dashboard...
               </div>
             ) : boundaries ? (
@@ -106,7 +106,7 @@ export default function HomePage() {
                 selectedCountyCode={selectedCountyCode}
               />
             ) : (
-              <div className="flex h-[400px] items-center justify-center rounded-xl border border-brand-border bg-brand-bg text-sm text-brand-stone">
+              <div className="flex h-[400px] items-center justify-center rounded-xl border border-brand-border bg-brand-bg text-sm text-brand-stone" aria-live="polite">
                 Geographic data temporarily unavailable.
               </div>
             )}

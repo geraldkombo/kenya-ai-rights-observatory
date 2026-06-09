@@ -115,22 +115,31 @@ export default function ExplorePage() {
             <thead>
               <tr className="border-b border-brand-border bg-brand-bg text-xs font-bold uppercase tracking-wider text-brand-stone">
                 <th
-                  className="sticky left-0 z-10 cursor-pointer bg-brand-bg px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                  scope="col"
+                  tabIndex={0}
+                  className="sticky left-0 z-10 min-h-[44px] cursor-pointer bg-brand-bg px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
                   onClick={() => handleSort("name")}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort("name"); } }}
                 >
                   County <SortArrow columnKey="name" active={sortKey === "name" ? sortDir : null} />
                 </th>
                 <th
-                  className="cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                  scope="col"
+                  tabIndex={0}
+                  className="min-h-[44px] cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
                   onClick={() => handleSort("drrs")}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort("drrs"); } }}
                 >
                   Overall DRRS <SortArrow columnKey="drrs" active={sortKey === "drrs" ? sortDir : null} />
                 </th>
                 {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((key) => (
                   <th
                     key={key}
-                    className="cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                    scope="col"
+                    tabIndex={0}
+                    className="min-h-[44px] cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
                     onClick={() => handleSort(key)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort(key); } }}
                   >
                     {DIM_LABELS[key]} <SortArrow columnKey={key} active={sortKey === key ? sortDir : null} />
                   </th>
@@ -170,7 +179,7 @@ export default function ExplorePage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={7} className="px-4 py-16 text-center text-sm text-brand-muted">
+                  <td colSpan={7} className="px-4 py-16 text-center text-sm text-brand-muted" role="status">
                     No counties match &ldquo;{searchTerm}&rdquo;
                   </td>
                 </tr>
