@@ -19,10 +19,10 @@ interface TableRow {
 
 const DIM_LABELS: Record<string, string> = {
   surveillance: "Surveillance",
-  internetHealth: "Internet Health",
-  dataPrivacy: "Data Privacy",
+  internetHealth: "Internet health",
+  dataPrivacy: "Data privacy",
   biometric: "Biometric",
-  platformImpact: "Platform Impact",
+  platformImpact: "Platform impact",
 };
 
 function SortArrow({ columnKey, active }: { columnKey: SortKey; active: "asc" | "desc" | null }) {
@@ -130,7 +130,7 @@ export default function ExplorePage() {
                   onClick={() => handleSort("drrs")}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort("drrs"); } }}
                 >
-                  Overall DRRS <SortArrow columnKey="drrs" active={sortKey === "drrs" ? sortDir : null} />
+                  Overall Score <SortArrow columnKey="drrs" active={sortKey === "drrs" ? sortDir : null} />
                 </th>
                 {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((key) => (
                   <th

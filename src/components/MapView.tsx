@@ -229,7 +229,7 @@ export default function MapView({
       )}
 
       <div className="absolute bottom-4 left-3 z-10 rounded-lg border border-brand-border bg-white/95 p-3 shadow-md backdrop-blur-sm print:hidden">
-        <h4 className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-dark">Risk Level (DRRS)</h4>
+        <h4 className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-dark">Risk Level</h4>
         <div className="flex flex-col gap-1 text-xs text-brand-stone">
           <div className="flex items-center gap-2"><span className="inline-block h-3 w-3 rounded-sm bg-[#8C2D04]"></span> Critical (70-100)</div>
           <div className="flex items-center gap-2"><span className="inline-block h-3 w-3 rounded-sm bg-[#D95F0E]"></span> High (50-69)</div>
@@ -250,7 +250,7 @@ export default function MapView({
         >
           <div className="font-semibold text-brand-dark">{hoverInfo.countyName}</div>
           {hoverInfo.drrs !== undefined && (
-            <div className="mt-0.5 text-xs text-brand-stone">DRRS: {hoverInfo.drrs}</div>
+            <div className="mt-0.5 text-xs text-brand-stone">Risk Score: {hoverInfo.drrs}</div>
           )}
         </div>
       )}

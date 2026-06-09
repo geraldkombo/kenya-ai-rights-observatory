@@ -33,7 +33,7 @@ export default function InsightsDashboard({
       <div className="break-inside-avoid rounded-xl border border-brand-border bg-white p-5 transition-all duration-200 ease-in-out hover:shadow-md">
         <div className="text-xs font-semibold uppercase tracking-wider text-brand-stone">High Risk</div>
         <div className="mt-1 text-2xl font-bold text-brand-dark">{highRiskCount}</div>
-        <div className="text-xs text-brand-muted">counties (DRRS &gt;= 50)</div>
+        <div className="text-xs text-brand-muted">counties (score &gt;= 50)</div>
       </div>
     </div>
   );

@@ -47,20 +47,20 @@ function BriefContent() {
 
       <div className="mb-8 grid grid-cols-2 gap-8">
         <div className="break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
-          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Key Indicators</h3>
+          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">County indicators</h3>
           <ul className="space-y-4 text-sm">
-            <li><strong>AI Systems Deployed:</strong> {indicator.ai_systems_count}</li>
-            <li><strong>CCTV Density (per 10k):</strong> {indicator.cctv_density}</li>
-            <li><strong>ODPC Complaints:</strong> {indicator.odpc_complaints}</li>
-            <li><strong>Internet Shutdown Hrs:</strong> {indicator.internet_shutdown_hours}</li>
-            <li><strong>Internet Usage:</strong> {indicator.internet_usage_pct}%</li>
-            <li><strong>Mobile Ownership:</strong> {indicator.mobile_ownership_pct}%</li>
-            <li><strong>Birth Registration:</strong> {indicator.birth_registration_pct}%</li>
+            <li><strong>AI systems:</strong> {indicator.ai_systems_count}</li>
+            <li><strong>CCTV density:</strong> {indicator.cctv_density} per 10k</li>
+            <li><strong>Data complaints:</strong> {indicator.odpc_complaints}</li>
+            <li><strong>Shutdown hours:</strong> {indicator.internet_shutdown_hours}h</li>
+            <li><strong>Internet usage:</strong> {indicator.internet_usage_pct}%</li>
+            <li><strong>Mobile ownership:</strong> {indicator.mobile_ownership_pct}%</li>
+            <li><strong>Birth registration:</strong> {indicator.birth_registration_pct}%</li>
             <li><strong>Population:</strong> {indicator.population.toLocaleString()}</li>
           </ul>
         </div>
         <div className="break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
-          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Action Recommendations</h3>
+          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Actions</h3>
           <ul className="list-disc space-y-2 pl-5 text-sm text-brand-stone">
             <li>Submit FOIA requests to county government regarding AI procurement.</li>
             <li>Engage local civil society on biometric inclusion campaigns.</li>
@@ -88,14 +88,14 @@ function BriefContent() {
         </div>
       </div>
 
-      <div className="mb-8 space-y-3" aria-label="DRRS component scores">
-        <h3 className="font-bold text-brand-brown">DRRS Component Scores</h3>
+      <div className="mb-8 space-y-3" aria-label="Score breakdown">
+        <h3 className="font-bold text-brand-brown">Score breakdown</h3>
         {[
-          { label: 'Surveillance Density', value: score.surveillance },
-          { label: 'Internet Health Risk', value: score.internetHealth },
-          { label: 'Data Privacy Risk', value: score.dataPrivacy },
-          { label: 'Biometric Enrollment', value: score.biometric },
-          { label: 'Platform Impact', value: score.platformImpact },
+          { label: 'Surveillance', value: score.surveillance },
+          { label: 'Internet health', value: score.internetHealth },
+          { label: 'Data privacy', value: score.dataPrivacy },
+          { label: 'Biometric enrollment', value: score.biometric },
+          { label: 'Platform impact', value: score.platformImpact },
         ].map((dim) => (
           <div key={dim.label} className="flex items-center gap-3">
             <span className="w-40 text-sm text-brand-stone">{dim.label}</span>

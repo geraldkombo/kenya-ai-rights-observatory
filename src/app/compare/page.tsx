@@ -17,7 +17,7 @@ function useStats(countyId: string) {
 
 const DIMENSIONS = [
   { key: "surveillance" as const, label: "Surveillance", shortLabel: "Surveillance" },
-  { key: "internetHealth" as const, label: "Internet Health Deficit", shortLabel: "Internet Health" },
+  { key: "internetHealth" as const, label: "Internet health", shortLabel: "Internet health" },
   { key: "dataPrivacy" as const, label: "Data Privacy", shortLabel: "Data Privacy" },
   { key: "biometric" as const, label: "Biometric Enrollment", shortLabel: "Biometric" },
   { key: "platformImpact" as const, label: "Platform Impact", shortLabel: "Platform" },

@@ -87,19 +87,19 @@ export default function CountyDetails({ county, indicators }: Props) {
         </div>
         <div className={`rounded-lg px-3 py-1.5 text-right transition-colors ${getDRRSBadgeClass(score.drrs)}`}>
           <div className="text-xl font-bold tracking-tight">{score.drrs}</div>
-          <div className="text-[10px] font-medium opacity-80">DRRS</div>
+          <div className="text-[10px] font-medium opacity-80">Digital Rights Risk Score</div>
         </div>
       </div>
 
       <div className="mt-5 space-y-3 border-t border-brand-border pt-4">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-stone">Risk dimensions</h4>
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-stone">Score distribution</h4>
         {(["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const).map((dim) => {
           const trends = dimTrends?.[dim];
           const trendColor = trends && trends[2] > trends[0] ? "#DC2626" : "#059669";
           const labels: Record<string, string> = {
-            surveillance: "Surveillance density",
-            internetHealth: "Internet health deficit",
-            dataPrivacy: "Data privacy risk",
+            surveillance: "Surveillance",
+            internetHealth: "Internet health",
+            dataPrivacy: "Data privacy",
             biometric: "Biometric enrollment",
             platformImpact: "Platform impact",
           };
@@ -118,7 +118,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
       {score.drivers.length > 0 && (
         <div className="mt-5 rounded-lg border border-red-100 bg-red-50 p-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-red-800">Key drivers</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-red-800">Key findings</h4>
           <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-red-700">
             {score.drivers.map((d, i) => (
               <li key={i}>{d}</li>
@@ -141,7 +141,7 @@ export default function CountyDetails({ county, indicators }: Props) {
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.internet_shutdown_hours}h</div>
         </div>
         <div>
-          <div className="text-[11px] font-semibold text-brand-stone">ODPC Complaints</div>
+          <div className="text-[11px] font-semibold text-brand-stone">Data Complaints</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.odpc_complaints}</div>
         </div>
       </div>
@@ -150,7 +150,7 @@ export default function CountyDetails({ county, indicators }: Props) {
         href={`/brief?id=${county.id}`}
         className="mt-4 flex min-h-[44px] items-center justify-center rounded-lg border border-brand-border bg-brand-bg text-sm font-semibold text-brand-dark transition-colors hover:bg-brand-cream"
       >
-        View full brief &rarr;
+        View analytical brief &rarr;
       </Link>
 
       <button
@@ -158,7 +158,7 @@ export default function CountyDetails({ county, indicators }: Props) {
         className="mt-2 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-brand-border bg-brand-bg px-4 py-2.5 text-sm font-semibold text-brand-dark transition-colors hover:bg-[#E0DBD0] print:hidden"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        Export Raw CSV Data
+        Export data
       </button>
       <ShareCard county={county} indicators={indicators} />
     </div>
