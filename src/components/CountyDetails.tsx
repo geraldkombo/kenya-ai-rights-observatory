@@ -34,6 +34,26 @@ export default function CountyDetails({ county, indicators }: Props) {
     return computeDRRS(county.id, ind);
   }, [ind, county.id]);
 
+  const handleDownloadCSV = () => {
+    if (!ind || !score) return;
+    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Platform_Impact", "AI_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
+    const row = [
+      county.name, county.id, score.drrs, score.surveillance, score.internetHealth,
+      score.dataPrivacy, score.biometric, score.platformImpact, ind.ai_systems_count,
+      ind.cctv_density, ind.internet_shutdown_hours, ind.odpc_complaints,
+    ];
+    const csvContent = [headers.join(","), row.join(",")].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `${county.name.replace(/\s+/g, "_")}_Digital_Rights_Data.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   if (!ind || !score) {
     return (
       <div className="rounded-xl border border-brand-border bg-white p-5">
@@ -93,12 +113,21 @@ export default function CountyDetails({ county, indicators }: Props) {
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.odpc_complaints}</div>
         </div>
       </div>
+
       <Link
         href={`/brief?id=${county.id}`}
         className="mt-4 flex min-h-[44px] items-center justify-center rounded-lg border border-brand-border bg-brand-bg text-sm font-semibold text-brand-dark transition-colors hover:bg-brand-cream"
       >
         View full brief &rarr;
       </Link>
+
+      <button
+        onClick={handleDownloadCSV}
+        className="mt-2 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-brand-border bg-brand-bg px-4 py-2.5 text-sm font-semibold text-brand-dark transition-colors hover:bg-[#E0DBD0] print:hidden"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Export Raw CSV Data
+      </button>
     </div>
   );
 }

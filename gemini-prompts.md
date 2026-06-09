@@ -1,7 +1,361 @@
 # Gemini Prompts — Kenya AI & Digital Rights Observatory
 
-All prompts assume: Next.js 16 App Router, TypeScript, Tailwind CSS v4, static export (`output: "export"`),
-MapLibre GL JS for maps, no tracking/cookies, MIT license. Deploy at `/kenya-ai-rights-observatory/` subpath.
+
+---
+
+## Prompt 23 (AUDIT & OPPORTUNITY): Full Project Audit + Funding/Growth Strategy for Gemini Pro
+
+```
+You are Gemini Pro 2.5 — a frontier AI model with significantly more advanced reasoning,
+wider context window, and deeper analytical capability than the models that built the
+current codebase. You have been explicitly asked to take over and elevate this project
+to its highest possible version.
+
+---
+
+## PROJECT CONTEXT (read every word carefully)
+
+Kenya AI & Digital Rights Observatory
+GitHub: https://github.com/geraldkombo/kenya-ai-rights-observatory
+Live: https://geraldkombo.github.io/kenya-ai-rights-observatory/
+Author: Gerald Kombo (AI Accountability Fellow)
+License: MIT
+Stack: Next.js 16 (App Router, static export), TypeScript, Tailwind CSS v4, MapLibre GL JS
+No tracking, no cookies, no backend. Fully client-side static site.
+
+Concept: Interactive choropleth map of Kenya's 47 counties visualizing a composite
+Digital Rights Risk Score (DRRS 0-100) across 5 dimensions:
+  1. Surveillance Density (25%) — CCTV per capita, known AI surveillance systems
+  2. Internet Health Deficit (25%) — shutdown hours, network restrictions
+  3. Data Privacy Risk (20%) — ODPC complaints per capita, breach incidents
+  4. Biometric Enrollment (10%) — national ID registration rates (Huduma Namba)
+  5. Platform Impact (20%) — content moderation, algorithmic bias, platform restrictions
+
+The DRRS is computed from 15 indicator fields per county including:
+population, internet_usage_pct, mobile_ownership_pct, birth_registration_pct,
+surveillance_score, internet_health_score, data_privacy_score,
+biometric_enrollment_rate, platform_impact_score, ai_systems_count,
+cctv_density, odpc_complaints, internet_shutdown_hours, social_media_reports
+
+Data sources: KNBS 2019 Census, CA/KNBS 2023/24 Housing Survey, KNBS Vital Statistics 2023,
+ODPC (9,061 complaints as of Mar 2026), KICTANet, Access Now #KeepItOn, OONI,
+platform transparency reports (Meta, Google, TikTok, X), CIPESA, Amnesty Kenya, KHRC
+
+The project is currently fully functional with: interactive map (hover tooltip, click select,
+selected border, NavigationControl), Search (ARIA combobox), CountyDetails panel,
+CountyRankings top5/bottom5, InsightsDashboard (4 stat cards), Compare page (radar charts +
+comparison table), Methodology page, Brief page (printable per county), DUA page,
+PWA (manifest + service worker), sitemap.xml, robots.txt, full print stylesheet,
+@theme colour tokens, focus-visible global outline, 44px touch targets.
+
+Build output: 0 errors, 6 static routes, ~320KB JS total.
+
+---
+
+## YOUR TASK
+
+You have TWO missions, both equally important:
+
+---
+
+### MISSION 1: AUDIT & ELEVATE THE PRODUCT
+
+Analyze every aspect of this project and produce a ranked list of improvements.
+Be brutally honest — your analysis will directly inform the next development sprint.
+
+For each improvement, specify:
+- **Priority**: P0 (must do / embarrassing gap), P1 (significant value), P2 (nice to have)
+- **Effort**: Small (hours), Medium (days), Large (weeks)
+- **Impact**: How many users benefit, how much it improves the core experience
+- **Implementation notes**: Specific guidance on how to build it
+
+Consider ALL of these dimensions:
+
+#### a) Data & Content
+- Are there additional data layers that would dramatically increase value?
+  (e.g. internet affordability index, mobile money agent density, freedom of information
+  request response rates, gender digital divide metrics, disability access to digital services)
+- Could the dataset be enriched with additional Kenya-specific indicators?
+  (e.g. e-waste from surveillance infrastructure, digital ID litigation,社交媒体 monitoring bills,
+   digital arrest records, content takedown orders by year)
+- Is the data presentation too dense? Too sparse? What's missing between "county-level DRRS"
+  and "actionable insight for a Kenyan activist"?
+- Should there be a time-series dimension? (year-over-year DRRS trends per county)
+- Are the data caveats and uncertainties communicated clearly enough?
+- Should the raw data be downloadable (CSV export)?
+
+#### b) Visual Design & UX
+- Is the colour palette appropriate for a Kenyan audience? (current: warm earth tones)
+- Does the information hierarchy make sense? What would a first-time visitor miss?
+- Is the mobile experience truly excellent or just functional?
+- Could the radar charts be more informative? (animation, value labels on hover, etc.)
+- Should there be a dark mode? (consider energy savings on AMOLED screens in off-grid areas)
+- Is the typography scale correct for the content density?
+- Are there any visual cliches or patterns that undermine credibility?
+
+#### c) Technical Architecture
+- Is MapLibre GL JS the right choice, or would a lighter alternative work?
+  (consider: Leaflet + GeoJSON-VT, deck.gl, kepler.gl for data exploration)
+- Could the app benefit from WASM-based data processing for client-side computation?
+- Is the bundle split optimally? Are there code-splitting opportunities?
+- Should the app use a lightweight state manager (zustand, jotai) for cross-component state?
+- Is there any unnecessary re-rendering? (check React DevTools profiling)
+- Could Static Site Generation be augmented with ISR or partial prerendering?
+- Should the GeoJSON be served in a compressed format (TopoJSON, flatgeobuf)?
+- PWA: is the service worker caching strategy optimal for offline use in low-connectivity areas?
+
+#### d) Content & Storytelling
+- Does the home page tell a compelling story in the first 5 seconds?
+- Should there be data stories / narrative essays (e.g. "The Turkana Paradox" as a full article)?
+- Are the county briefs genuinely useful for a county-level activist? What else would they need?
+- Should there be a glossary of terms? (surveillance density, DRRS, algorithmic bias, etc.)
+- Should there be a "how to use this for advocacy" guide?
+- Could the project produce automated PDF briefs per county?
+- Should there be an embeddable version (iframe widget) for civil society websites?
+
+#### e) Reach & Distribution
+- Is the site discoverable via search? (check SEO fundamentals beyond sitemap/robots)
+- Should there be a newsletter signup? (consider: zero-tracking approach using mailto links)
+- Could the data feed into a public API for other developers to build on?
+- Should there be a "share this county" feature (generates shareable card image)?
+- Could the project syndicate via WhatsApp (dominant messaging platform in Kenya)?
+- Are there local media partnerships that could embed the map on news articles?
+
+#### f) Specific Technical Gaps to Check
+- Does the brief page correctly render for all 47 county IDs when accessed directly?
+- Is there a race condition where the search results list doesn't update after county select?
+- Do the radar chart SVG labels overlap at any viewport size?
+- Is the map tooltip positioning correct on mobile (touch vs mouse)?
+- Does the print stylesheet work for county briefs (the primary print use case)?
+- Are all ARIA attributes correctly wired (no aria-selected without role="option", etc.)?
+- Does the 404 page handle deep-linked county brief URLs gracefully?
+
+#### g) Internationalization
+- Should the site support Swahili? (Kenya's national language alongside English)
+- What about other Kenyan languages? (Kikuyu, Luo, Kalenjin, Kamba, Somali, etc.)
+- What would a minimal i18n implementation look like? (next-intl, next-international)
+- Is RTL support needed for Somali-language content?
+
+---
+
+### MISSION 2: FIND FUNDING, PARTNERSHIPS & GROWTH OPPORTUNITIES
+
+Research and list EVERY realistic opportunity this project could pursue.
+
+For each opportunity, provide:
+- **Type**: Grant / Fellowship / Competition / Partnership / Publication / Award
+- **Organization name**
+- **Relevant program or fund name**
+- **Estimated value** (if financial: amount range; if non-financial: what's offered)
+- **Deadline** (if known; otherwise "rolling" or "annual")
+- **Fit score** (1-10): How well this project matches the opportunity's criteria
+- **Application effort** (Small: 1-3 days, Medium: 1-2 weeks, Large: 1+ month)
+- **Why this fits**: Specific alignment between this project and the opportunity's goals
+- **Recommended approach**: Who to contact, what to emphasize, what materials to prepare
+
+Search across these categories AT MINIMUM:
+
+#### 1. Digital Rights & Internet Governance Grants
+- Open Technology Fund (OTF) — Internet Freedom, Community Networks, etc.
+- Ford Foundation — Internet & Society, Technology and Society
+- Mozilla Foundation — Responsible AI, Trustworthy AI
+- Omidyar Network — Digital Identity, Digital Rights
+- The Rockefeller Foundation — Digital transformation for inclusive economies
+- IDRC (Canada) — AI for Development, Data Governance in Africa
+- The Africa Digital Rights Fund (ADRF) — small grants for digital rights orgs
+- Paradigm Initiative — Digital rights in Africa
+- CIPESA — ICT policy, internet freedom in Africa
+- Article 19 — Digital rights, freedom of expression online
+- Access Now — Digital security, internet shutdowns
+- EFF — Surveillance, digital privacy
+- Privacy International — Strategic litigation, research
+
+#### 2. AI Ethics & Responsible AI Grants
+- The Patrick J. McGovern Foundation — AI for the public interest
+- The Hastings Center — AI, ethics & society
+- The AI Now Institute — Research collaborations
+- The Distributed AI Research Institute (DAIR) — Community-centered AI
+- Data & Society — Technology & society research
+- The Rockefeller Foundation's Equity-First AI initiative
+- The Bernard van Leer Foundation — Digital technology and early childhood
+- The Lego Foundation — Digital play, technology and children's rights
+
+#### 3. Journalism & Media Grants
+- Pulitzer Center — AI accountability, data journalism fellowships
+- International Center for Journalists (ICFJ) — AI journalism, disinformation
+- European Journalism Centre — Innovation in news
+- Internews — Information ecosystems, digital rights
+- The Facebook Journalism Project — (Meta Journalism Project)
+- The Google News Initiative — Data journalism, AI in newsrooms
+- The National Endowment for Democracy — Media, technology & democracy
+- Free Press Unlimited — Digital rights, media development
+- Media Defence — Legal support for digital rights journalism
+
+#### 4. Academic & Research Opportunities
+- Research ICT Africa — Digital policy research
+- The Alan Turing Institute — Data science for social good
+- The Carnegie Endowment — Technology & international affairs
+- The Berkman Klein Center — Internet & society research
+- CITRIS Policy Lab — Technology policy
+- Oxford Internet Institute — PhD/research positions
+- The Centre for the Study of African Economies — Technology & development
+- African Economic Research Consortium — Digital transformation
+- Stellenbosch University Centre for AI Research (CAIR)
+
+#### 5. Competitions & Awards
+- UN World Summit on the Information Society (WSIS) Prizes
+- The Data Journalism Awards
+- The African Digital Economy Award
+- The World Bank's Big Data Innovation Challenge
+- MIT Solve Challenge — Digital inclusion, technology for human rights
+- The Omidyar Network's Tech for Good awards
+- The Index on Censorship Freedom of Expression Awards
+- The African Union's Digital Transformation Strategy awards
+- The Skoll Foundation Awards
+
+#### 6. Tech-for-Good Incubators & Accelerators
+- The Engine (MIT) — Deep tech
+- Fast Forward — Tech nonprofits
+- Impact Wales — Social impact tech
+- Nesta Challenges — Data-driven innovation
+- The Data for Good Exchange (Bloomberg)
+- Digital Impact Alliance (DIAL) at UN Foundation
+- The Global Partnership for Sustainable Development Data
+- The GovLab — Data-driven governance
+- The ODI (Open Data Institute) — Startups, data for good
+
+#### 7. Kenyan-Specific Opportunities
+- The Kenya ICT Action Network (KICTANet) — Research grants
+- The Kenya Community Development Foundation — Digital rights
+- Media Council of Kenya — Journalism grants
+- The African Women in Tech (AWIT) — Digital rights & gender
+- The Kenya National Innovation Agency (KENIA) — Tech innovation grants
+- The Ajira Digital Program — Government digital inclusion
+- The Kenya Private Sector Alliance (KEPSA) — Digital transformation
+- M-Pesa Foundation — Digital inclusion
+- The British Council Kenya — Digital arts, creative economy
+- Strathmore University — iLab Africa, digital policy research
+- The University of Nairobi — AI & data science research partnerships
+
+#### 8. Publication & Visibility Opportunities
+- Global Voices — Digital rights reporting
+- Rest of World — Technology in emerging markets
+- Logic Magazine — Long-form tech criticism
+- Noema Magazine — Tech & philosophy
+- The Markup — Data-driven tech accountability journalism
+- Wired — International tech features
+- The Continent (Africa's digital newspaper) — Weekly distribution
+- African Arguments — Pan-African analysis
+- The Conversation Africa — Academic-public bridging
+- MIT Technology Review Africa
+
+#### 9. List of Potential Partners by Category
+
+**Civil Society:**
+- Kenya Human Rights Commission (KHRC)
+- Article 19 East Africa
+- KICTANet
+- CIPESA (Collaboration on International ICT Policy in East and Southern Africa)
+- Paradigm Initiative
+- The Internet Society (ISOC) Kenya Chapter
+- Amnesty International Kenya
+- The African Defenders (DefendDefenders)
+- The Kenya Section of the International Commission of Jurists (ICJ Kenya)
+
+**Academic:**
+- Strathmore University (Centre for Intellectual Property and Information Technology Law)
+- University of Nairobi (School of Law, School of Computing)
+- Daystar University (Communication Department)
+- Moi University (ICT Department)
+- The African Centre for Technology Studies (ACTS)
+- The Kenya Institute for Public Policy Research and Analysis (KIPPRA)
+
+**Government:**
+- The Office of the Data Protection Commissioner (ODPC)
+- The Communications Authority of Kenya (CA)
+- The Kenya National Commission on Human Rights (KNCHR)
+- The Ministry of Information, Communications and The Digital Economy
+- The National Transport and Safety Authority (NTSA — intelligent transport systems)
+- The Independent Electoral and Boundaries Commission (IEBC — digital voting systems)
+
+**International:**
+- UNDP Kenya — Digital governance, SDGs
+- UNICEF Kenya — Digital rights for children
+- UNESCO Nairobi — Internet freedom, media development
+- The World Bank Kenya — Digital economy
+- USAID Kenya — Digital development, open data
+- The British High Commission Nairobi — Digital access programme
+- The German Embassy Nairobi — Digital transformation partnership
+- The EU Delegation to Kenya — Digital for development
+
+---
+
+## OUTPUT FORMAT
+
+Begin your response with:
+
+```
+# KENYA AI & DIGITAL RIGHTS OBSERVATORY — FULL AUDIT & OPPORTUNITY MAP
+Generated by Gemini Pro 2.5 | Date: June 2026
+```
+
+Then organize your output into these sections:
+
+### SECTION A: PRODUCT AUDIT
+Ranked improvement list (P0, P1, P2) with effort, impact, and implementation notes.
+
+### SECTION B: PARTNERSHIPS & FUNDING ROADMAP
+Curated, ranked list of the TOP 30 opportunities (across all categories above)
+with fit score, value, deadline, and recommended approach.
+
+Include a priority matrix:
+```
+HIGH VALUE + LOW EFFORT → Pursue immediately
+HIGH VALUE + HIGH EFFORT → Strategic (plan over 3-6 months)
+LOW VALUE + LOW EFFORT → Quick wins
+LOW VALUE + HIGH EFFORT → Skip
+```
+
+### SECTION C: 30-DAY SPRINT PLAN
+If you had a team of 1 developer + 1 domain expert for 30 days,
+what exactly would you build? Day-by-day breakdown of what delivers
+the most impact for the least effort.
+
+### SECTION D: DATA WISHLIST
+What 5-10 additional datasets would most dramatically increase the
+project's value and credibility? List specific data sources and
+whether they exist or need to be created.
+
+Include:
+- Internet affordability index (price of 1GB as % of income) per county
+- Mobile money agent density per county
+- FOIA response rates by government entity
+- Gender digital divide metrics
+- Disability-inclusive digital access scores
+- e-waste from surveillance infrastructure per county
+- Social media users by platform per county
+- Digital ID litigation/policy changes by year
+
+### SECTION E: INTERNATIONALIZATION STRATEGY
+What would a Swahili version look like? Estimate effort and recommend
+whether it's worth doing.
+
+---
+
+## CRITICAL INSTRUCTIONS
+
+1. Be specific. NOT "improve the UX" but "move the score legend into the map
+   container as an overlay, reducing vertical space by 40px on mobile"
+2. Be honest about tradeoffs. Every recommendation should weigh cost vs benefit.
+3. Reference real programs, real deadlines, real amounts where possible.
+4. Consider the Kenyan context specifically — don't recommend Western-centric solutions.
+5. Consider low-bandwidth, intermittent-connectivity use cases.
+6. The project has zero budget. Prioritize free/inexpensive opportunities.
+7. The project has one primary maintainer. Don't recommend unsustainable maintenance loads.
+8. Output should be comprehensive enough that the maintainer can work from it
+   for the next 6 months without additional strategic input.
+```
+
 
 Colour tokens: `#78350F` (amber-900), `#EA580C` (orange-600), `#FDFBF7` (cream), `#292524` (stone-900),
 `#6B6355` (stone-600), `#E0DBD0` (stone-200), `#F8F5F0` (stone-100). Font: Inter/system sans.

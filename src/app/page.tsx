@@ -3,13 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import * as topojson from "topojson-client";
+import type { Topology } from "topojson-specification";
 import { counties, indicators } from "@/lib/data";
 import { computeDRRS } from "@/lib/scoring";
 import { fetchJSON } from "@/lib/data-fetch";
 import InsightsDashboard from "@/components/InsightsDashboard";
 import CountyDetails from "@/components/CountyDetails";
 import CountyRankings from "@/components/CountyRankings";
-import ScoreLegend from "@/components/ScoreLegend";
 import MapErrorBoundary from "@/components/MapErrorBoundary";
 import Search from "@/components/Search";
 
@@ -31,9 +32,11 @@ export default function HomePage() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await fetchJSON<GeoJSON.FeatureCollection>("/data/boundaries.geojson");
-        if (!data || !data.features) throw new Error("Boundaries data missing features");
-        setBoundaries(data);
+        const topology = await fetchJSON<Topology>("/data/boundaries.topojson");
+        if (!topology || !topology.objects) throw new Error("Topology data missing");
+        const geojson = topojson.feature(topology, topology.objects.counties) as unknown as GeoJSON.FeatureCollection;
+        if (!geojson || !geojson.features) throw new Error("Boundaries parsing failed");
+        setBoundaries(geojson);
         setLoaded(true);
       } catch (e: any) {
         setError(`Data load error: ${e?.message ?? "Unknown"}`);
@@ -108,9 +111,6 @@ export default function HomePage() {
               </div>
             )}
           </MapErrorBoundary>
-          <div className="mt-2">
-            <ScoreLegend />
-          </div>
         </div>
 
         <div className="hidden space-y-4 lg:block" aria-live="polite">
