@@ -15,12 +15,19 @@ function useStats(countyId: string) {
 }
 
 const DIMENSIONS = [
-  { key: "surveillance" as const, label: "Surveillance" },
-  { key: "internetHealth" as const, label: "Internet Health Deficit" },
-  { key: "dataPrivacy" as const, label: "Data Privacy" },
-  { key: "biometric" as const, label: "Biometric Enrollment" },
-  { key: "platformImpact" as const, label: "Platform Impact" },
+  { key: "surveillance" as const, label: "Surveillance", shortLabel: "Surveillance" },
+  { key: "internetHealth" as const, label: "Internet Health Deficit", shortLabel: "Internet Health" },
+  { key: "dataPrivacy" as const, label: "Data Privacy", shortLabel: "Data Privacy" },
+  { key: "biometric" as const, label: "Biometric Enrollment", shortLabel: "Biometric" },
+  { key: "platformImpact" as const, label: "Platform Impact", shortLabel: "Platform" },
 ];
+
+function DeltaArrow({ a, b }: { a: number; b: number }) {
+  if (a === b) return <span className="text-brand-muted">=</span>;
+  return a > b
+    ? <span className="text-red-600" title="Higher risk">&uarr;</span>
+    : <span className="text-green-600" title="Lower risk">&darr;</span>;
+}
 
 export default function ComparePage() {
   const [countyA, setCountyA] = useState("");
@@ -43,7 +50,7 @@ export default function ComparePage() {
         {(countyA || countyB) && (
           <button
             onClick={() => { setCountyA(""); setCountyB(""); }}
-            className="min-h-[44px] inline-flex items-center justify-center rounded-md border border-brand-border bg-brand-bg px-4 py-2 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-[#F0EDE6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange"
+            className="min-h-[44px] inline-flex items-center justify-center rounded-md border border-brand-border bg-brand-bg px-4 py-2 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-[#F0EDE6]"
           >
             Reset Selection
           </button>
@@ -71,26 +78,74 @@ export default function ComparePage() {
         </div>
       </div>
 
+      {!countyA && (
+        <div className="mt-16 text-center text-sm text-brand-muted">
+          Select a county above to begin comparison.
+        </div>
+      )}
+
+      {countyA && !countyB && (
+        <div className="mt-16 text-center text-sm text-brand-muted">
+          Select a second county to compare.
+        </div>
+      )}
+
       {selA && selB && statsA && statsB && (
         <div className="mt-8 space-y-8">
           <section className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center" aria-label="Radar chart comparison">
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm font-bold text-brand-brown">{selA.name}</span>
               <RadarChart
-                scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsA.score[d.key] }))}
+                scores={DIMENSIONS.map((d) => ({ label: d.shortLabel, value: statsA.score[d.key] }))}
                 size={220}
               />
             </div>
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm font-bold text-brand-orange">{selB.name}</span>
               <RadarChart
-                scores={DIMENSIONS.map((d) => ({ label: d.label, value: statsB.score[d.key] }))}
+                scores={DIMENSIONS.map((d) => ({ label: d.shortLabel, value: statsB.score[d.key] }))}
                 size={220}
               />
             </div>
           </section>
 
-          <section className="grid gap-8 md:grid-cols-2" aria-live="polite">
+          <section className="overflow-hidden rounded-lg border border-brand-border bg-white shadow-sm" aria-live="polite">
+            <div className="bg-brand-bg px-4 py-3">
+              <h3 className="text-sm font-bold text-brand-dark">Dimension Comparison</h3>
+            </div>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-brand-border text-xs font-semibold uppercase tracking-wider text-brand-stone">
+                  <th className="px-4 py-2 text-left">Dimension</th>
+                  <th className="px-4 py-2 text-right">{selA.name}</th>
+                  <th className="px-4 py-2 text-center">Delta</th>
+                  <th className="px-4 py-2 text-left">{selB.name}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {DIMENSIONS.map((d) => {
+                  const valA = statsA.score[d.key];
+                  const valB = statsB.score[d.key];
+                  return (
+                    <tr key={d.key} className="border-b border-brand-border last:border-0 hover:bg-brand-bg/50">
+                      <td className="px-4 py-3 font-medium text-brand-dark">{d.label}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${valA > valB ? "text-red-600" : valA < valB ? "text-green-600" : "text-brand-dark"}`}>{valA}%</td>
+                      <td className="px-4 py-3 text-center text-lg"><DeltaArrow a={valA} b={valB} /></td>
+                      <td className={`px-4 py-3 font-semibold ${valB > valA ? "text-red-600" : valB < valA ? "text-green-600" : "text-brand-dark"}`}>{valB}%</td>
+                    </tr>
+                  );
+                })}
+                <tr className="border-t-2 border-brand-dark bg-brand-bg font-bold">
+                  <td className="px-4 py-3 text-brand-dark">Overall DRRS</td>
+                  <td className={`px-4 py-3 text-right ${statsA.score.drrs > statsB.score.drrs ? "text-red-600" : statsA.score.drrs < statsB.score.drrs ? "text-green-600" : "text-brand-dark"}`}>{statsA.score.drrs}</td>
+                  <td className="px-4 py-3 text-center"><DeltaArrow a={statsA.score.drrs} b={statsB.score.drrs} /></td>
+                  <td className={`px-4 py-3 ${statsB.score.drrs > statsA.score.drrs ? "text-red-600" : statsB.score.drrs < statsA.score.drrs ? "text-green-600" : "text-brand-dark"}`}>{statsB.score.drrs}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section className="grid gap-8 md:grid-cols-2">
             {([{ county: selA, stats: statsA }, { county: selB, stats: statsB }] as const).map(({ county, stats }, idx) => (
               <div key={county.id} className="break-inside-avoid rounded-lg border border-brand-border bg-white shadow-sm transition-all duration-200 hover:shadow-md" style={{ borderTop: `4px solid ${idx === 0 ? "#78350F" : "#EA580C"}` }}>
                 <div className="flex items-start justify-between border-b border-brand-border bg-brand-bg p-4">

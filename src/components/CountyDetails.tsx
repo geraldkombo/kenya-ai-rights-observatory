@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import type { CountyRecord, DigitalRightsIndicators } from "@/lib/types";
 import { computeDRRS, getDRRSBadgeClass, getDRRSColor } from "@/lib/scoring";
 
@@ -92,6 +93,12 @@ export default function CountyDetails({ county, indicators }: Props) {
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.odpc_complaints}</div>
         </div>
       </div>
+      <Link
+        href={`/brief?id=${county.id}`}
+        className="mt-4 flex min-h-[44px] items-center justify-center rounded-lg border border-brand-border bg-brand-bg text-sm font-semibold text-brand-dark transition-colors hover:bg-brand-cream"
+      >
+        View full brief &rarr;
+      </Link>
     </div>
   );
 }
