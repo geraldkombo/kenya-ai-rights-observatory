@@ -25,11 +25,11 @@ function BriefContent() {
   const score = computeDRRS(county.id, indicator);
 
   return (
-    <div className="mx-auto max-w-4xl bg-white p-8 text-brand-dark print:p-0 print:w-full">
-      <div className="mb-8 flex items-end justify-between border-b-4 border-brand-brown pb-4">
+    <div className="mx-auto max-w-4xl bg-white p-8 text-stone-800 print:p-0 print:w-full">
+      <div className="mb-8 flex items-end justify-between border-b-2 border-stone-200 pb-4">
         <div>
-          <h1 className="text-4xl font-bold text-brand-brown">{county.name} County</h1>
-          <h2 className="mt-2 text-xl text-brand-orange">Digital Rights & Surveillance Brief</h2>
+          <h1 className="text-4xl font-bold text-stone-800">{county.name} County</h1>
+          <h2 className="mt-2 text-xl text-brand-orange">Digital Rights Risk Brief</h2>
         </div>
         <button
           onClick={() => window.print()}
@@ -46,8 +46,8 @@ function BriefContent() {
       </div>
 
       <div className="mb-8 grid grid-cols-2 gap-8">
-        <div className="break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
-          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">County indicators</h3>
+        <div className="break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
+          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">County indicators</h3>
           <ul className="space-y-4 text-sm">
             <li><strong>AI systems:</strong> {indicator.ai_systems_count}</li>
             <li><strong>CCTV density:</strong> {indicator.cctv_density} per 10k</li>
@@ -59,9 +59,9 @@ function BriefContent() {
             <li><strong>Population:</strong> {indicator.population.toLocaleString()}</li>
           </ul>
         </div>
-        <div className="break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
-          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Actions</h3>
-          <ul className="list-disc space-y-2 pl-5 text-sm text-brand-stone">
+        <div className="break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
+          <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">Actions</h3>
+          <ul className="list-disc space-y-2 pl-5 text-sm text-stone-500">
             <li>Submit FOIA requests to county government regarding AI procurement.</li>
             <li>Engage local civil society on biometric inclusion campaigns.</li>
             <li>Monitor network throttling during localized protests.</li>
@@ -69,8 +69,8 @@ function BriefContent() {
         </div>
       </div>
 
-      <div className="mb-8 break-inside-avoid rounded-lg border border-brand-border bg-brand-bg p-6">
-        <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-brand-stone">Neighbouring Counties</h3>
+      <div className="mb-8 break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
+        <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">Neighbouring Counties</h3>
         <div className="flex flex-wrap gap-2">
           {(NEIGHBORS[county.id] ?? []).map((nid) => {
             const nc = counties.find((c) => c.id === nid);
@@ -79,7 +79,7 @@ function BriefContent() {
               <Link
                 key={nid}
                 href={`/brief?id=${nid}`}
-                className="inline-flex items-center min-h-[44px] rounded-md border border-brand-border bg-white px-3 py-1.5 text-sm text-brand-stone transition-colors hover:border-brand-orange hover:text-brand-orange"
+                className="inline-flex items-center min-h-[44px] rounded-md border border-stone-200 bg-white px-3 py-1.5 text-sm text-stone-500 transition-colors hover:border-brand-orange hover:text-brand-orange"
               >
                 {nc.name}
               </Link>
@@ -98,19 +98,16 @@ function BriefContent() {
           { label: 'Platform impact', value: score.platformImpact },
         ].map((dim) => (
           <div key={dim.label} className="flex items-center gap-3">
-            <span className="w-40 text-sm text-brand-stone">{dim.label}</span>
-            <div className="h-3 flex-1 overflow-hidden rounded-full bg-brand-border">
-              <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{ width: `${dim.value}%`, backgroundColor: barColor(dim.value) }}
-              />
+            <span className="w-40 text-sm text-stone-500">{dim.label}</span>
+            <div className="h-2.5 flex-1 rounded-full bg-stone-200">
+              <div className="h-full rounded-full bg-brand-orange transition-all" style={{ width: `${dim.value}%` }} />
             </div>
-            <span className="w-8 text-right text-xs font-bold text-brand-dark">{dim.value}</span>
+            <span className="w-8 text-right text-xs font-bold text-stone-800">{dim.value}</span>
           </div>
         ))}
       </div>
 
-      <p className="border-t border-brand-border pt-4 text-xs text-brand-muted">
+      <p className="border-t border-stone-200 pt-4 text-xs text-stone-400">
         Generated by the Kenya Digital Rights Risk Atlas. Data valid as of June 2026.
       </p>
     </div>

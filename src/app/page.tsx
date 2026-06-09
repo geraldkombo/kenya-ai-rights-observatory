@@ -84,9 +84,12 @@ export default function HomePage() {
       />
 
       <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs font-medium text-brand-stone sm:text-sm">
-          Identify counties with the most critical digital rights risks, surveillance density, and AI system deployment across Kenya.
-        </p>
+        <div>
+          <p className="text-xs font-medium text-stone-700 sm:text-sm">
+            Identify counties with the most critical digital rights risks, surveillance density, and emerging threats across Kenya.
+          </p>
+          <p className="mt-0.5 text-[11px] italic text-stone-500 sm:text-xs">Effective rights monitoring requires reliable and accessible data.</p>
+        </div>
         <Search counties={counties} onSelect={setSelectedCountyCode} />
       </div>
 
@@ -125,10 +128,10 @@ export default function HomePage() {
       {selectedCounty && (
         <div className="fixed inset-x-0 bottom-0 z-50 max-h-[70svh] overflow-y-auto rounded-t-2xl border border-brand-border bg-white shadow-2xl lg:hidden print:hidden">
           <div className="sticky top-0 flex items-center justify-between bg-white px-4 pb-1 pt-2">
-            <div className="mx-auto h-1.5 w-12 rounded-full bg-brand-border" />
+            <div className="mx-auto h-1.5 w-12 rounded-full bg-stone-200" />
             <button
               onClick={() => setSelectedCountyCode(null)}
-              className="absolute right-3 top-2 min-h-[44px] rounded-full p-2 text-brand-muted transition-colors hover:bg-brand-bg hover:text-brand-stone"
+              className="absolute right-3 top-2 min-h-[44px] rounded-full p-2 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-500"
               aria-label="Close county details"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -140,18 +143,25 @@ export default function HomePage() {
         </div>
       )}
 
-      <div className="mt-6 border-t border-brand-border pt-6 print:hidden">
+      <div className="mt-6 border-t border-stone-200 pt-6 print:hidden">
         <div className="flex flex-wrap gap-3">
-          <Link href="/method" className="min-h-[44px] rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-stone transition-colors hover:bg-brand-bg">
+          <Link href="/method" className="min-h-[44px] rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:bg-stone-50">
             Review methodology
           </Link>
-          <Link href="/compare" className="min-h-[44px] rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-stone transition-colors hover:bg-brand-bg">
+          <Link href="/compare" className="min-h-[44px] rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:bg-stone-50">
             Compare county risks
           </Link>
-          <Link href="/advocacy" className="min-h-[44px] rounded-lg border border-brand-border px-4 py-2 text-sm font-medium text-brand-stone transition-colors hover:bg-brand-bg">
+          <Link href="/advocacy" className="min-h-[44px] rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:bg-stone-50">
             Advocacy tools
           </Link>
         </div>
+      </div>
+
+      <div className="mt-6 border-t border-stone-100 pt-4 pb-2 print:hidden">
+        <p className="text-[10px] leading-5 text-stone-400">
+          <strong>Data sources:</strong> <a href="https://statistics.knbs.or.ke/nada/index.php/catalog/116" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">KNBS 2019 Census</a> &middot; <a href="https://www.knbs.or.ke/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">KNBS KIHBS 2015/16</a> &middot; <a href="https://www.odpc.go.ke/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">ODPC Annual Reports</a> &middot; <a href="https://www.osf.go.ke/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">OSF Kenya</a> &middot; <a href="https://crisis24.garda.com/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">GardaWorld</a> &middot; <a href="https://www.openstreetmap.org/relation/192798" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">OSM Kenya</a> &middot; <a href="https://github.com/geraldkombo/kenya-ai-rights-observatory/blob/main/src/lib/data.ts" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-stone-600">Composite indicators (GitHub)</a>
+          <span className="ml-1">| CC-BY-4.0 open data</span>
+        </p>
       </div>
     </div>
   );

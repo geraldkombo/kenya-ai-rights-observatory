@@ -59,7 +59,7 @@ export default function Search({ counties, onSelect, placeholder = "Search count
         aria-controls="search-results"
         aria-activedescendant={activeIndex >= 0 ? `search-option-${activeIndex}` : undefined}
         placeholder={placeholder}
-        className="w-full min-h-[44px] rounded-lg border border-brand-border bg-brand-cream px-4 py-2.5 text-sm text-brand-dark placeholder-brand-muted transition-colors focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
+        className="w-full min-h-[44px] rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm text-stone-800 placeholder-stone-400 transition-colors focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
         value={query}
         onChange={(e) => { setQuery(e.target.value); setIsOpen(true); }}
         onFocus={() => query.length > 0 && setIsOpen(true)}

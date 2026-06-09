@@ -81,17 +81,17 @@ export default function ExplorePage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-8">
-      <div className="mb-8 flex flex-col gap-4 border-b border-brand-border pb-6 md:flex-row md:items-end md:justify-between">
+      <div className="mb-8 flex flex-col gap-4 border-b border-stone-200 pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <Link
             href="/"
-            className="mb-4 -ml-1 inline-flex min-h-[44px] items-center gap-1 rounded-md px-1 text-sm font-bold text-brand-stone transition-colors hover:text-brand-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange"
+            className="mb-4 -ml-1 inline-flex min-h-[44px] items-center gap-1 rounded-md px-1 text-sm font-bold text-stone-500 transition-colors hover:text-brand-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15 18-6-6 6-6"/></svg>
             Back to Map
           </Link>
-          <h1 className="text-3xl font-bold text-brand-brown md:text-4xl">Data Explorer</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-stone">
+          <h1 className="text-3xl font-bold text-stone-800 md:text-4xl">Data Explorer</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-500">
             Sort, filter, and compare all 47 counties across the five DRRS dimensions. Click any column header to sort ascending or descending.
           </p>
         </div>
@@ -103,21 +103,21 @@ export default function ExplorePage() {
             placeholder="Filter by county name&hellip;"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="min-h-[44px] w-full rounded-xl border border-brand-border bg-white px-4 py-2 pl-10 text-sm text-brand-dark transition-shadow focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6355' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "12px center" }}
+            className="min-h-[44px] w-full rounded-xl border border-stone-300 bg-white px-4 py-2 pl-10 text-sm text-stone-800 transition-shadow focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "12px center" }}
           />
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full whitespace-nowrap text-left text-sm">
             <thead>
-              <tr className="border-b border-brand-border bg-brand-bg text-xs font-bold uppercase tracking-wider text-brand-stone">
+              <tr className="border-b border-stone-200 bg-stone-100 text-xs font-bold uppercase tracking-wider text-stone-500">
                 <th
                   scope="col"
                   tabIndex={0}
-                  className="sticky left-0 z-10 min-h-[44px] cursor-pointer bg-brand-bg px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                  className="sticky left-0 z-10 min-h-[44px] cursor-pointer bg-stone-100 px-4 py-3 text-left transition-colors hover:bg-stone-200"
                   onClick={() => handleSort("name")}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort("name"); } }}
                 >
@@ -149,11 +149,11 @@ export default function ExplorePage() {
             <tbody className="divide-y divide-brand-border">
               {filteredAndSorted.length > 0 ? (
                 filteredAndSorted.map((row) => (
-                  <tr key={row.id} className="transition-colors hover:bg-brand-bg/50">
-                    <td className="sticky left-0 z-10 bg-white px-4 py-3 font-bold text-brand-dark transition-colors">
+                  <tr key={row.id} className="transition-colors hover:bg-stone-50">
+                    <td className="sticky left-0 z-10 bg-white px-4 py-3 font-bold text-stone-800 transition-colors">
                       <Link
                         href={`/brief?id=${row.id}`}
-                        className="min-h-[44px] inline-flex items-center text-brand-dark underline-offset-2 hover:text-brand-orange hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange rounded"
+                        className="min-h-[44px] inline-flex items-center text-stone-800 underline-offset-2 hover:text-brand-orange hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange rounded"
                       >
                         {row.name}
                       </Link>
@@ -169,7 +169,7 @@ export default function ExplorePage() {
                       return (
                         <td key={key} className="px-4 py-3">
                           <div className="flex items-center gap-2">
-                            <span className="font-mono text-brand-stone">{row.scores[key]}</span>
+                            <span className="font-mono text-stone-500">{row.scores[key]}</span>
                             <Sparkline data={dimTrend} width={40} height={16} color={trendColor} />
                           </div>
                         </td>
@@ -179,7 +179,7 @@ export default function ExplorePage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={7} className="px-4 py-16 text-center text-sm text-brand-muted" role="status">
+                  <td colSpan={7} className="px-4 py-16 text-center text-sm text-stone-400" role="status">
                     No counties match &ldquo;{searchTerm}&rdquo;
                   </td>
                 </tr>

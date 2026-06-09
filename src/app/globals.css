@@ -4,12 +4,12 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --color-brand-brown: #78350F;
   --color-brand-orange: #EA580C;
-  --color-brand-cream: #FDFBF7;
+  --color-brand-cream: #FAFAF9;
   --color-brand-dark: #292524;
-  --color-brand-stone: #6B6355;
-  --color-brand-muted: #A8A08F;
-  --color-brand-border: #E0DBD0;
-  --color-brand-bg: #F8F5F0;
+  --color-brand-stone: #78716C;
+  --color-brand-muted: #A8A29E;
+  --color-brand-border: #E7E5E4;
+  --color-brand-bg: #F5F5F4;
   --color-brand-accent: #92400E;
 }
 

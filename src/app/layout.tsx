@@ -68,7 +68,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href={`${BASE}/manifest.json`} />
       </head>
-      <body className="min-h-[100svh] bg-[#FDFBF7] text-[#292524]">
+      <body className="min-h-[100svh] bg-stone-50 text-stone-800">
         <Header />
         <main>{children}</main>
         <script
