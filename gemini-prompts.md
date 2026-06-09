@@ -1,4 +1,4 @@
-# Gemini Prompts — Kenya AI & Digital Rights Observatory
+# Gemini Prompts — Kenya Digital Rights Risk Atlas
 
 
 ---
@@ -2001,6 +2001,45 @@ After all changes, verify:
 
 Do NOT half-implement any section. Every component must be polished or it will
 stand out as unfinished. The goal is KHEM parity — indistinguishable production quality.
+```
+
+## Prompt 25 — Polish BarCompare, mobile header, and rename consistency
+
+You are reviewing recent changes to the Kenya Digital Rights Risk Atlas (renamed from "Kenya AI & Digital Rights Observatory"). Three changes need polishing for production quality:
+
+### 1. BarCompare component (`src/components/BarCompare.tsx`)
+Replaced dual radar chart comparison with a compact horizontal bar chart. Review for:
+- Visual polish: bar colors, height, spacing, typography, animation
+- Accessibility: aria-labels, keyboard nav, screen reader hints for which county has higher/lower risk
+- Mobile: works at 320px width without overflow, bars remain distinguishable
+- Color logic: higher-risk county gets brand-brown (#78350F) or brand-orange (#EA580C), lower gets brand-muted (#A8A08F)
+- Add a subtle label or legend explaining the bar direction (higher bar = higher risk)
+- Consider smooth CSS transition on data change (already has duration-500)
+
+### 2. Mobile hamburger menu (`src/components/Header.tsx`)
+Added hamburger toggle for <640px screens. Review for:
+- Animations: menu should slide/fade in, not appear abruptly; hamburger icon should animate to X
+- Focus trap: when menu is open, Tab should cycle within menu links only
+- Escape key closes the menu
+- Click outside closes the menu
+- Body scroll lock when menu is open (prevent background scrolling)
+- aria-expanded, aria-controls, role="dialog" on menu panel
+- Ensure no layout shift when menu opens (menu should overlay, not push content down)
+
+### 3. Rename consistency check
+Project renamed to "Kenya Digital Rights Risk Atlas". Check all user-facing text across routes:
+- `src/app/layout.tsx` — siteName, description, OG/twitter descriptions
+- `src/components/Header.tsx` — header title
+- `src/app/brief/page.tsx` — footer attribution
+- `src/app/dua/page.tsx` — data page copy
+- `public/manifest.json` — PWA name
+- `public/og-image.svg` — OG image text
+- `README.md` — project title and description
+- `gemini-prompts.md` — header line (already updated)
+- Are there any stale references to "AI", "Observatory", or "algorithmic systems" remaining?
+- Do description fields accurately reflect the project (surveillance, data privacy, digital rights — not AI)?
+
+Return a diff or edit commands for each issue found. Do NOT rewrite entire files — only targeted fixes.
 ```
 
 
