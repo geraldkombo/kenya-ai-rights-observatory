@@ -87,6 +87,11 @@ export default function FoiaTracker() {
                     >
                       {req.county}
                     </Link>
+                    {req.stampedRef && (
+                      <span className="rounded bg-brand-bg px-1.5 py-0.5 text-[10px] font-mono font-bold uppercase text-brand-stone">
+                        Ref: {req.stampedRef}
+                      </span>
+                    )}
                     <span className="rounded bg-brand-border/50 px-1.5 py-0.5 text-[10px] font-bold text-brand-muted">
                       DRRS {drrs}
                     </span>

@@ -8,6 +8,7 @@ export const foiaRequests: FoiaRequest[] = [
     dateSubmitted: "2026-06-01",
     status: "Acknowledged",
     daysPending: 8,
+    stampedRef: "NBI/CECM/ICT/2026/0417",
     notes: "County Clerk confirmed receipt. Awaiting substantive response on CCTV procurement contracts.",
   },
   {

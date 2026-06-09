@@ -52,6 +52,7 @@ export interface FoiaRequest {
   status: FoiaStatus;
   daysPending: number;
   notes?: string;
+  stampedRef?: string;
 }
 
 export interface DRSScore {
