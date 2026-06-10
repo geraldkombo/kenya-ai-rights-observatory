@@ -2042,4 +2042,160 @@ Project renamed to "Kenya Digital Rights Risk Atlas". Check all user-facing text
 Return a diff or edit commands for each issue found. Do NOT rewrite entire files — only targeted fixes.
 ```
 
+## Prompt 26 — PRODUCTION FINAL: Perfect the Kenya Digital Rights Risk Atlas for June 2026 (AMREF CSS Forum Submission)
+
+You are a senior product engineer preparing the **Kenya Digital Rights Risk Atlas** for a conference submission to the **AMREF Community Systems Strengthening (CSS) Forum** under **Sub-theme 2: Digital Health and Evidence Generation Through Community-Led Monitoring**. This tool must be the absolute best version of itself — June 2026 state-of-the-art, indistinguishable from a well-funded institutional product. This is the final polish before submission.
+
+### Project Context
+
+**What this tool is:** A production-grade, offline-capable PWA that maps digital rights risks (surveillance, internet health, data privacy, biometric enrollment, platform impact) across Kenya's 47 counties. No server, no tracking, no backend — static Next.js export hosted on GitHub Pages.
+
+**What it is NOT:** An AI-focused tool. Recently renamed from "Kenya AI & Digital Rights Observatory" to accurately reflect its scope.
+
+**Tech stack:**
+- Next.js 16.2.7 static export + Turbopack
+- MapLibre GL JS (no Mapbox — fully open-source)
+- Tailwind CSS v4 with @theme tokens
+- TopoJSON (120KB, 36% smaller than GeoJSON)
+- html2canvas for WhatsApp share cards
+- Pure SVG sparklines
+- PWA service worker (cache-first tiles, network-first JS/CSS)
+
+**57 static routes:** Home, Explore, Compare, Brief, Method, Advocacy, Data (Dua), 47 county embed routes, _not-found
+
+**Live URL:** https://geraldkombo.github.io/kenya-ai-rights-observatory/
+
+### What Has Been Built (Complete Inventory)
+
+**Data layer:**
+- 47 counties with 15 indicators each (population, surveillance, internet health, data privacy, biometric enrollment, platform impact, AI systems count, CCTV density, ODPC complaints, internet shutdown hours, social media reports, internet usage %, mobile ownership %, birth registration %)
+- DRRS scoring algorithm with 5 weighted dimensions (25% surveillance, 25% internet health, 20% data privacy, 10% biometric, 20% platform impact)
+- Historical time-series estimation (2024-2026) with dimension-specific growth rates
+- FOIA data model with 3 pilot requests and stampedRef chain-of-custody
+- Neighbor adjacency data for all 47 counties
+
+**Pages & features:**
+- `/` — Interactive choropleth map with legend, search, stats dashboard, county click → sidebar details / mobile bottom sheet, export CSV, WhatsApp share card
+- `/explore` — Sortable/filterable data table with inline sparklines per dimension per county
+- `/compare` — Two-county comparison with BarCompare horizontal bars, dimension table, geographic context, neighbor optgroup selectors
+- `/brief?id=X` — Printable county brief with indicators, score breakdown bars, neighboring counties chips, FOIA actions
+- `/method` — Methodology documentation
+- `/advocacy` — 4 FOIA templates, escalation pathway (FOIA→CAJ→ODPC→High Court), FOIA tracker dashboard
+- `/dua` — Data sources, citation
+- `/embed/[county]` — 47 embeddable county widgets (lightweight, no chrome)
+
+**Design system (KHEM-aligned):**
+- Tailwind stone palette (stone-50 body, stone-800 text, stone-500 muted)
+- White header with backdrop blur, stone borders
+- Brand accent colors: brown #78350F, orange #EA580C
+- 44px minimum touch targets
+- focus-visible orange outline ring
+- aria-live on dynamic panels
+
+**PWA & Offline:**
+- Service worker v4 with cache-first tiles, network-first JS/CSS
+- Pre-cached HTML shell for 7 routes + TopoJSON + manifest + icons
+- `apple-mobile-web-app-title: "Digital Rights KE"`
+- Manifest.json with 192/512 icons, start_url, display: standalone
+
+**Accessibility (production audit passed):**
+- scope="col" on all table headers
+- tabIndex + Enter/Space keyboard sort on explore headers
+- aria-live on 3 loading states + 1 status cell
+- print:hidden on non-printable elements
+- role="alert" on errors, role="note" on key findings
+- aria-label on SVG charts and interactive elements
+
+### The Mission: Make This the Absolute Best Tool in Existence for Its Purpose
+
+You must review every file and every feature. Below are the mandatory improvement areas. Do NOT skip any.
+
+#### 1. Code Quality & Architecture
+
+- **TypeScript strictness:** Every `any` must be eliminated. Every prop interface must be explicit. No implicit `any` anywhere.
+- **Component decomposition:** Any component over 200 lines must be split. Repeated patterns (cards, badges, table cells) must be extracted.
+- **Dead code elimination:** Remove unused imports, unused variables, commented-out code, console.log statements.
+- **Error boundaries:** Every data-fetching component needs an error boundary. The map should gracefully handle TopoJSON parse failures.
+- **Loading states:** Every dynamic import needs a proper loading skeleton (not just "Loading..." text). SVG skeleton placeholders for charts.
+- **Constants file:** Extract all magic strings, dimension labels, color values into `src/lib/constants.ts`.
+
+#### 2. Performance
+
+- **Bundle analysis:** Check that no library is bloating the bundle. Confirm tree-shaking is working.
+- **Image optimization:** All icons should be SVG. No raster images in the build.
+- **CSS purge:** Confirm Tailwind v4 is purging unused classes. Check the final CSS size.
+- **MapLibre GL:** Only load the CSS once. Confirm no duplicate map instances.
+- **Font loading:** Inter font should use `font-display: swap` with a fallback. Confirm no flash of invisible text (FOIT).
+
+#### 3. Mobile UX (Highest Priority for CSS Forum — Community Health Workers Use Phones)
+
+- **Touch targets:** Every interactive element must be min 44×44px. Audit with a physical device test at 320px width.
+- **Bottom sheet:** The county detail bottom sheet on mobile must be draggable (touch drag to dismiss), smooth spring animation, proper backdrop blur.
+- **Table horizontal scroll:** The explore table must scroll smoothly, with sticky first column (county name) remaining visible. Scroll indicator (fade gradient on right edge).
+- **Map on mobile:** Full-width, with legend below the map (not overlaid). The "Instructions for use" accordion (like KHEM) should be above the map.
+- **Select dropdowns:** Native `<select>` elements on iOS often clip. Test on Safari iOS. Consider a custom dropdown or ensure native select works with `font-size: 16px` (prevents iOS zoom).
+
+#### 4. Accessibility (WCAG 2.1 AA Minimum, AAA Where Possible)
+
+- **Color contrast:** All text must meet 4.5:1 ratio (normal) or 3:1 (large). The brown #78350F on cream #FAFAF9 must be checked.
+- **Screen reader:** Navigate the entire app with VoiceOver (macOS) and TalkBack (Android). Every dynamic update must trigger aria-live.
+- **Keyboard:** Full keyboard navigation. Tab order must match visual order. No focus traps (except the mobile menu when open).
+- **Reduce motion:** Support `prefers-reduced-motion`. Disable all CSS transitions and animation when the user prefers reduced motion.
+- **Dark mode:** Not required, but if implemented, must respect `prefers-color-scheme: dark`.
+
+#### 5. PWA & Offline (Critical for Field Workers)
+
+- **Offline fallback:** When offline, the home page must still show the map (even if tiles fail gracefully). Show a subtle "offline mode" indicator.
+- **Cache strategy:** Review sw.js cache policies. Use Stale-While-Revalidate for data files. Cache-first for TopoJSON and fonts. Network-first for JS/CSS.
+- **Background sync:** Queue FOIA requests for when connectivity returns (even if just localStorage + "pending" badge).
+- **Install prompt:** Trigger the beforeinstallprompt event on second visit. Show an "Install App" banner.
+- **Updated content:** When the service worker detects new content, show a "Update available" toast with a refresh button.
+
+#### 6. Data & Scoring
+
+- **Data freshness:** Update all 47 county indicators to June 2026 values. Use the latest available open data (KNBS 2025/26 projections, ODPC 2025 annual report, OSF Kenya 2026).
+- **Scoring calibration:** Review the DRRS formula weights. Are the 25/25/20/10/20 splits justified? Add a citation or rationale in the methodology.
+- **Historical trends:** The estimateHistory() function generates 2024-2026 data. Validate the growth rates against observed trends. Document the estimation methodology.
+- **FOIA data:** Add the actual stampedRef numbers from physical registry delivery. Update status on the 3 pilot FOIA requests.
+
+#### 7. CSS Forum Pitch — Why This Tool Wins
+
+This tool demonstrates exactly what Sub-theme 2 requires:
+- **Community-Led Monitoring:** Citizens use the tool to track surveillance, submit FOIA requests, and escalate rights violations. The embedded county widgets let community organizations publish risk data on their own sites.
+- **Digital Health Evidence Generation:** The tool generates structured, comparable data across all 47 counties. Time-series sparklines show trends. CSV export enables offline analysis.
+- **Offline-First Design:** Field workers in areas with poor connectivity can still access cached data. FOIA requests are queued locally.
+- **Open Data, No Tracking:** All code is MIT licensed on GitHub. No analytics, no cookies, no user tracking — ethical by design.
+
+#### 8. Final Polish Checklist
+
+- [ ] No `TODO` or `FIXME` comments remain in source code
+- [ ] No `console.log` or debug statements
+- [ ] All SVG icons use currentColor for theme-ability
+- [ ] OG image shows the correct project name (not "AI")
+- [ ] README.md is accurate and complete
+- [ ] sitemap.xml includes all 57 routes
+- [ ] robots.txt allows indexing
+- [ ] favicon.ico exists as fallback
+- [ ] 404 page is helpful with navigation back to map
+- [ ] Print layout works for brief page (A4, clean typography)
+- [ ] All links open in same tab (no target="_blank" without rel)
+- [ ] No hardcoded URLs — use the BASE constant
+
+### Delivery Format
+
+For each issue found, provide:
+1. **File path and line number** of the issue
+2. **What's wrong** (one sentence)
+3. **The fix** (exact edit command with oldString and newString)
+
+Return issues grouped by file, prioritised by impact (P0 = crash/blocker, P1 = usability, P2 = polish).
+
+At the end, give a **confidence score** (0-100%) that the tool is ready for:
+- Conference submission under Sub-theme 2
+- Field use by community health workers on low-end Android phones
+- Offline operation in areas with <10% internet penetration
+
+Start. Read every file. Miss nothing.
+```
+
 
