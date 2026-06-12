@@ -1,5 +1,5 @@
-const CACHE = "ke-digital-rights-v4";
-const STALE = "ke-next-v1";
+const CACHE = "ke-digital-rights-v5";
+const STALE = "ke-next-v2";
 const BASE = self.location.pathname.replace(/\/sw\.js$/, "");
 
 const PRECACHE = [
@@ -72,7 +72,20 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // Everything else (HTML pages, data files, icons): cache-first with network refresh
+  // Navigation (HTML pages): network-first with cache fallback
+  if (e.request.mode === "navigate") {
+    e.respondWith(
+      caches.open(STALE).then((c) =>
+        fetch(e.request).then((r) => {
+          c.put(e.request, r.clone());
+          return r;
+        }).catch(() => caches.open(CACHE).then((c2) => c2.match(e.request)))
+      )
+    );
+    return;
+  }
+
+  // Everything else (data files, icons, manifest): cache-first with network refresh
   e.respondWith(
     caches.open(CACHE).then((c) =>
       c.match(e.request).then((hit) => {
