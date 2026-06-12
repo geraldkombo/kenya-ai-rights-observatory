@@ -39,7 +39,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
   const handleDownloadCSV = () => {
     if (!ind || !score) return;
-    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Platform_Impact", "Automated_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
+    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Content_Controls", "Automated_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
     const row = [
       county.name, county.id, score.drrs, score.surveillance, score.internetHealth,
       score.dataPrivacy, score.biometric, score.platformImpact, ind.ai_systems_count,
@@ -101,7 +101,7 @@ export default function CountyDetails({ county, indicators }: Props) {
             internetHealth: "Internet health",
             dataPrivacy: "Data privacy",
             biometric: "Biometric enrollment",
-            platformImpact: "Platform impact",
+            platformImpact: "Content controls",
           };
           return (
             <div key={dim} className="flex items-center gap-3">

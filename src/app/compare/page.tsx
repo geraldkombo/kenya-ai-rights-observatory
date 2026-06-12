@@ -20,7 +20,7 @@ const DIMENSIONS = [
   { key: "internetHealth" as const, label: "Internet health", shortLabel: "Internet health" },
   { key: "dataPrivacy" as const, label: "Data Privacy", shortLabel: "Data Privacy" },
   { key: "biometric" as const, label: "Biometric Enrollment", shortLabel: "Biometric" },
-  { key: "platformImpact" as const, label: "Platform Impact", shortLabel: "Platform" },
+  { key: "platformImpact" as const, label: "Content Controls", shortLabel: "Content" },
 ];
 
 function DeltaArrow({ a, b }: { a: number; b: number }) {
