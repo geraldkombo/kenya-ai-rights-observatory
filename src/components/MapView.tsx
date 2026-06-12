@@ -223,8 +223,9 @@ export default function MapView({
         aria-label="Map of Kenya counties with digital rights risk data"
       />
       {!ready && (
-        <div className="absolute inset-0 flex items-center justify-center bg-brand-cream text-sm text-brand-stone" aria-live="polite">
-          Loading geographic interface...
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-brand-cream" aria-live="polite" aria-label="Map loading">
+          <div className="h-16 w-16 rounded-full bg-brand-stone/20 animate-pulse mb-4" />
+          <div className="h-3 w-32 rounded bg-brand-stone/20 animate-pulse" />
         </div>
       )}
 

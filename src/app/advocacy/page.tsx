@@ -105,7 +105,7 @@ Yours faithfully,
       </section>
 
       <section id="template-3" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
-        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 3: AI Procurement & Algorithmic Systems Audit</h2>
+        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 3: Procurement & Algorithmic Systems Audit</h2>
         <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act - Target: County CECM ICT</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Executive Committee Member for ICT
@@ -157,7 +157,7 @@ I, [Your Full Name / Organisation], lodge the following complaint:
    2021.
 
 3. I have reasonable grounds to believe that the County Government
-   deployed [AI system / surveillance system / biometric system]
+    deployed [surveillance / biometric / algorithmic] system
    without conducting a mandatory Data Protection Impact Assessment
    (DPIA) as required under Section 31 of the DPA.
 

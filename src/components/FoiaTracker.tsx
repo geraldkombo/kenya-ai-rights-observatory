@@ -19,7 +19,7 @@ const TYPE_LABELS: Record<string, string> = {
   CCTV: "CCTV & Surveillance",
   HealthData: "Health Data Systems",
   Biometric: "Biometric Enrollment",
-  AIProcurement: "AI Procurement",
+  AIProcurement: "Algorithmic Procurement",
 };
 
 const TYPE_TEMPLATES: Record<string, number> = {

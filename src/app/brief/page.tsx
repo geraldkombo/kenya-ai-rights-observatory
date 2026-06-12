@@ -62,7 +62,7 @@ function BriefContent() {
         <div className="break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
           <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">Actions</h3>
           <ul className="list-disc space-y-2 pl-5 text-sm text-stone-500">
-            <li>Submit FOIA requests to county government regarding AI procurement.</li>
+            <li>Submit FOIA requests to county government regarding surveillance or algorithmic technology procurement.</li>
             <li>Engage local civil society on biometric inclusion campaigns.</li>
             <li>Monitor network throttling during localized protests.</li>
           </ul>

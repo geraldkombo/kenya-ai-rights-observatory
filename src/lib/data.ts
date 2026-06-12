@@ -11,9 +11,9 @@ import type { CountyRecord, DigitalRightsIndicators } from "./types";
  * - Internet shutdown hours: Based on documented events (June 2024 national shutdown, Nov 2024 Telegram block,
  *   localized disruptions during #RejectFinanceBill2024 protests); Access Now / NetBlocks cross-referenced
  * - Social media reports: Based on CA internet usage data + documented platform restrictions
- * - AI systems: County-level estimates based on economic activity, e-government adoption, fintech presence
+ * - Automated systems: County-level estimates based on economic activity, e-government adoption, fintech presence
  *
- * NOTE: Fields without published county-level disaggregation (AI systems, CCTV, shutdown hours)
+ * NOTE: Fields without published county-level disaggregation (automated systems, CCTV, shutdown hours)
  * are estimates derived from multiple proxy indicators. All estimates are clearly labeled.
  */
 

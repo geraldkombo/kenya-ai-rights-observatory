@@ -1,5 +1,5 @@
 # Funding & Partnership Proposals
-## Kenya AI & Digital Rights Observatory
+## Kenya Digital Rights Risk Atlas
 
 Generated: June 2026
 Based on Gemini Pro 2.5 audit and recommendations.
@@ -11,16 +11,16 @@ Based on Gemini Pro 2.5 audit and recommendations.
 **Format:** Concept Note (Email/Form Submission)
 **Target Ask:** $10,000 (Seed funding for field validation)
 
-**Subject:** ADRF Proposal: Localizing Digital Rights Monitoring via the Kenya AI Rights Observatory
+**Subject:** ADRF Proposal: Localizing Digital Rights Monitoring via the Kenya Digital Rights Risk Atlas
 
-**Project Title:** The Kenya AI & Digital Rights Observatory: Decentralizing Accountability
+**Project Title:** The Kenya Digital Rights Risk Atlas: Decentralizing Accountability
 **Applicant:** [Project Lead Name] & Gerald Kombo (Technical Lead)
 
 **1. Project Context & Problem Statement**
 While digital rights violations in East Africa are well-documented at the national level, the localization of these risks remains opaque. In Kenya, the aggressive deployment of algorithmic welfare systems, biometric enrollment mandates, and localized network throttling disproportionately impacts marginalized and rural populations. National averages obscure the reality that data privacy risks and surveillance densities vary drastically across the 47 counties. Local civil society organizations lack accessible, empirical tools to challenge county-level tech procurement or advocate for vulnerable demographics.
 
 **2. The Solution**
-We have engineered the Kenya AI & Digital Rights Observatory (KAIDRO) — an offline-first, interactive civic technology platform. The Observatory tracks a composite Digital Rights Risk Score (DRRS) across all 47 counties, quantifying Surveillance Density, Internet Health Deficits, Data Privacy Risks, Biometric Exclusion, and Platform Impact.
+We have engineered the Kenya Digital Rights Risk Atlas — an offline-capable, interactive civic technology platform. The Atlas tracks a simple Digital Rights Risk Score (DRRS) across all 47 counties, quantifying Surveillance Density, Internet Health Deficits, Data Privacy Risks, Biometric Exclusion, and Platform Impact.
 
 Built on a completely static Next.js architecture, the platform operates without tracking cookies, requires virtually no bandwidth to load (utilizing TopoJSON compression), and enables localized advocates to generate immediate "Share Cards" for offline dissemination via WhatsApp.
 
