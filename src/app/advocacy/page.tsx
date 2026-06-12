@@ -7,7 +7,7 @@ export default function AdvocacyPage() {
       <h1 className="mb-6 text-3xl font-bold text-brand-brown">Advocacy & Action Guide</h1>
 
       <p className="mb-8 text-sm leading-relaxed text-brand-stone">
-        The DRRS gives you evidence. This page gives you the legal tools to act on it &mdash; FOIA requests under Article 35 of the Constitution, complaints to the Office of the Data Protection Commissioner (ODPC), and practical steps that work inside Kenya&apos;s county government system.
+        The DRRS gives you evidence. This page gives you the legal tools to act on it - FOIA requests under Article 35 of the Constitution, complaints to the Office of the Data Protection Commissioner (ODPC), and practical steps that work inside Kenya&apos;s county government system.
       </p>
 
       <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
@@ -57,7 +57,7 @@ export default function AdvocacyPage() {
 
       <section id="template-1" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 1: County ICT Contracts & Digital Service Delivery</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016) &mdash; Target: County Secretary</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;4 Access to Information Act (2016) - Target: County Secretary</p>
         <p className="mb-3 text-xs italic text-brand-stone">Most county ICT spending goes through IFMIS. This request asks for records that are legally required to be public but rarely shared proactively.</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Secretary
@@ -103,7 +103,7 @@ Yours faithfully,
 
       <section id="template-2" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 2: Internet Shutdown & Network Disruptions</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &mdash; Target: County Commissioner / Communications Authority of Kenya</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya - Target: County Commissioner / Communications Authority of Kenya</p>
         <p className="mb-3 text-xs italic text-brand-stone">Internet shutdowns in Kenya are ordered at the national level (National Security Council) but enforced locally. This request targets both the national and county chain of command. CC the Kenya National Commission on Human Rights (KNCHR).</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Commissioner
@@ -145,7 +145,7 @@ Yours faithfully,
 
       <section id="template-3" className="mb-8 break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
         <h2 className="mb-1 text-base font-bold text-brand-dark">Template 3: CCTV & Public Surveillance Contracts</h2>
-        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act &mdash; Target: County Secretary / CECM Security</p>
+        <p className="mb-4 text-xs text-brand-muted">Request under Article 35, Constitution of Kenya &sect;5(1) Access to Information Act - Target: County Secretary / CECM Security</p>
         <p className="mb-3 text-xs italic text-brand-stone">County governments spend millions on CCTV systems through the County Security budget. These contracts are rarely disclosed. Use this template to find out what your county is buying and from whom.</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: The County Secretary
@@ -184,8 +184,8 @@ Yours faithfully,
       </section>
 
       <section id="template-4" className="mb-8 break-inside-avoid rounded-xl border border-border bg-white p-6">
-        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 4: ODPC Complaint &mdash; County Data Controller</h2>
-        <p className="mb-4 text-xs text-brand-muted">Complaint under Section 34, Data Protection Act 2019 &mdash; File via: <a href="https://www.odpc.go.ke/complaints/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-brand-orange">odpc.go.ke/complaints</a></p>
+        <h2 className="mb-1 text-base font-bold text-brand-dark">Template 4: ODPC Complaint - County Data Controller</h2>
+        <p className="mb-4 text-xs text-brand-muted">Complaint under Section 34, Data Protection Act 2019 - File via: <a href="https://www.odpc.go.ke/complaints/" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-brand-orange">odpc.go.ke/complaints</a></p>
         <p className="mb-3 text-xs italic text-brand-stone">The ODPC is increasingly active. In 2024, the office issued fines and enforcement notices against several data controllers. A complaint against a county government carries weight because of the public interest angle. Submit online or deliver a physical copy to ODPC headquarters, Nairobi.</p>
         <div className="overflow-x-auto rounded-lg border border-brand-border bg-brand-bg p-5 font-mono text-xs leading-relaxed text-brand-dark">
           <pre className="whitespace-pre-wrap">{`To: Office of the Data Protection Commissioner (ODPC)
@@ -244,7 +244,7 @@ Yours faithfully,
             <p>County Secretary: CS Jeizan Faruk</p>
             <p>Email: countysec@mombasa.go.ke / info@mombasa.go.ke</p>
             <p>Phone: Call <strong>1599</strong> (Mombasa County Call Centre)</p>
-            <p>Mombasa has a dedicated Access to Information Officer &mdash; email m.bates@mombasa.go.ke.</p>
+            <p>Mombasa has a dedicated Access to Information Officer - email m.bates@mombasa.go.ke.</p>
           </div>
           <div>
             <p className="font-bold text-brand-dark">Kisumu County</p>
@@ -255,8 +255,8 @@ Yours faithfully,
           </div>
           <div>
             <p className="font-bold text-brand-dark">Nakuru County</p>
-            <p>County Secretary: Samuel Mwaura &mdash; mwaura.samuel@nakuru.go.ke</p>
-            <p>Deputy CS: Newton Mwaura Kamau &mdash; mwaura.newton@nakuru.go.ke</p>
+            <p>County Secretary: Samuel Mwaura - mwaura.samuel@nakuru.go.ke</p>
+            <p>Deputy CS: Newton Mwaura Kamau - mwaura.newton@nakuru.go.ke</p>
           </div>
           <div>
             <p className="font-bold text-brand-dark">Machakos County</p>
@@ -275,11 +275,11 @@ Yours faithfully,
       <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
         <h2 className="text-sm font-bold uppercase tracking-wider text-brand-dark">Quick reference: who to call</h2>
         <div className="mt-2 space-y-2 text-sm text-brand-stone">
-          <p><strong>County Secretary</strong> &mdash; chief accounting officer, legally responsible for FOIA compliance. Find their name on the county government website or call the county switchboard.</p>
-          <p><strong>County Attorney</strong> &mdash; handles legal affairs. Copy them on every FOIA request.</p>
-          <p><strong>ODPC</strong> &mdash; complaints@odpc.go.ke / +254-20-277-9000. Physical office: Westcom Point, Mahiga Mairu Avenue, Nairobi.</p>
-          <p><strong>CAJ (Commission on Administrative Justice)</strong> &mdash; handles FOIA appeal if a county ignores or denies your request. Visit their offices at 2nd Floor, Briarcliffe Gardens, off Gitanga Road, Nairobi. Ask for the Access to Information desk.</p>
-          <p><strong>Kenya National Commission on Human Rights (KNCHR)</strong> &mdash; takes complaints on surveillance and internet shutdowns. Head office: CVF Plaza, Lenana Road, Nairobi.</p>
+          <p><strong>County Secretary</strong> - chief accounting officer, legally responsible for FOIA compliance. Find their name on the county government website or call the county switchboard.</p>
+          <p><strong>County Attorney</strong> - handles legal affairs. Copy them on every FOIA request.</p>
+          <p><strong>ODPC</strong> - complaints@odpc.go.ke / +254-20-277-9000. Physical office: Westcom Point, Mahiga Mairu Avenue, Nairobi.</p>
+          <p><strong>CAJ (Commission on Administrative Justice)</strong> - handles FOIA appeal if a county ignores or denies your request. Visit their offices at 2nd Floor, Briarcliffe Gardens, off Gitanga Road, Nairobi. Ask for the Access to Information desk.</p>
+          <p><strong>Kenya National Commission on Human Rights (KNCHR)</strong> - takes complaints on surveillance and internet shutdowns. Head office: CVF Plaza, Lenana Road, Nairobi.</p>
         </div>
       </section>
 
