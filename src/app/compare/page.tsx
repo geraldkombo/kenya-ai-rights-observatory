@@ -210,7 +210,7 @@ export default function ComparePage() {
                         </tr>
                       ))}
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">Population</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.population.toLocaleString()}</td></tr>
-                      <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">AI Systems</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.ai_systems_count}</td></tr>
+                      <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">AI Surveillance</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.ai_systems_count}</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">CCTV Density</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.cctv_density} per 10K</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">Shutdown Hours</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.internet_shutdown_hours}h</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">ODPC Complaints</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.odpc_complaints}</td></tr>

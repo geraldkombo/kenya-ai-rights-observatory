@@ -102,12 +102,12 @@ export default function MapView({
 
       map.addLayer({
         id: "counties-hover",
-        type: "fill",
+        type: "line",
         source: "counties",
         paint: {
-          "fill-color": fillExpr as any,
-          "fill-opacity": 0.95,
-          "fill-outline-color": "#292524",
+          "line-color": "#292524",
+          "line-width": 2.5,
+          "line-opacity": 0.8,
         },
         filter: ["==", "county_code", -1],
       });

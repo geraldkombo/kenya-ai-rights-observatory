@@ -129,7 +129,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
       <div className="mt-4 grid grid-cols-2 gap-4 border-t border-brand-border pt-4">
         <div>
-          <div className="text-[11px] font-semibold text-brand-stone">AI Systems</div>
+          <div className="text-[11px] font-semibold text-brand-stone">AI Surveillance</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.ai_systems_count}</div>
         </div>
         <div>
