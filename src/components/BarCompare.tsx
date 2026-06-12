@@ -18,11 +18,11 @@ interface BarCompareProps {
 
 type DimKey = "surveillance" | "internetHealth" | "dataPrivacy" | "biometric" | "platformImpact";
 const DIMS: { key: DimKey; label: string }[] = [
-  { key: "surveillance", label: "Surveillance" },
-  { key: "internetHealth", label: "Internet health" },
-  { key: "dataPrivacy", label: "Data privacy" },
-  { key: "biometric", label: "Biometric" },
-  { key: "platformImpact", label: "Post removals" },
+  { key: "surveillance", label: "CCTV Monitoring" },
+  { key: "internetHealth", label: "Internet Disruptions" },
+  { key: "dataPrivacy", label: "Data Violations" },
+  { key: "biometric", label: "Digital Identity" },
+  { key: "platformImpact", label: "Account Suspensions" },
 ];
 
 export default function BarCompare({ countyA, countyB, scoresA, scoresB }: BarCompareProps) {

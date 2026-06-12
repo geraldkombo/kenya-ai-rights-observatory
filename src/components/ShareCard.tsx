@@ -60,9 +60,9 @@ export default function ShareCard({ county, indicators }: { county: CountyRecord
           </div>
           <div className="space-y-3">
             {[
-              { label: "Surveillance Density", val: score.surveillance },
+              { label: "CCTV Monitoring", val: score.surveillance },
               { label: "Data Privacy Risk", val: score.dataPrivacy },
-              { label: "Biometric Exclusion", val: score.biometric },
+              { label: "Digital Identity Exclusion", val: score.biometric },
             ].map(d => (
               <div key={d.label} className="flex justify-between border-b border-brand-border pb-1">
                 <span className="font-bold text-brand-dark">{d.label}</span>

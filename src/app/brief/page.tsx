@@ -49,7 +49,7 @@ function BriefContent() {
         <div className="break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
           <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">County indicators</h3>
           <ul className="space-y-4 text-sm">
-            <li><strong>Surveillance systems:</strong> {indicator.ai_systems_count}</li>
+            <li><strong>CCTV Monitoring:</strong> {indicator.ai_systems_count}</li>
             <li><strong>CCTV density:</strong> {indicator.cctv_density} per 10k</li>
             <li><strong>Data complaints:</strong> {indicator.odpc_complaints}</li>
             <li><strong>Shutdown hours:</strong> {indicator.internet_shutdown_hours}h</li>
@@ -91,11 +91,11 @@ function BriefContent() {
       <div className="mb-8 space-y-3" aria-label="Score breakdown">
         <h3 className="font-bold text-brand-brown">Score breakdown</h3>
         {[
-          { label: 'Surveillance', value: score.surveillance },
-          { label: 'Internet health', value: score.internetHealth },
-          { label: 'Data privacy', value: score.dataPrivacy },
-          { label: 'Biometric enrollment', value: score.biometric },
-          { label: 'Post removals', value: score.platformImpact },
+          { label: 'CCTV Monitoring', value: score.surveillance },
+          { label: 'Internet Disruptions', value: score.internetHealth },
+          { label: 'Data Violations', value: score.dataPrivacy },
+          { label: 'Digital Identity', value: score.biometric },
+          { label: 'Account Suspensions', value: score.platformImpact },
         ].map((dim) => (
           <div key={dim.label} className="flex items-center gap-3">
             <span className="w-40 text-sm text-stone-500">{dim.label}</span>

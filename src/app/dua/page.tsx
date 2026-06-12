@@ -29,10 +29,10 @@ export default function DUAPage() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">Surveillance Infrastructure</td><td className="py-2.5 pr-4 text-brand-stone">CIPESA, Article 19, Media reports</td><td className="py-2.5 text-brand-muted">Public records / CC-BY</td></tr>
+                <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">CCTV Monitoring</td><td className="py-2.5 pr-4 text-brand-stone">CIPESA, Article 19, Media reports</td><td className="py-2.5 text-brand-muted">Public records / CC-BY</td></tr>
                 <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">Internet Shutdown Data</td><td className="py-2.5 pr-4 text-brand-stone">KICTANet, Access Now #KeepItOn, OONI</td><td className="py-2.5 text-brand-muted">CC-BY / Open Data</td></tr>
                 <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">ODPC Complaints</td><td className="py-2.5 pr-4 text-brand-stone">Office of the Data Protection Commissioner</td><td className="py-2.5 text-brand-muted">Public records</td></tr>
-                <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">Biometric Enrollment</td><td className="py-2.5 pr-4 text-brand-stone">National Registration Bureau, Communications Authority of Kenya</td><td className="py-2.5 text-brand-muted">Public records</td></tr>
+                <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">Digital Identity</td><td className="py-2.5 pr-4 text-brand-stone">National Registration Bureau, Communications Authority of Kenya</td><td className="py-2.5 text-brand-muted">Public records</td></tr>
                 <tr className="border-b border-brand-border"><td className="py-2.5 pr-4 font-medium text-brand-dark">Platform Transparency</td><td className="py-2.5 pr-4 text-brand-stone">Meta, Google, TikTok, X transparency reports</td><td className="py-2.5 text-brand-muted">Public reports</td></tr>
                 <tr><td className="py-2.5 pr-4 font-medium text-brand-dark">Kenya Population</td><td className="py-2.5 pr-4 text-brand-stone">Kenya National Bureau of Statistics (KNBS) 2019 Census</td><td className="py-2.5 text-brand-muted">Open Data</td></tr>
               </tbody>

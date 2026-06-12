@@ -16,9 +16,9 @@ const STATUS_STYLES: Record<FoiaStatus, string> = {
 };
 
 const TYPE_LABELS: Record<string, string> = {
-  CCTV: "CCTV & Surveillance",
+  CCTV: "CCTV Monitoring",
   HealthData: "Health Data Systems",
-  Biometric: "Biometric Enrollment",
+  Biometric: "Digital Identity",
   AIProcurement: "Algorithmic Procurement",
 };
 

@@ -16,11 +16,11 @@ function useStats(countyId: string) {
 }
 
 const DIMENSIONS = [
-  { key: "surveillance" as const, label: "Surveillance", shortLabel: "Surveillance" },
-  { key: "internetHealth" as const, label: "Internet health", shortLabel: "Internet health" },
-  { key: "dataPrivacy" as const, label: "Data Privacy", shortLabel: "Data Privacy" },
-  { key: "biometric" as const, label: "Biometric Enrollment", shortLabel: "Biometric" },
-  { key: "platformImpact" as const, label: "Post Removals", shortLabel: "Posts" },
+  { key: "surveillance" as const, label: "CCTV Monitoring", shortLabel: "CCTV" },
+  { key: "internetHealth" as const, label: "Internet Disruptions", shortLabel: "Internet" },
+  { key: "dataPrivacy" as const, label: "Data Violations", shortLabel: "Data" },
+  { key: "biometric" as const, label: "Digital Identity", shortLabel: "Digital ID" },
+  { key: "platformImpact" as const, label: "Account Suspensions", shortLabel: "Suspensions" },
 ];
 
 function DeltaArrow({ a, b }: { a: number; b: number }) {
@@ -210,11 +210,11 @@ export default function ComparePage() {
                         </tr>
                       ))}
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">Population</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.population.toLocaleString()}</td></tr>
-                      <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">Surveillance Systems</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.ai_systems_count}</td></tr>
+                      <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">CCTV Monitoring</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.ai_systems_count}</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">CCTV Density</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.cctv_density} per 10K</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">Shutdown Hours</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.internet_shutdown_hours}h</td></tr>
                       <tr className="border-b border-stone-200"><td className="py-2 text-stone-500">ODPC Complaints</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.odpc_complaints}</td></tr>
-                      <tr><td className="py-2 text-stone-500">Biometric Enrollment</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.biometric_enrollment_rate}%</td></tr>
+                      <tr><td className="py-2 text-stone-500">Digital Identity</td><td className="py-2 text-right font-semibold text-stone-800">{stats.ind.biometric_enrollment_rate}%</td></tr>
                     </tbody>
                   </table>
                 </div>

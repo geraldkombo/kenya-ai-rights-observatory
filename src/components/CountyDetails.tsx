@@ -39,7 +39,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
   const handleDownloadCSV = () => {
     if (!ind || !score) return;
-    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Post_Removals", "Automated_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
+    const headers = ["County", "Code", "DRRS_Score", "CCTV_Monitoring", "Internet_Disruptions", "Data_Violations", "Digital_Identity", "Account_Suspensions", "Automated_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
     const row = [
       county.name, county.id, score.drrs, score.surveillance, score.internetHealth,
       score.dataPrivacy, score.biometric, score.platformImpact, ind.ai_systems_count,
@@ -97,11 +97,11 @@ export default function CountyDetails({ county, indicators }: Props) {
           const trends = dimTrends?.[dim];
           const trendColor = trends && trends[2] > trends[0] ? "#DC2626" : "#059669";
           const labels: Record<string, string> = {
-            surveillance: "Surveillance",
-            internetHealth: "Internet health",
-            dataPrivacy: "Data privacy",
-            biometric: "Biometric enrollment",
-            platformImpact: "Post removals",
+            surveillance: "CCTV Monitoring",
+            internetHealth: "Internet Disruptions",
+            dataPrivacy: "Data Violations",
+            biometric: "Digital Identity",
+            platformImpact: "Account Suspensions",
           };
           return (
             <div key={dim} className="flex items-center gap-3">
@@ -129,7 +129,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
       <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-brand-border pt-4">
         <div>
-          <div className="text-[11px] font-semibold text-brand-stone">Surveillance Systems</div>
+          <div className="text-[11px] font-semibold text-brand-stone">CCTV Monitoring</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.ai_systems_count}</div>
           <p className="mt-0.5 text-[10px] leading-tight text-brand-muted">Known surveillance systems documented through public records and civil society reports</p>
         </div>

@@ -18,11 +18,11 @@ interface TableRow {
 }
 
 const DIM_LABELS: Record<string, string> = {
-  surveillance: "Surveillance",
-  internetHealth: "Internet health",
-  dataPrivacy: "Data privacy",
-  biometric: "Biometric",
-  platformImpact: "Post removals",
+  surveillance: "CCTV Monitoring",
+  internetHealth: "Internet Disruptions",
+  dataPrivacy: "Data Violations",
+  biometric: "Digital Identity",
+  platformImpact: "Account Suspensions",
 };
 
 const DIM_KEYS = ["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const;

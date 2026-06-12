@@ -21,7 +21,7 @@ export default function InsightsDashboard({
         <div className="text-xs text-stone-400">monitored</div>
       </div>
       <div className="break-inside-avoid rounded-xl border border-stone-200 bg-white p-5 transition-all duration-200 ease-in-out hover:shadow-md">
-        <div className="text-xs font-semibold uppercase tracking-wider text-stone-500">Surveillance Systems</div>
+        <div className="text-xs font-semibold uppercase tracking-wider text-stone-500">CCTV Monitoring</div>
         <div className="mt-1 text-2xl font-bold text-stone-800">{totalAISystems}</div>
         <div className="text-xs text-stone-400">identified</div>
       </div>
