@@ -63,8 +63,8 @@ function scoreLabel(score: number): string {
 }
 
 function SortArrow({ columnKey, active }: { columnKey: SortKey; active: "asc" | "desc" | null }) {
-  if (!active) return <span className="ml-1 text-brand-border/50">{"\u2195"}</span>;
-  return <span className="ml-1 text-brand-orange">{active === "asc" ? "\u2191" : "\u2193"}</span>;
+  if (!active) return <span className="ml-1 text-brand-border/50">{String.fromCodePoint(8597)}</span>;
+  return <span className="ml-1 text-brand-orange">{active === "asc" ? String.fromCodePoint(8593) : String.fromCodePoint(8595)}</span>;
 }
 
 function ScoreBar({ score, color }: { score: number; color?: string }) {
