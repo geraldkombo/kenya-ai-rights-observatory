@@ -11,16 +11,44 @@ export default function AdvocacyPage() {
       </p>
 
       <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
-        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand-dark">How to work with county government</h2>
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand-dark">Before you start: what you need</h2>
         <div className="space-y-3 text-sm leading-relaxed text-brand-stone">
-          <p>County governments receive FOIA requests, but follow-up is what gets results. Here is what works:</p>
+          <p>Do not walk into a county office empty-handed. Prepare these things before you leave your house:</p>
           <ul className="list-disc space-y-1.5 pl-5">
-            <li><strong>Know who to write to:</strong> Address the County Secretary (not CECM), who is legally the accounting officer. Copy the County Attorney and the Data Protection Officer if one exists.</li>
-            <li><strong>Deliver in person:</strong> Email gets ignored. Print the request, deliver it to the county registry, and get a stamped receipt. This gives you proof of delivery for an ODPC complaint later.</li>
-            <li><strong>Track who handles what:</strong> Most counties have not designated Data Protection Officers as required by the DPA 2019. If they have not, this is itself a violation you can report to ODPC.</li>
-            <li><strong>The 21-day deadline is aspirational:</strong> Counties routinely miss this. Send a reminder at day 22, then escalate to CAJ (Commission on Administrative Justice) at day 30. Physical visits to the CAJ offices in Nairobi or regional hubs speed things up.</li>
-            <li><strong>Use local media:</strong> A county that ignores your FOIA request often responds when a local radio station or newspaper asks why. MCAs (ward representatives) can also pressure the executive through county assembly questions.</li>
-            <li><strong>Run multiple tracks at once:</strong> File the FOIA request, alert the media, and ask an MCA to file a question in the county assembly &mdash; all on the same day. Pressure from different angles works better than a linear escalation.</li>
+            <li><strong>A Revenue Stamp:</strong> Buy a standard revenue stamp from your nearest Postal Corporation of Kenya (Posta) branch. It usually costs between Ksh 100 and Ksh 200. Not all counties legally require it for an Access to Information (ATI) request, but having one prevents a difficult clerk from rejecting your letter for not looking "official."</li>
+            <li><strong>Printed Copies:</strong> Print exactly 3 copies of your request. One original for the County Secretary, one copy for the county files, and one copy that you will take back home.</li>
+            <li><strong>Introduction Letter:</strong> If you are requesting on behalf of a local group or CBO, carry a brief letter of introduction on your group&apos;s letterhead.</li>
+            <li><strong>Airtime:</strong> Ensure you have enough phone credit for follow-up calls. County offices rarely call you back.</li>
+            <li><strong>The County Secretary&apos;s Name:</strong> Your letter must be addressed to the specific County Secretary. To find the name, check the county website. If the site is down, call the county switchboard and ask, &ldquo;Who is the current County Secretary?&rdquo; If the switchboard is off, call the County Public Service Board.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand-dark">Step-by-step submission process</h2>
+        <div className="space-y-3 text-sm leading-relaxed text-brand-stone">
+          <p><strong>Step 1: Go to the County Registry.</strong> Do not hand your letter to a random secretary or a security guard. Ask the front desk at the main county headquarters: &ldquo;Where is the central registry?&rdquo; or &ldquo;Where is the County Secretary&apos;s registry?&rdquo; All official letters must go through the registry to get an official reference number.</p>
+          <p><strong>Step 2: What to say at the desk.</strong> Keep it simple. Hand them the letters and say: &ldquo;I am submitting an Access to Information request for the County Secretary. Please stamp my copy.&rdquo;</p>
+          <p><strong>Step 3: Get your copy stamped.</strong> The clerk must stamp your personal copy with a &ldquo;RECEIVED&rdquo; stamp, date it, and sign it. <strong>Do not leave without this stamped copy.</strong> This is your only legal proof that the county government received your request.</p>
+          <p><strong>Step 4: What if they refuse to stamp?</strong> Sometimes clerks refuse to stamp letters they think are &ldquo;sensitive.&rdquo; If this happens:</p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li>Politely remind them that receiving a letter is just acknowledging delivery, not approving the request.</li>
+            <li>If they still refuse, leave their copies on the desk.</li>
+            <li>On your own copy, write the date, the exact time, the office name, and the name of the clerk who refused to stamp it. This handwritten note is legally acceptable proof of attempted delivery.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-brand-dark">What happens after submission (the timeline)</h2>
+        <div className="space-y-3 text-sm leading-relaxed text-brand-stone">
+          <p>The Access to Information Act gives the government 21 days to respond to your request. Here is how you manage that time:</p>
+          <ul className="list-disc space-y-1.5 pl-5">
+            <li><strong>Day 1:</strong> Get your stamped copy. File it safely.</li>
+            <li><strong>Day 7:</strong> Call the registry or the County Secretary&apos;s office. Say: &ldquo;I submitted an Access to Information request on [Date]. The reference is [Your Name/Org]. I am calling to check which officer is handling it.&rdquo;</li>
+            <li><strong>Day 15:</strong> Send a polite reminder letter. Attach a photocopy of your original stamped request.</li>
+            <li><strong>Day 22 (Deadline Missed):</strong> The county is now legally in default. Stop calling them.</li>
+            <li><strong>Day 30 (Escalation):</strong> File a formal complaint with the Commission on Administrative Justice (CAJ), also known as the Ombudsman. It is completely free. Call their toll-free line at <strong>0800 221 349</strong> or email <strong>complain@ombudsman.go.ke</strong>. Attach a photo of your stamped letter. You can also visit their headquarters in Nairobi (West End Towers, Waiyaki Way) or regional offices in Mombasa, Kisumu, Eldoret, Isiolo, Garissa, and Nyahururu. You can also report at the CAJ desk inside major Huduma Centres.</li>
           </ul>
         </div>
       </section>
@@ -209,6 +237,42 @@ Yours faithfully,
       </section>
 
       <section className="mb-8 rounded-xl border border-brand-border bg-amber-50 p-6">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-brand-dark">Verified contacts for key counties</h2>
+        <div className="mt-4 space-y-4 text-sm text-brand-stone">
+          <div>
+            <p className="font-bold text-brand-dark">Mombasa County</p>
+            <p>County Secretary: CS Jeizan Faruk</p>
+            <p>Email: countysec@mombasa.go.ke / info@mombasa.go.ke</p>
+            <p>Phone: Call <strong>1599</strong> (Mombasa County Call Centre)</p>
+            <p>Mombasa has a dedicated Access to Information Officer &mdash; email m.bates@mombasa.go.ke.</p>
+          </div>
+          <div>
+            <p className="font-bold text-brand-dark">Kisumu County</p>
+            <p>County Secretary: CPA/CS Hesbon Owuor Hongo</p>
+            <p>Email: info@kisumu.go.ke</p>
+            <p>Phone: <strong>057 202 5366</strong></p>
+            <p>Physical: Cabinet Affairs Office, City Hall Building.</p>
+          </div>
+          <div>
+            <p className="font-bold text-brand-dark">Nakuru County</p>
+            <p>County Secretary: Samuel Mwaura &mdash; mwaura.samuel@nakuru.go.ke</p>
+            <p>Deputy CS: Newton Mwaura Kamau &mdash; mwaura.newton@nakuru.go.ke</p>
+          </div>
+          <div>
+            <p className="font-bold text-brand-dark">Machakos County</p>
+            <p>County Secretary: Dr. Muya Ndambuki</p>
+            <p>Website: machakos.go.ke</p>
+          </div>
+          <div>
+            <p className="font-bold text-brand-dark">Nairobi County</p>
+            <p>Address your letter to &ldquo;The County Secretary, Nairobi City County Government.&rdquo;</p>
+            <p>Physical: City Hall, City Square. Take your letter to the main registry at City Hall.</p>
+            <p>Website: nairobi.go.ke</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-xl border border-brand-border bg-white p-6">
         <h2 className="text-sm font-bold uppercase tracking-wider text-brand-dark">Quick reference: who to call</h2>
         <div className="mt-2 space-y-2 text-sm text-brand-stone">
           <p><strong>County Secretary</strong> &mdash; chief accounting officer, legally responsible for FOIA compliance. Find their name on the county government website or call the county switchboard.</p>
