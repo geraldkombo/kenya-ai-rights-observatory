@@ -31,7 +31,7 @@ export default function MethodPage() {
             <div className="rounded-lg bg-brand-bg p-4">
               <h3 className="text-xs font-bold uppercase tracking-widest text-brand-orange">Surveillance Density (25%)</h3>
               <p className="mt-2 text-xs leading-6 text-brand-stone">
-                Density of CCTV cameras per 10,000 population and count of known AI surveillance systems. Higher density indicates greater monitoring infrastructure.
+                Density of CCTV cameras per 10,000 population and count of known surveillance systems. Higher density indicates greater monitoring infrastructure.
               </p>
             </div>
             <div className="rounded-lg bg-brand-bg p-4">
@@ -72,7 +72,7 @@ export default function MethodPage() {
             <li><strong>Population:</strong> Kenya National Bureau of Statistics, 2019 Kenya Population and Housing Census.</li>
             <li><strong>Internet usage &amp; mobile ownership:</strong> Communications Authority of Kenya / KNBS, 2023/24 Kenya Housing Survey (published August 2025). Internet usage ranges from 64.7% (Nairobi) to 9.1% (West Pokot).</li>
             <li><strong>Birth registration:</strong> KNBS Vital Statistics Report 2023. Used as proxy for biometric/civil registration completeness per county. Ranges from 131.6% (Nairobi) to 12.2% (Wajir).</li>
-            <li><strong>Surveillance:</strong> Compiled from media reports, civil society monitoring (CIPESA, KICTANet, Amnesty Kenya, KHRC), and open-source intelligence on CCTV and AI surveillance deployments. County-level data are estimates derived from multiple proxy indicators.</li>
+            <li><strong>Surveillance:</strong> Compiled from media reports, civil society monitoring (CIPESA, KICTANet, Amnesty Kenya, KHRC), and open-source intelligence on CCTV and surveillance deployments. County-level data are estimates derived from multiple proxy indicators.</li>
             <li><strong>Internet health:</strong> Internet shutdown records from the Kenya ICT Action Network (KICTANet), OONI network measurement data, and Access Now #KeepItOn reports. County-level estimates incorporate documented events (June 2024 national shutdown, November 2024 Telegram block, localized disruptions).</li>
             <li><strong>Data privacy:</strong> Office of the Data Protection Commissioner (ODPC) - 9,061 total complaints as of March 2026. County distribution estimated from regional office presence (Nairobi, Mombasa, Kisumu, Nakuru, Eldoret, Machakos, Garissa, Nyeri) and population.</li>
             <li><strong>Biometric enrollment:</strong> Huduma Namba/Maisha Namba enrollment statistics from the National Registration Bureau, cross-referenced with birth registration completeness from KNBS Vital Statistics 2023.</li>
@@ -83,7 +83,7 @@ export default function MethodPage() {
         <section className="break-inside-avoid rounded-lg bg-brand-brown p-6 text-brand-cream">
           <h2 className="text-sm font-bold uppercase tracking-widest text-amber-200">Limitations</h2>
           <p className="mt-4 text-sm leading-7 text-brand-cream">
-            This platform relies on publicly reported data, which likely undercounts the true extent of surveillance and AI deployment. Corporate transparency reports are voluntary and may omit Kenya-specific metrics. Internet shutdown data depends on user-submitted OONI measurements, which are sparse in rural areas. The scores represent a minimum baseline.
+            This platform relies on publicly reported data, which likely undercounts the true extent of surveillance deployment. Corporate transparency reports are voluntary and may omit Kenya-specific metrics. Internet shutdown data depends on user-submitted OONI measurements, which are sparse in rural areas. The scores represent a minimum baseline.
           </p>
         </section>
 

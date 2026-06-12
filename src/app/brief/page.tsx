@@ -49,7 +49,7 @@ function BriefContent() {
         <div className="break-inside-avoid rounded-lg border border-stone-200 bg-stone-100 p-6">
           <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-stone-500">County indicators</h3>
           <ul className="space-y-4 text-sm">
-            <li><strong>AI surveillance:</strong> {indicator.ai_systems_count}</li>
+            <li><strong>Surveillance systems:</strong> {indicator.ai_systems_count}</li>
             <li><strong>CCTV density:</strong> {indicator.cctv_density} per 10k</li>
             <li><strong>Data complaints:</strong> {indicator.odpc_complaints}</li>
             <li><strong>Shutdown hours:</strong> {indicator.internet_shutdown_hours}h</li>
