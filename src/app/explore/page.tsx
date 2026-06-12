@@ -55,9 +55,16 @@ const TIER_HOVER_BG: Record<string, string> = {
   low: "hover:bg-stone-50",
 };
 
+function scoreLabel(score: number): string {
+  if (score >= 70) return "Critical risk (70-100)";
+  if (score >= 50) return "High risk (50-69)";
+  if (score >= 30) return "Moderate risk (30-49)";
+  return "Low risk (0-29)";
+}
+
 function SortArrow({ columnKey, active }: { columnKey: SortKey; active: "asc" | "desc" | null }) {
-  if (!active) return <span className="ml-1 text-brand-border/50">&#8597;</span>;
-  return <span className="ml-1 text-brand-orange">{active === "asc" ? "&#8593;" : "&#8595;"}</span>;
+  if (!active) return <span className="ml-1 text-brand-border/50">{"\u2195"}</span>;
+  return <span className="ml-1 text-brand-orange">{active === "asc" ? "\u2191" : "\u2193"}</span>;
 }
 
 function ScoreBar({ score, color }: { score: number; color?: string }) {
@@ -172,7 +179,7 @@ export default function ExplorePage() {
                 <th
                   scope="col"
                   tabIndex={0}
-                  className="min-h-[44px] cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                  className="min-h-[44px] cursor-pointer bg-stone-100 px-4 py-3 text-left transition-colors hover:bg-stone-200"
                   onClick={() => handleSort("drrs")}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort("drrs"); } }}
                 >
@@ -183,7 +190,7 @@ export default function ExplorePage() {
                     key={key}
                     scope="col"
                     tabIndex={0}
-                    className="min-h-[44px] cursor-pointer px-4 py-3 text-left transition-colors hover:bg-[#E0DBD0]"
+                    className="min-h-[44px] cursor-pointer bg-stone-100 px-4 py-3 text-left transition-colors hover:bg-stone-200"
                     onClick={() => handleSort(key)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort(key); } }}
                   >
@@ -205,9 +212,12 @@ export default function ExplorePage() {
                         {row.name}
                       </Link>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 transition-colors hover:bg-stone-50/50">
                       <div className="flex items-center gap-2">
-                        <span className={`inline-flex min-w-[3rem] items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-bold ${getDRRSBadgeClass(row.scores.drrs)}`}>
+                        <span
+                          className={`inline-flex min-w-[3rem] items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-bold ${getDRRSBadgeClass(row.scores.drrs)}`}
+                          title={scoreLabel(row.scores.drrs)}
+                        >
                           {row.scores.drrs}
                         </span>
                         <div className="w-16">
