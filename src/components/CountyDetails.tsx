@@ -39,7 +39,7 @@ export default function CountyDetails({ county, indicators }: Props) {
 
   const handleDownloadCSV = () => {
     if (!ind || !score) return;
-    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Platform_Impact", "AI_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
+    const headers = ["County", "Code", "DRRS_Score", "Surveillance", "Internet_Health", "Data_Privacy", "Biometric", "Platform_Impact", "Automated_Systems", "CCTV_Density", "Shutdown_Hours", "ODPC_Complaints"];
     const row = [
       county.name, county.id, score.drrs, score.surveillance, score.internetHealth,
       score.dataPrivacy, score.biometric, score.platformImpact, ind.ai_systems_count,
@@ -127,22 +127,26 @@ export default function CountyDetails({ county, indicators }: Props) {
         </div>
       )}
 
-      <div className="mt-4 grid grid-cols-2 gap-4 border-t border-brand-border pt-4">
+      <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-brand-border pt-4">
         <div>
           <div className="text-[11px] font-semibold text-brand-stone">Surveillance Systems</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.ai_systems_count}</div>
+          <p className="mt-0.5 text-[10px] leading-tight text-brand-muted">Known surveillance systems documented through public records and civil society reports</p>
         </div>
         <div>
           <div className="text-[11px] font-semibold text-brand-stone">CCTV Density</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.cctv_density} per 10K</div>
+          <p className="mt-0.5 text-[10px] leading-tight text-brand-muted">Estimated CCTV cameras per 10,000 residents, based on county urbanization and published reports</p>
         </div>
         <div>
           <div className="text-[11px] font-semibold text-brand-stone">Shutdown Hours</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.internet_shutdown_hours}h</div>
+          <p className="mt-0.5 text-[10px] leading-tight text-brand-muted">Internet disruption hours documented in the past year, cross-referenced from Access Now and local sources</p>
         </div>
         <div>
           <div className="text-[11px] font-semibold text-brand-stone">Data Complaints</div>
           <div className="mt-0.5 text-sm font-medium text-brand-dark">{ind.odpc_complaints}</div>
+          <p className="mt-0.5 text-[10px] leading-tight text-brand-muted">Formal complaints filed with the Office of the Data Protection Commissioner by county residents</p>
         </div>
       </div>
 

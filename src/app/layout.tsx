@@ -74,7 +74,8 @@ export default function RootLayout({
         <main>{children}</main>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("${BASE}/sw.js",{updateViaCache:"none"}).catch(function(){})})}`,
+            __html: `if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("${BASE}/sw.js",{updateViaCache:"none"}).catch(function(){})})}window.addEventListener("unhandledrejection",function(e){if(e.reason&&e.reason.message&&(e.reason.message.includes("chunk")||e.reason.message.includes("Loading"))){e.preventDefault();navigator.serviceWorker.getRegistration().then(function(r){if(r){r.unregister()}}).finally(function(){location.reload()})}})`,
+
           }}
         />
       </body>
