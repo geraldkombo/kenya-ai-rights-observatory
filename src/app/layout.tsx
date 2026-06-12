@@ -67,13 +67,14 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} antialiased`}>
       <head>
         <link rel="manifest" href={`${BASE}/manifest.json`} />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
       </head>
       <body className="min-h-[100svh] bg-stone-50 text-stone-800">
         <Header />
         <main>{children}</main>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if("serviceWorker"in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("${BASE}/sw.js").catch(()=>{})})}`,
+            __html: `if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("${BASE}/sw.js",{updateViaCache:"none"}).catch(function(){})})}`,
           }}
         />
       </body>

@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: Kenya AI & Digital Rights Observatory
+title: Kenya Digital Rights Risk Atlas
 message: >-
   If you use this software or data in your research, please
   cite it using these metadata.
@@ -10,6 +10,6 @@ authors:
 repository-code: 'https://github.com/geraldkombo/kenya-ai-rights-observatory'
 url: 'https://geraldkombo.github.io/kenya-ai-rights-observatory/'
 abstract: >-
-  A spatial mapping tool for tracking AI surveillance, internet health, and digital rights violations across Kenya.
+  A spatial mapping tool for tracking surveillance, internet health, and digital rights violations across Kenya.
 license: MIT
 date-released: '2026-06-08'

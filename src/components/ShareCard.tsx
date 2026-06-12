@@ -53,7 +53,7 @@ export default function ShareCard({ county, indicators }: { county: CountyRecord
         <div ref={cardRef} className="w-[400px] bg-brand-cream p-6 font-sans shadow-lg">
           <div className="mb-4 border-b-2 border-brand-dark pb-3">
             <h2 className="text-2xl font-black uppercase tracking-tight text-brand-dark">{county.name}</h2>
-            <p className="text-sm font-bold text-brand-stone">AI & Digital Rights Risk Score (DRRS)</p>
+            <p className="text-sm font-bold text-brand-stone">Digital Rights Risk Score (DRRS)</p>
           </div>
           <div className="mb-6 text-6xl font-black" style={{ color: getDRRSColor(score.drrs) }}>
             {score.drrs}<span className="text-2xl text-brand-stone">/100</span>
@@ -71,7 +71,7 @@ export default function ShareCard({ county, indicators }: { county: CountyRecord
             ))}
           </div>
           <div className="mt-6 text-center text-[10px] font-bold uppercase tracking-widest text-brand-stone">
-            Kenya AI Rights Observatory &bull; Open Data
+            Kenya Digital Rights Risk Atlas &bull; Open Data
           </div>
         </div>
       </div>

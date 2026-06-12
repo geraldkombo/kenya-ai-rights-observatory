@@ -5,22 +5,22 @@ export default function MethodPage() {
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8">
       <h1 className="text-2xl font-bold text-brand-brown">Methodology Framework</h1>
       <p className="mt-4 border-l-4 border-brand-orange pl-4 text-sm leading-7 text-brand-stone">
-        Digital rights risk requires transparent, verifiable assessment. All indicators, data sources, and calculations are publicly documented and independently reproducible.
+        All indicators, data sources, and calculations are publicly documented and independently reproducible.
       </p>
 
       <div className="mt-8 space-y-8">
         <section className="break-inside-avoid rounded-lg border border-brand-border bg-white p-6">
           <h2 className="text-sm font-bold uppercase tracking-widest text-brand-brown">The Digital Rights Risk Score (DRRS)</h2>
           <p className="mt-4 text-sm leading-7 text-brand-dark">
-            The Digital Rights Risk Score (DRRS) is a composite index from <strong>0 to 100</strong> that measures the level of digital rights risk within each county. Higher scores indicate greater exposure to surveillance, internet disruption, data privacy violations, and algorithmic harm.
+            The Digital Rights Risk Score (DRRS) is a simple score from <strong>0 to 100</strong> that measures digital rights risk within each county. Higher scores mean greater exposure to surveillance, internet disruption, data privacy violations, and algorithmic harm.
           </p>
           <div className="mt-4 rounded-md bg-brand-bg p-4 text-sm leading-7 text-brand-stone">
             <p className="font-semibold text-brand-dark">How to read the score:</p>
             <ul className="mt-2 list-disc space-y-1 pl-4">
               <li><strong>0&ndash;29:</strong> Low digital rights risk</li>
               <li><strong>30&ndash;49:</strong> Moderate digital rights risk</li>
-              <li><strong>50&ndash;69:</strong> High digital rights risk requiring attention</li>
-              <li><strong>70&ndash;100:</strong> Critical digital rights risk requiring urgent intervention</li>
+              <li><strong>50&ndash;69:</strong> High digital rights risk</li>
+              <li><strong>70&ndash;100:</strong> Critical digital rights risk</li>
             </ul>
           </div>
         </section>
