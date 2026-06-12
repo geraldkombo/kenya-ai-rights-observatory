@@ -95,7 +95,7 @@ function BriefContent() {
           { label: 'Internet health', value: score.internetHealth },
           { label: 'Data privacy', value: score.dataPrivacy },
           { label: 'Biometric enrollment', value: score.biometric },
-          { label: 'Content controls', value: score.platformImpact },
+          { label: 'Post removals', value: score.platformImpact },
         ].map((dim) => (
           <div key={dim.label} className="flex items-center gap-3">
             <span className="w-40 text-sm text-stone-500">{dim.label}</span>

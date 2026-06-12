@@ -32,7 +32,7 @@ export function computeDRRS(
   if (internetHealth > 0.6) drivers.push(`Poor internet health: ${ind.internet_shutdown_hours} hours of shutdown in past year`);
   if (dataPrivacy > 0.6) drivers.push(`Elevated privacy risk: ${ind.odpc_complaints} data protection complaints reported`);
   if (biometric > 0.6) drivers.push(`High biometric enrollment: ${ind.biometric_enrollment_rate}% population enrolled`);
-  if (platformImpact > 0.6) drivers.push(`Content restrictions: ${ind.social_media_reports} content reports on record`);
+  if (platformImpact > 0.6) drivers.push(`Post removals on record: ${ind.social_media_reports} platform reports`);
 
   return {
     drrs,

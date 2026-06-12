@@ -53,15 +53,15 @@ export default function MethodPage() {
               </p>
             </div>
             <div className="rounded-lg bg-brand-bg p-4 sm:col-span-2">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-brand-orange">Content Controls (20%)</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-brand-orange">Post Removals (20%)</h3>
               <p className="mt-2 text-xs leading-6 text-brand-stone">
-                Social media content moderation reports, algorithmic bias incidents, and platform-related human rights complaints. Higher volume indicates more content being removed or restricted.
+                How many posts, accounts, or pages social media platforms removed or restricted in Kenya. Based on transparency reports from Meta, Google, TikTok, and X.
               </p>
             </div>
           </div>
           <div className="mt-4 rounded-md bg-brand-bg p-4 text-sm leading-7 text-brand-stone">
             <p className="font-semibold text-brand-dark">Formula:</p>
-            <p className="mt-1"><strong>DRRS</strong> = (Surveillance x 0.25) + (Internet Health Deficit x 0.25) + (Data Privacy x 0.20) + (Biometric x 0.10) + (Content Controls x 0.20)</p>
+            <p className="mt-1"><strong>DRRS</strong> = (Surveillance x 0.25) + (Internet Health Deficit x 0.25) + (Data Privacy x 0.20) + (Biometric x 0.10) + (Post Removals x 0.20)</p>
             <p className="mt-2 text-xs leading-5 text-brand-stone">Each component is normalised to a 0&ndash;1 scale, then the weighted sum is multiplied by 100.</p>
           </div>
         </section>
@@ -76,7 +76,7 @@ export default function MethodPage() {
             <li><strong>Internet health:</strong> Internet shutdown records from the Kenya ICT Action Network (KICTANet), OONI network measurement data, and Access Now #KeepItOn reports. County-level estimates incorporate documented events (June 2024 national shutdown, November 2024 Telegram block, localized disruptions).</li>
             <li><strong>Data privacy:</strong> Office of the Data Protection Commissioner (ODPC) - 9,061 total complaints as of March 2026. County distribution estimated from regional office presence (Nairobi, Mombasa, Kisumu, Nakuru, Eldoret, Machakos, Garissa, Nyeri) and population.</li>
             <li><strong>Biometric enrollment:</strong> Huduma Namba/Maisha Namba enrollment statistics from the National Registration Bureau, cross-referenced with birth registration completeness from KNBS Vital Statistics 2023.</li>
-            <li><strong>Content controls:</strong> Content moderation transparency reports from Meta, Google, TikTok, and X (Twitter), combined with Kenyan civil society monitoring and CA internet usage data.</li>
+            <li><strong>Post removals:</strong> Content moderation transparency reports from Meta, Google, TikTok, and X (Twitter), combined with Kenyan civil society monitoring and CA internet usage data.</li>
           </ul>
         </section>
 

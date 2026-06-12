@@ -22,7 +22,7 @@ const DIM_LABELS: Record<string, string> = {
   internetHealth: "Internet health",
   dataPrivacy: "Data privacy",
   biometric: "Biometric",
-  platformImpact: "Content controls",
+  platformImpact: "Post removals",
 };
 
 const DIM_KEYS = ["surveillance", "internetHealth", "dataPrivacy", "biometric", "platformImpact"] as const;

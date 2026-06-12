@@ -22,7 +22,7 @@ const DIMS: { key: DimKey; label: string }[] = [
   { key: "internetHealth", label: "Internet health" },
   { key: "dataPrivacy", label: "Data privacy" },
   { key: "biometric", label: "Biometric" },
-  { key: "platformImpact", label: "Content controls" },
+  { key: "platformImpact", label: "Post removals" },
 ];
 
 export default function BarCompare({ countyA, countyB, scoresA, scoresB }: BarCompareProps) {
