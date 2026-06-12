@@ -2,7 +2,7 @@
   "name": "Kenya Digital Rights Risk Atlas",
   "short_name": "Digital Rights KE",
   "description": "Mapping surveillance and digital rights risks across Kenya's 47 counties.",
-  "start_url": "/kenya-ai-rights-observatory/",
+  "start_url": "/kenya-digital-rights-atlas/",
   "display": "standalone",
   "background_color": "#FDFBF7",
   "theme_color": "#78350F",

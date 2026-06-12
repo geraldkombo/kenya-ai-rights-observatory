@@ -166,7 +166,7 @@ export default function MapView({
         if (!features.length) onCountyClick("");
       });
 
-      map.fitBounds([[33.5, -5], [42.5, 5]], { padding: 40, duration: 0 });
+      map.fitBounds([[32.5, -5.2], [42.5, 5.2]], { padding: 20, duration: 0 });
       setReady(true);
     });
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://geraldkombo.github.io/kenya-ai-rights-observatory/sitemap.xml
+Sitemap: https://geraldkombo.github.io/kenya-digital-rights-atlas/sitemap.xml

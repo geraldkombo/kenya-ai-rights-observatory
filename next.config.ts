@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/kenya-ai-rights-observatory",
-  assetPrefix: "/kenya-ai-rights-observatory/",
+  basePath: "/kenya-digital-rights-atlas",
+  assetPrefix: "/kenya-digital-rights-atlas/",
   images: {
     unoptimized: true,
   },

@@ -2,7 +2,7 @@
 
 Mapping surveillance infrastructure, data privacy risks, and digital rights across Kenya's 47 counties. A civic technology tool for civil society, researchers, and advocates.
 
-**Live:** https://geraldkombo.github.io/kenya-ai-rights-observatory/
+**Live:** https://geraldkombo.github.io/kenya-digital-rights-atlas/
 
 ## Features
 

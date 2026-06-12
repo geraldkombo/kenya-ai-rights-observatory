@@ -7,8 +7,8 @@ type: software
 authors:
   - given-names: Research Team
     family-names: Observatory
-repository-code: 'https://github.com/geraldkombo/kenya-ai-rights-observatory'
-url: 'https://geraldkombo.github.io/kenya-ai-rights-observatory/'
+repository-code: 'https://github.com/geraldkombo/kenya-digital-rights-atlas'
+url: 'https://geraldkombo.github.io/kenya-digital-rights-atlas/'
 abstract: >-
   A spatial mapping tool for tracking surveillance, internet health, and digital rights violations across Kenya.
 license: MIT

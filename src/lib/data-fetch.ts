@@ -1,4 +1,4 @@
-const BASE = "/kenya-ai-rights-observatory";
+const BASE = "/kenya-digital-rights-atlas";
 
 export function dataUrl(path: string): string {
   return BASE + path;

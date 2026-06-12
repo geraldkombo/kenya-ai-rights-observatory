@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 const siteName = "Kenya Digital Rights Risk Atlas";
-const siteUrl = "https://geraldkombo.github.io/kenya-ai-rights-observatory/";
+const siteUrl = "https://geraldkombo.github.io/kenya-digital-rights-atlas/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const BASE = "/kenya-ai-rights-observatory";
+const BASE = "/kenya-digital-rights-atlas";
 
 export default function RootLayout({
   children,

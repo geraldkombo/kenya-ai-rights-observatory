@@ -43,7 +43,7 @@ export default function DUAPage() {
         <section className="break-inside-avoid rounded-xl border border-brand-border bg-white p-6">
           <h2 className="text-base font-semibold text-brand-dark">Suggested Citation</h2>
           <div className="mt-4 rounded-lg bg-amber-200 p-5 text-sm leading-6 text-brand-dark">
-            <p className="font-mono">Kenya Digital Rights Risk Atlas. <em>Mapping surveillance infrastructure, data privacy, and digital rights across Kenya&apos;s 47 counties.</em> Nairobi, Kenya. Retrieved from https://geraldkombo.github.io/kenya-ai-rights-observatory/</p>
+            <p className="font-mono">Kenya Digital Rights Risk Atlas. <em>Mapping surveillance infrastructure, data privacy, and digital rights across Kenya&apos;s 47 counties.</em> Nairobi, Kenya. Retrieved from https://geraldkombo.github.io/kenya-digital-rights-atlas/</p>
           </div>
         </section>
 
