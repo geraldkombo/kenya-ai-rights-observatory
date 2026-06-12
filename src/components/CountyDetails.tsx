@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import type { CountyRecord, DigitalRightsIndicators } from "@/lib/types";
-import { computeDRRS, getDRRSBadgeClass, getDRRSColor } from "@/lib/scoring";
+import { computeDRRS, getDRRSBadgeClass, getDRRSColor, DIM_DESC } from "@/lib/scoring";
 import { estimateHistory, drrsPercentTrend } from "@/lib/historical";
 import Sparkline from "./Sparkline";
 import ShareCard from "./ShareCard";
@@ -13,9 +13,9 @@ interface Props {
   indicators: DigitalRightsIndicators[];
 }
 
-function ProgressBar({ label, value }: { label: string; value: number }) {
+function ProgressBar({ label, value, desc }: { label: string; value: number; desc?: string }) {
   return (
-    <div>
+    <div title={desc}>
       <div className="flex items-center justify-between text-xs">
         <span className="text-brand-stone">{label}</span>
         <span className="font-medium text-brand-dark">{value}%</span>
@@ -106,7 +106,7 @@ export default function CountyDetails({ county, indicators }: Props) {
           return (
             <div key={dim} className="flex items-center gap-3">
               <div className="flex-1">
-                <ProgressBar label={labels[dim]} value={score[dim]} />
+                <ProgressBar label={labels[dim]} value={score[dim]} desc={DIM_DESC[dim]} />
               </div>
               {trends && (
                 <Sparkline data={trends} width={48} height={20} color={trendColor} />

@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { counties, indicators } from '@/lib/data';
-import { computeDRRS, getDRRSBadgeClass } from '@/lib/scoring';
+import { computeDRRS, getDRRSBadgeClass, DIM_DESC } from '@/lib/scoring';
 import { NEIGHBORS } from '@/lib/neighbors';
 import { Suspense } from 'react';
 
@@ -91,13 +91,13 @@ function BriefContent() {
       <div className="mb-8 space-y-3" aria-label="Score breakdown">
         <h3 className="font-bold text-brand-brown">Score breakdown</h3>
         {[
-          { label: 'CCTV Monitoring', value: score.surveillance },
-          { label: 'Internet Disruptions', value: score.internetHealth },
-          { label: 'Data Violations', value: score.dataPrivacy },
-          { label: 'Digital Identity', value: score.biometric },
-          { label: 'Account Suspensions', value: score.platformImpact },
+          { label: 'CCTV Monitoring', value: score.surveillance, key: 'surveillance' },
+          { label: 'Internet Disruptions', value: score.internetHealth, key: 'internetHealth' },
+          { label: 'Data Violations', value: score.dataPrivacy, key: 'dataPrivacy' },
+          { label: 'Digital Identity', value: score.biometric, key: 'biometric' },
+          { label: 'Account Suspensions', value: score.platformImpact, key: 'platformImpact' },
         ].map((dim) => (
-          <div key={dim.label} className="flex items-center gap-3">
+          <div key={dim.label} className="flex items-center gap-3" title={DIM_DESC[dim.key]}>
             <span className="w-40 text-sm text-stone-500">{dim.label}</span>
             <div className="h-2.5 flex-1 rounded-full bg-stone-200">
               <div className="h-full rounded-full bg-brand-orange transition-all" style={{ width: `${dim.value}%` }} />

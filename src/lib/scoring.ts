@@ -13,6 +13,14 @@ const RANGES = {
   platformImpact: { min: 0, max: 100 },
 };
 
+export const DIM_DESC: Record<string, string> = {
+  surveillance: "CCTV cameras and government monitoring systems in public spaces",
+  internetHealth: "Hours of internet shutdown, throttling, or restriction in the past year",
+  dataPrivacy: "Complaints filed with the Office of the Data Protection Commissioner (ODPC)",
+  biometric: "Share of population enrolled in government digital ID systems (Huduma Namba, Maisha Namba)",
+  platformImpact: "Accounts, pages, or posts removed or restricted by social media platforms",
+};
+
 export function computeDRRS(
   countyId: string,
   ind: DigitalRightsIndicators
@@ -28,11 +36,11 @@ export function computeDRRS(
   );
 
   const drivers: string[] = [];
-  if (surveillance > 0.6) drivers.push(`High surveillance density: ${ind.cctv_density} cameras per 10K people`);
-  if (internetHealth > 0.6) drivers.push(`Poor internet health: ${ind.internet_shutdown_hours} hours of shutdown in past year`);
-  if (dataPrivacy > 0.6) drivers.push(`Elevated privacy risk: ${ind.odpc_complaints} data protection complaints reported`);
-  if (biometric > 0.6) drivers.push(`High biometric enrollment: ${ind.biometric_enrollment_rate}% population enrolled`);
-  if (platformImpact > 0.6) drivers.push(`Account suspensions on record: ${ind.social_media_reports} platform reports`);
+  if (surveillance > 0.6) drivers.push(`CCTV cameras per 10K people: ${ind.cctv_density}`);
+  if (internetHealth > 0.6) drivers.push(`Shutdown hours in past year: ${ind.internet_shutdown_hours}h`);
+  if (dataPrivacy > 0.6) drivers.push(`ODPC complaints reported: ${ind.odpc_complaints}`);
+  if (biometric > 0.6) drivers.push(`Digital ID enrollment: ${ind.biometric_enrollment_rate}% of population`);
+  if (platformImpact > 0.6) drivers.push(`Account suspensions on record: ${ind.social_media_reports}`);
 
   return {
     drrs,

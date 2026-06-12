@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { counties, indicators } from "@/lib/data";
-import { computeDRRS, getDRRSBadgeClass } from "@/lib/scoring";
+import { computeDRRS, getDRRSBadgeClass, DIM_DESC } from "@/lib/scoring";
 import { estimateHistory, calcDRRSTrend } from "@/lib/historical";
 import type { DRSScore, YearRecord } from "@/lib/types";
 import Sparkline from "@/components/Sparkline";
@@ -67,10 +67,10 @@ function SortArrow({ columnKey, active }: { columnKey: SortKey; active: "asc" | 
   return <span className="ml-1 text-brand-orange">{active === "asc" ? String.fromCodePoint(8593) : String.fromCodePoint(8595)}</span>;
 }
 
-function ScoreBar({ score, color }: { score: number; color?: string }) {
+function ScoreBar({ score, color, desc }: { score: number; color?: string; desc?: string }) {
   const c = color ?? SCORE_COLORS[scoreTier(score)];
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2" title={desc}>
       <div className="h-1.5 flex-1 rounded-full bg-stone-200">
         <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, backgroundColor: c }} />
       </div>
@@ -190,6 +190,7 @@ export default function ExplorePage() {
                     key={key}
                     scope="col"
                     tabIndex={0}
+                    title={DIM_DESC[key]}
                     className="min-h-[44px] cursor-pointer bg-stone-100 px-4 py-3 text-left transition-colors hover:bg-stone-200"
                     onClick={() => handleSort(key)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleSort(key); } }}
@@ -221,7 +222,7 @@ export default function ExplorePage() {
                           {row.scores.drrs}
                         </span>
                         <div className="w-16">
-                          <ScoreBar score={row.scores.drrs} />
+                          <ScoreBar score={row.scores.drrs} desc={scoreLabel(row.scores.drrs)} />
                         </div>
                       </div>
                     </td>
@@ -229,7 +230,7 @@ export default function ExplorePage() {
                       const dimTrend = calcDRRSTrend(row.history, key);
                       const trendColor = dimTrend.length >= 2 && dimTrend[dimTrend.length - 1] >= dimTrend[0] ? "#DC2626" : "#059669";
                       return (
-                        <td key={key} className="px-4 py-3">
+                        <td key={key} className="px-4 py-3" title={DIM_DESC[key]}>
                           <div className="flex items-center gap-2">
                             <Sparkline data={dimTrend} width={40} height={16} color={trendColor} />
                             <span className="font-mono text-stone-500">{row.scores[key]}</span>
@@ -272,14 +273,14 @@ export default function ExplorePage() {
                 </span>
               </div>
 
-              <ScoreBar score={row.scores.drrs} />
+              <ScoreBar score={row.scores.drrs} desc={scoreLabel(row.scores.drrs)} />
 
               <div className="mt-3 space-y-2 border-t border-stone-100 pt-3">
                 {DIM_KEYS.map((key) => {
                   const dimTrend = calcDRRSTrend(row.history, key);
                   const trendColor = dimTrend.length >= 2 && dimTrend[dimTrend.length - 1] >= dimTrend[0] ? "#DC2626" : "#059669";
                   return (
-                    <div key={key} className="flex items-center justify-between text-xs">
+                    <div key={key} className="flex items-center justify-between text-xs" title={DIM_DESC[key]}>
                       <span className="text-stone-500">{DIM_LABELS[key]}</span>
                       <div className="flex items-center gap-2">
                         <Sparkline data={dimTrend} width={36} height={14} color={trendColor} />
